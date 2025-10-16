@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchase Successful! | Learn How to Draw Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* Custom font import for Inter */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7fafc; /* Light gray background */
+        }
+        /* Custom ring utility for the CTA button to make it pop */
+        .ring-amber-cta {
+            box-shadow: 0 0 0 5px rgba(251, 191, 36, 0.5); /* Amber with 50% opacity */
+        }
+    </style>
+</head>
+<body class="text-gray-800 min-h-screen flex flex-col">
+
+    <!-- Header & Navigation -->
+    <header class="bg-sky-900 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-center">
+            <!-- Logo/Home Link -->
+            <a href="index.html" class="flex items-center space-x-2 text-2xl font-extrabold text-white tracking-tight">
+                <img src="lhtdhublogo.jpg" alt="lhtdhub Logo" class="h-8 w-8 rounded-full shadow-md" onerror="this.onerror=null; this.src='https://placehold.co/32x32/sky500/ffffff?text=LTD';">
+                <span>Learn How to Draw Hub</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content: Success Message -->
+    <main class="flex-grow flex items-center justify-center p-4">
+        <div class="max-w-3xl w-full bg-white p-8 md:p-12 rounded-2xl shadow-2xl text-center border-t-8 border-teal-500">
+            
+            <!-- Success Icon -->
+            <div class="mx-auto w-24 h-24 bg-teal-100 rounded-full flex items-center justify-center mb-6 border-4 border-teal-300">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle text-teal-600"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+            </div>
+
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-sky-900 mb-4">
+                Purchase Complete! You're In!
+            </h1>
+            
+            <p class="text-xl text-gray-600 mb-8">
+                Welcome to the community! Your purchase has been confirmed. You now have <strong>lifetime access</strong> to your new course.
+            </p>
+
+            <!-- Access CTA -->
+            <a href="[STUDENT_DASHBOARD_URL_HERE]" class="inline-block bg-amber-500 text-sky-900 font-extrabold text-2xl py-4 px-10 rounded-xl hover:bg-amber-400 transition duration-300 transform hover:scale-105 shadow-xl ring-4 ring-amber-200 focus:outline-none focus:ring-amber-cta">
+                Start Your Course Now
+            </a>
+
+            <div class="mt-10 pt-6 border-t border-gray-100 text-left">
+                <h2 class="text-2xl font-bold text-sky-800 mb-3">What's Next?</h2>
+                <ul class="space-y-3 text-gray-600">
+                    <li class="flex items-start space-x-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail text-sky-500 mt-1 flex-shrink-0"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.83 1.83 0 0 1-2.06 0L2 7"/></svg>
+                        <p>
+                            <strong>Check Your Email:</strong> Your receipt and login details have been sent to your inbox. Please check your spam folder just in case!
+                        </p>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users text-sky-500 mt-1 flex-shrink-0"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        <p>
+                            <strong>Join the Community:</strong> The link above grants you access to our private student forum where you can share your work and get feedback.
+                        </p>
+                    </li>
+                    <li class="flex items-start space-x-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-life-buoy text-sky-500 mt-1 flex-shrink-0"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m9.17 14.83-4.24 4.24"/><path d="m19.07 19.07-4.24-4.24"/></svg>
+                        <p>
+                            <strong>Need Help?</strong> If you have any trouble accessing your course, please reply to your confirmation email or visit our help center.
+                        </p>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer - Darker blue base for consistency -->
+    <footer class="bg-sky-900 text-white py-8 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="space-x-4 text-sm font-semibold">
+                <a href="#" class="hover:text-amber-400 transition duration-150">Help Center</a>
+                <a href="#" class="hover:text-amber-400 transition duration-150">Terms & Conditions</a>
+                <a href="https://www.youtube.com/@LearnHowToDrawHub" target="_blank" class="hover:text-amber-400 transition duration-150">YouTube Channel</a>
+            </div>
+            <p class="text-sm mt-4">© 2025 Learn How to Draw Hub. Thank you for drawing with us!</p>
+        </div>
+    </footer>
+
+</body>
+<script>
+    // This script ensures Lucide icons render properly
+    lucide.createIcons();
+</script>
+</html>
