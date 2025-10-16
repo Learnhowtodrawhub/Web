@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course: Digital Art Fundamentals</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* Custom font import for Inter */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7fafc; /* Light gray background */
+        }
+        /* Custom aspect ratio for the video player */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 0.75rem; /* rounded-xl */
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body class="text-gray-800 min-h-screen flex flex-col">
+
+    <!-- Header & Navigation -->
+    <header class="bg-sky-900 shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
+            <!-- Logo/Home Link -->
+            <a href="index.html" class="flex items-center space-x-2 text-xl font-extrabold text-white tracking-tight">
+                <img src="lhtdhublogo.jpg" alt="lhtdhub Logo" class="h-8 w-8 rounded-full shadow-md" onerror="this.onerror=null; this.src='https://placehold.co/32x32/sky500/ffffff?text=LTD';">
+                <span>Digital Art Dashboard</span>
+            </a>
+            
+            <!-- User Status / Back to Courses -->
+            <div class="flex items-center space-x-4">
+                <span class="text-sm text-amber-400 font-semibold hidden sm:inline">Welcome, Artist!</span>
+                <a href="index.html" class="text-sm font-semibold text-white hover:text-amber-400 transition duration-150 flex items-center space-x-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-grid"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="3" x2="21" y1="9" y2="9"/><line x1="3" x2="21" y1="15" y2="15"/><line x1="9" x2="9" y1="9" y2="21"/><line x1="15" x2="15" y1="9" y2="21"/></svg>
+                    <span>My Courses</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content: Player and Modules -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+
+            <!-- Column 1: Module Navigation (Sidebar) -->
+            <aside class="lg:col-span-1 bg-white p-6 rounded-2xl shadow-xl border border-gray-100 h-fit lg:sticky lg:top-[70px]">
+                <h2 class="text-2xl font-extrabold text-sky-900 mb-4 border-b pb-2">Course Modules</h2>
+                <nav class="space-y-2">
+
+                    <!-- Module 1: Introduction -->
+                    <div class="group">
+                        <h3 class="flex items-center justify-between text-lg font-bold text-sky-800 p-2 cursor-pointer">
+                            <span>1. Setup and Software Basics</span>
+                        </h3>
+                        <ul class="ml-4 border-l pl-4 border-gray-200 text-gray-600 space-y-1 text-sm">
+                            <li class="p-2 bg-sky-50 rounded-lg font-semibold text-sky-700 border-l-2 border-amber-500 cursor-pointer hover:bg-sky-100 transition duration-150">
+                                1.1 Wacom/Tablet Setup
+                            </li>
+                            <li class="p-2 rounded-lg cursor-pointer hover:bg-sky-100 transition duration-150">
+                                1.2 Brushes and Tools Overview
+                            </li>
+                            <li class="p-2 rounded-lg cursor-pointer hover:bg-sky-100 transition duration-150">
+                                1.3 Understanding Layers
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Module 2: Color -->
+                    <div class="group pt-2">
+                        <h3 class="flex items-center justify-between text-lg font-bold text-sky-800 p-2 cursor-pointer">
+                            <span>2. Digital Coloring & Blending</span>
+                        </h3>
+                        <ul class="ml-4 border-l pl-4 border-gray-200 text-gray-600 space-y-1 text-sm">
+                            <li class="p-2 rounded-lg cursor-pointer hover:bg-sky-100 transition duration-150">
+                                2.1 Basic Color Theory (Digital)
+                            </li>
+                            <li class="p-2 rounded-lg cursor-pointer hover:bg-sky-100 transition duration-150">
+                                2.2 Using Clipping Masks
+                            </li>
+                            <li class="p-2 rounded-lg cursor-pointer hover:bg-sky-100 transition duration-150">
+                                2.3 Hard vs. Soft Edges
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Module 3: Advanced -->
+                    <div class="group pt-2">
+                        <h3 class="flex items-center justify-between text-lg font-bold text-sky-800 p-2 cursor-pointer text-gray-400">
+                            <span>3. Rendering and Textures (Locked)</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lock text-gray-400"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                        </h3>
+                    </div>
+
+                </nav>
+            </aside>
+
+            <!-- Column 2: Video Player and Lesson Content -->
+            <section class="lg:col-span-3">
+                <div class="bg-white p-6 md:p-8 rounded-2xl shadow-2xl">
+                    <h1 class="text-3xl sm:text-4xl font-extrabold text-sky-900 mb-2">
+                        1.1 Wacom/Tablet Setup and Configuration
+                    </h1>
+                    <p class="text-pink-600 font-bold uppercase tracking-widest mb-6">
+                        Digital Art Fundamentals Course
+                    </p>
+
+                    <!-- Video Player Embed -->
+                    <div class="video-container shadow-2xl ring-4 ring-sky-200 rounded-xl mb-8">
+                        <!-- Placeholder Video: Replace 'VIDEO_ID_HERE' with your actual private YouTube video ID -->
+                        <iframe 
+                            src="https://www.youtube.com/embed/P6FfI7rT6M8?rel=0" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+
+                    <!-- Lesson Description -->
+                    <div class="prose max-w-none text-gray-700">
+                        <h2 class="text-2xl font-bold text-sky-800 mb-3">About This Lesson</h2>
+                        <p>
+                            Welcome to digital creation! Before we draw a single line, we need to ensure your drawing tablet (Wacom, iPad, etc.) is set up correctly with your software. This lesson covers driver installation, pressure sensitivity, and mapping shortcuts for maximum efficiency.
+                        </p>
+                        
+                        <h3 class="text-xl font-bold text-sky-700 mt-6">Action Items:</h3>
+                        <ul class="list-disc list-inside space-y-1 ml-4">
+                            <li><span class="font-semibold">Install Drivers:</span> Ensure you have the latest drivers for your specific hardware.</li>
+                            <li><span class="font-semibold">Test Pressure:</span> Draw light and heavy lines to confirm pressure sensitivity is working correctly.</li>
+                            <li><span class="font-semibold">Set Shortcuts:</span> Map your most-used commands (undo, brush size) to your tablet buttons.</li>
+                        </ul>
+
+                        <h3 class="text-xl font-bold text-sky-700 mt-6">Next Steps:</h3>
+                        <p>
+                            Ready to draw? Click on **1.2 Brushes and Tools Overview** in the left sidebar to dive into the digital toolbox!
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="flex justify-between mt-8">
+                    <!-- No Previous Lesson -->
+                    <span class="inline-block px-6 py-3 text-gray-400 font-bold rounded-lg cursor-not-allowed border">
+                        < Previous Lesson
+                    </span>
+                    
+                    <!-- Next Lesson Button -->
+                    <button class="flex items-center space-x-2 bg-amber-500 text-sky-900 font-extrabold px-6 py-3 rounded-xl hover:bg-amber-400 transition duration-300 shadow-lg">
+                        <span>Next Lesson ></span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>
+                    </button>
+                </div>
+
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-sky-900 text-white py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-sm mb-4">© 2025 Learn How to Draw Hub. All course content is for student use only.</p>
+        </div>
+    </footer>
+
+</body>
+<script>
+    // This script ensures Lucide icons render properly
+    lucide.createIcons();
+</script>
+</html>
