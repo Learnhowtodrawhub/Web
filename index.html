@@ -18,30 +18,44 @@
 </head>
 <body class="text-gray-800">
 
-    
+    <!-- Header & Navigation -->
     <header class="bg-white shadow-lg sticky top-0 z-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center relative">
             
+            <!-- Logo & Title -->
             <a href="#" class="flex items-center space-x-2">
                 <img src="lhtdhublogo.jpg" alt="lhtdhub Logo" class="h-10 w-10 rounded-full shadow-md" onerror="this.onerror=null; this.src='https://placehold.co/40x40/sky600/ffffff?text=LTD';">
                 <span class="text-2xl font-extrabold text-sky-600 tracking-tight hidden sm:inline">
                     Learn How to Draw Hub
                 </span>
             </a>
+            
+            <!-- Desktop Navigation -->
             <nav class="hidden md:flex space-x-6 font-semibold">
                 <a href="#courses" class="hover:text-amber-500 transition duration-150 text-gray-700">Courses</a>
                 <a href="#books" class="hover:text-amber-500 transition duration-150 text-gray-700">Books</a>
-                
                 <a href="#courses" class="text-white bg-amber-500 hover:bg-amber-600 px-4 py-2 rounded-xl transition duration-150 shadow-md">Start Drawing Fun!</a>
             </nav>
+            
+            <!-- Mobile Menu Toggle Button -->
             <div class="md:hidden">
-                
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu text-sky-600"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+                <button id="menu-button" class="p-2 rounded-lg text-sky-600 hover:bg-sky-100 transition duration-150">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+                </button>
             </div>
+        </div>
+        
+        <!-- Mobile Menu Content (Initially hidden) -->
+        <div id="mobile-menu" class="hidden w-full bg-white shadow-xl md:hidden pb-4 absolute top-full left-0">
+            <nav class="flex flex-col space-y-2 px-6 py-4 font-semibold border-t border-sky-100">
+                <a href="#courses" class="hover:bg-sky-50 p-3 rounded-lg text-gray-700">Courses</a>
+                <a href="#books" class="hover:bg-sky-50 p-3 rounded-lg text-gray-700">Books</a>
+                <a href="#courses" class="text-white bg-amber-500 hover:bg-amber-600 px-4 py-3 rounded-xl transition duration-150 shadow-md text-center mt-3">Start Drawing Fun!</a>
+            </nav>
         </div>
     </header>
 
-    
+    <!-- Hero Section -->
     <section class="bg-sky-500 text-white py-16 md:py-24 rounded-b-3xl shadow-2xl">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-4 leading-tight drop-shadow-lg">
@@ -51,20 +65,63 @@
                 Fun cartoon courses for kids, and the best art guidance for parents and adults.
             </p>
             
-            
+            <!-- Call to Action - YouTube -->
             <a href="https://www.youtube.com/@LearnHowToDrawHub" target="_blank" class="inline-flex items-center space-x-2 p-3 bg-sky-600 rounded-full shadow-lg mb-10 transform hover:scale-105 transition duration-300">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="lucide lucide-youtube text-red-400"><path d="M2.5 17.5c-1.1-1.1-2-2.3-2.5-3.5 0-1.6.5-3 1.5-4 1-1 2.4-1.5 4-1.5h10c1.6 0 3 .5 4 1.5 1 1 1.5 2.4 1.5 4 0 1.2-.5 2.4-1.5 3.5"/><path d="m10 11 5 3-5 3v-6Z"/></svg>
                 <span class="text-lg font-bold">Join 16,000+ Friends learning to draw!</span>
             </a>
 
-            
+            <!-- Primary Call to Action -->
             <a href="#courses" class="inline-block bg-amber-400 text-sky-900 font-extrabold text-xl py-3 px-8 rounded-full hover:bg-amber-300 transition duration-300 transform hover:scale-110 shadow-2xl ring-4 ring-amber-200">
                 Start Your First Lesson!
             </a>
         </div>
     </section>
 
+    <!-- Section 3: Value Proposition / Features -->
+    <section class="py-12 md:py-16 bg-white shadow-inner">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h3 class="text-3xl font-extrabold text-center mb-10 text-gray-800">
+                Why Our Drawing Hub Works
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
+                <!-- Feature 1 -->
+                <div class="p-6 bg-yellow-50 rounded-xl shadow-lg border-b-4 border-amber-400 transform transition duration-300 hover:shadow-xl">
+                    <div class="text-amber-500 mb-3 mx-auto w-12 h-12 flex items-center justify-center rounded-full bg-white shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-smile"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" x2="9.01" y1="9" y2="9"/><line x1="15" x2="15.01" y1="9" y2="9"/></svg>
+                    </div>
+                    <p class="font-bold text-lg text-sky-800 mb-1">Kid-Friendly Focus</p>
+                    <p class="text-sm text-gray-600">Lessons are designed to be fun and non-intimidating for young artists.</p>
+                </div>
+                <!-- Feature 2 -->
+                <div class="p-6 bg-yellow-50 rounded-xl shadow-lg border-b-4 border-amber-400 transform transition duration-300 hover:shadow-xl">
+                    <div class="text-amber-500 mb-3 mx-auto w-12 h-12 flex items-center justify-center rounded-full bg-white shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-graduation-cap"><path d="M22 10v6m-6 0a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4"/></svg>
+                    </div>
+                    <p class="font-bold text-lg text-sky-800 mb-1">Pro Guidance</p>
+                    <p class="text-sm text-gray-600">Advanced instruction for teens and adults seeking professional skills.</p>
+                </div>
+                <!-- Feature 3 -->
+                <div class="p-6 bg-yellow-50 rounded-xl shadow-lg border-b-4 border-amber-400 transform transition duration-300 hover:shadow-xl">
+                    <div class="text-amber-500 mb-3 mx-auto w-12 h-12 flex items-center justify-center rounded-full bg-white shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </div>
+                    <p class="font-bold text-lg text-sky-800 mb-1">Community Learning</p>
+                    <p class="text-sm text-gray-600">Access to a large, supportive YouTube drawing community.</p>
+                </div>
+                <!-- Feature 4 -->
+                <div class="p-6 bg-yellow-50 rounded-xl shadow-lg border-b-4 border-amber-400 transform transition duration-300 hover:shadow-xl">
+                    <div class="text-amber-500 mb-3 mx-auto w-12 h-12 flex items-center justify-center rounded-full bg-white shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-palette"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><path d="M21 8a2 2 0 0 0-2-2h-3a2 2 0 0 0-2 2v1h-.83a2 2 0 0 0-1.2 3.6l1.23 1.23a2 2 0 0 1 0 2.83L14 18l-5.6-5.6a2 2 0 0 0-2.83 0L4 15l1.6 1.6A2 2 0 0 1 4 18l-2 2h17a2 2 0 0 0 2-2V8z"/></svg>
+                    </div>
+                    <p class="font-bold text-lg text-sky-800 mb-1">Supply Insights</p>
+                    <p class="text-sm text-gray-600">Dedicated advice for parents on choosing the best and safest art materials.</p>
+                </div>
+            </div>
+        </div>
+    </section>
     
+    <!-- Course Cards Section -->
     <section id="courses" class="py-16 md:py-24 bg-sky-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h3 class="text-4xl font-extrabold text-center mb-12 text-sky-800">
@@ -73,7 +130,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 
-                
+                <!-- Course Card 1: Kids/Characters -->
                 <div class="bg-white border-4 border-pink-200 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition duration-300 transform hover:-translate-y-2">
                     <div class="text-pink-600 mb-4 inline-block p-4 rounded-full bg-pink-100 shadow-inner">
                         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-paintbrush"><path d="M18.37 2.63a2.43 2.43 0 0 1 3.44 3.44l-11.5 11.5-4 1 1-4Z"/></svg>
@@ -89,7 +146,7 @@
                 </div>
 
                 
-                
+                <!-- Course Card 2: Advanced/Adults -->
                 <div class="bg-white border-4 border-sky-200 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition duration-300 transform hover:-translate-y-2">
                     <div class="text-sky-600 mb-4 inline-block p-4 rounded-full bg-sky-100 shadow-inner">
                         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ruler"><path d="M22 10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z"/><path d="M15 12v6"/><path d="M9 12v4"/><path d="M12 12v8"/></svg>
@@ -105,7 +162,7 @@
                 </div>
 
                 
-                
+                <!-- Course Card 3: Parents/Guide -->
                 <div class="bg-white border-4 border-teal-200 rounded-2xl p-6 shadow-xl hover:shadow-2xl transition duration-300 transform hover:-translate-y-2">
                     <div class="text-teal-600 mb-4 inline-block p-4 rounded-full bg-teal-100 shadow-inner">
                         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-gift"><polyline points="20 12 20 22 4 22 4 12"/><rect width="20" height="5" x="2" y="7"/><line x1="12" x2="12" y1="2" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
@@ -130,42 +187,47 @@
     </section>
     
     
+    <!-- Books Section -->
     <section id="books" class="py-16 bg-sky-100 border-t border-b border-sky-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h3 class="text-4xl font-extrabold text-sky-800 mb-4">
                 Check Out Our Books Below!
             </h3>
             <p class="text-gray-700 text-lg mb-10 max-w-2xl mx-auto">
-                See our popular and fun books below to inspire your drawing!
+                See our popular and fun books below to inspire your drawing! They make great gifts for young artists.
             </p>
 
             <div class="flex flex-col md:flex-row justify-center gap-8">
                 
-                
+                <!-- Book 1 Card -->
                 <div class="bg-white p-6 rounded-2xl shadow-xl w-full md:w-1/3 border-4 border-amber-300">
                     <!-- Adjusted container to allow image to be taller and more visible -->
                     <div class="bg-white rounded-md mb-4 flex items-center justify-center p-4">
                         <!-- Image replacement: BuddieGoesToSchool.jpg -->
-                        <img src="bookimages/BuddieGoesToSchool.jpg" alt="Buddie Goes to School Book Cover" class="h-60 w-full object-contain mx-auto" onerror="this.onerror=null; this.src='https://placehold.co/200x250/FBBF24/020617?text=BOOK+COVER';">
+                        <img src="bookimages/BuddieGoesToSchool.jpg" alt="Buddie Goes to School Book Cover" class="h-60 w-full object-contain mx-auto rounded-lg shadow-md" onerror="this.onerror=null; this.src='https://placehold.co/200x250/FBBF24/020617?text=BOOK+COVER';">
                     </div>
-                    <h4 class="text-xl font-bold mb-2 text-sky-800">Buddie Goes to School             </h4>
-                    <p class="text-sm text-gray-600 mb-4"></p>
-                    <a href="[Book_1_Purchase_Link]" target="_blank" class="block w-full bg-amber-400 text-sky-900 font-extrabold py-3 rounded-xl hover:bg-amber-300 transition duration-200 shadow-md">
-                        Buy Now!
+                    <h4 class="text-xl font-bold mb-2 text-sky-800">Buddie Goes to School</h4>
+                    <p class="text-sm text-gray-600 mb-4 h-12 flex items-center justify-center">
+                        A fun, interactive storybook that encourages young readers to draw the characters as they learn about the first day of school!
+                    </p>
+                    <a href="#" target="_blank" class="block w-full bg-amber-400 text-sky-900 font-extrabold py-3 rounded-xl hover:bg-amber-300 transition duration-200 shadow-md">
+                        Buy Now on Amazon
                     </a>
                 </div>
                 
-                
+                <!-- Book 2 Card -->
                 <div class="bg-white p-6 rounded-2xl shadow-xl w-full md:w-1/3 border-4 border-amber-300">
                     <!-- Adjusted container to allow image to be taller and more visible -->
                     <div class="bg-white rounded-md mb-4 flex items-center justify-center p-4">
                         <!-- Image replacement: BuddieWhatWillYouDo.jpg -->
-                        <img src="bookimages/BuddieWhatWillYouDo.jpg" alt="What Will You Do? Book Cover" class="h-60 w-full object-contain mx-auto" onerror="this.onerror=null; this.src='https://placehold.co/200x250/FBBF24/020617?text=BOOK+COVER';">
+                        <img src="bookimages/BuddieWhatWillYouDo.jpg" alt="What Will You Do? Book Cover" class="h-60 w-full object-contain mx-auto rounded-lg shadow-md" onerror="this.onerror=null; this.src='https://placehold.co/200x250/FBBF24/020617?text=BOOK+COVER';">
                     </div>
                     <h4 class="text-xl font-bold mb-2 text-sky-800">Oh Buddie, What Will You Do?</h4>
-                    <p class="text-sm text-gray-600 mb-4"></p>
-                    <a href="[Book_2_Purchase_Link]" target="_blank" class="block w-full bg-amber-400 text-sky-900 font-extrabold py-3 rounded-xl hover:bg-amber-300 transition duration-200 shadow-md">
-                        Buy Now!
+                    <p class="text-sm text-gray-600 mb-4 h-12 flex items-center justify-center">
+                        Help Buddie make choices! This engaging story teaches decision-making skills while prompting drawing ideas for kids.
+                    </p>
+                    <a href="#" target="_blank" class="block w-full bg-amber-400 text-sky-900 font-extrabold py-3 rounded-xl hover:bg-amber-300 transition duration-200 shadow-md">
+                        Buy Now on Amazon
                     </a>
                 </div>
 
@@ -175,6 +237,7 @@
 
     
     
+    <!-- Footer -->
     <footer class="bg-sky-900 text-white py-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <p class="text-sm mb-4">© 2025 Learn How to Draw Hub. All rights reserved.</p>
@@ -190,5 +253,22 @@
 <script>
     // This script ensures Lucide icons render properly
     lucide.createIcons();
+    
+    // Mobile Menu Toggle Logic
+    const menuButton = document.getElementById('menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    if (menuButton && mobileMenu) {
+        menuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Hide menu when a link is clicked
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    }
 </script>
 </html>
