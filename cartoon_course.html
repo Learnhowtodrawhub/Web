@@ -3,124 +3,262 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Super Cartoon & Character Courses | LHTDHUB</title>
+    <title>Module 1: Dynamic Foundations & Cartoon Geometry (Expanded)</title>
+    <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Load Inter Font -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
+        /* Custom font import for Inter */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f0f9ff; /* Lightest sky blue background */
+            background-color: #fce7f6; /* Very light pink background */
+        }
+        /* Style for lesson sections - for smooth anchor scrolling */
+        .lesson-section {
+            scroll-margin-top: 80px; 
         }
     </style>
 </head>
-<body class="text-gray-800">
+<body class="text-gray-800 min-h-screen flex flex-col">
 
-    <!-- Header / Navigation -->
-    <header class="bg-white shadow-md sticky top-0 z-10">
+    <!-- Header & Quick Navigation (Deep Pink Theme) -->
+    <header class="bg-pink-800 shadow-lg sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
-            <a href="index.html" class="text-xl font-extrabold text-sky-600 hover:text-sky-800 transition">
-                ← Back to Home
+            <a href="#" class="flex items-center space-x-2 text-xl font-extrabold text-white tracking-tight">
+                <span>Module 1: Deep Dive</span>
             </a>
-            <div class="text-sm font-semibold text-gray-500">
-                Course: Cartoon Artist
-            </div>
+            
+            <nav class="hidden md:flex space-x-4">
+                <a href="#lesson-1-1" class="text-sm font-semibold text-white hover:text-amber-300 transition duration-150">1.1 Setup</a>
+                <a href="#lesson-1-2" class="text-sm font-semibold text-white hover:text-amber-300 transition duration-150">1.2 Geometry</a>
+                <a href="#lesson-1-3" class="text-sm font-semibold text-white hover:text-amber-300 transition duration-150">1.3 Linework</a>
+                <a href="#lesson-1-4" class="text-sm font-semibold text-white hover:text-amber-300 transition duration-150">1.4 Head Form</a>
+                <a href="#lesson-1-5" class="text-sm font-semibold text-white hover:text-amber-300 transition duration-150">1.5 Expressions</a>
+            </nav>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="bg-pink-500 text-white py-16 md:py-24 rounded-b-3xl shadow-2xl">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <span class="inline-block bg-pink-600 text-pink-100 px-4 py-1 rounded-full text-sm font-bold mb-4 uppercase shadow-lg">
-                For Kids & Young Beginners
-            </span>
-            <h1 class="text-5xl sm:text-6xl font-extrabold mb-4 leading-tight drop-shadow-xl">
-                The Ultimate Super Cartoon Artist Course
-            </h1>
-            <p class="text-pink-100 text-xl md:text-2xl mb-8 font-medium">
-                Turn scribbles into masterpieces! Learn to draw your own characters, comics, and fun creatures in simple, easy steps.
-            </p>
-            
-            <!-- Key Benefits -->
-            <div class="flex justify-center items-center space-x-4 text-lg font-semibold mb-10">
-                <span class="flex items-center space-x-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-zap text-yellow-300"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-                    <span>60+ Fun Lessons</span>
-                </span>
-                <span class="flex items-center space-x-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-check text-yellow-300"><path d="M20 13c0 5-4 9-8 9s-8-4-8-9V5l8-3 8 3v8Z"/><path d="m9 12 2 2 4-4"/></svg>
-                    <span>Lifetime Access</span>
-                </span>
-            </div>
+    <!-- Main Content: Module Overview and Lessons -->
+    <main class="flex-grow max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
+        <div class="bg-white p-6 md:p-10 rounded-3xl shadow-2xl">
 
-            <!-- CTA Button -->
-            <a href="https://buy.stripe.com/28EfZg0zq4qbbcw3z5bII01" class="inline-block bg-yellow-400 text-pink-900 font-extrabold text-2xl py-4 px-12 rounded-full hover:bg-yellow-300 transition duration-300 transform hover:scale-105 shadow-2xl ring-4 ring-yellow-200">
-                Enroll Today - Just $49!
-            </a>
-            <p class="text-pink-200 mt-3 text-sm">30-Day Money-Back Guarantee</p>
-        </div>
-    </section>
-
-    <!-- Course Content / Curriculum -->
-    <section class="py-16 md:py-24">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-4xl font-extrabold text-center mb-12 text-sky-800">
-                What Your Child Will Learn
-            </h2>
-
-            <div class="space-y-8">
-                
-                <!-- Module 1 -->
-                <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-pink-500">
-                    <h3 class="text-2xl font-bold mb-2 text-pink-600 flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star mr-3"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                        Module 1: Basic Shapes & Funny Faces
-                    </h3>
-                    <p class="text-gray-600 pl-8">Master the building blocks of all cartoons: circles, squares, and triangles! Then, learn how to draw over 20 different funny and expressive faces.</p>
-                </div>
-
-                <!-- Module 2 -->
-                <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-pink-500">
-                    <h3 class="text-2xl font-bold mb-2 text-pink-600 flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-rocket mr-3"><path d="M4.5 5.5A2.5 2.5 0 0 1 7 3h10a2.5 2.5 0 0 1 2.5 2.5v12.75a.75.75 0 0 1-1.28.53l-2.5-2.5-4 4-4-4-2.5 2.5a.75.75 0 0 1-1.22-.53V5.5Z"/></svg>
-                        Module 2: Awesome Animals & Creatures
-                    </h3>
-                    <p class="text-gray-600 pl-8">Step-by-step guides for drawing puppies, dragons, cartoon birds, and even your own magical creatures.</p>
-                </div>
-
-                <!-- Module 3 -->
-                <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-pink-500">
-                    <h3 class="text-2xl font-bold mb-2 text-pink-600 flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-award mr-3"><path d="m15.46 13.92-.08-.06.74-.75 2.15-2.15-3.41-3.41L12.75 9l-.75.74-.06-.08A6 6 0 1 0 15.46 13.92Z"/><path d="M12 2v2"/><path d="m14 12-1-1"/><path d="m10 12 1-1"/><path d="M12 6.5V7"/><path d="m10 4-1 1"/><path d="m14 4 1 1"/></svg>
-                        Module 3: Action Poses & Storytelling
-                    </h3>
-                    <p class="text-gray-600 pl-8">Learn how to make characters run, jump, and fly! Includes simple lessons on putting characters together to create a mini-comic or story.</p>
-                </div>
-
-            </div>
-
-            <!-- Bottom CTA -->
-            <div class="text-center mt-16">
-                <p class="text-3xl font-bold text-sky-700 mb-6">
-                    Ready to start the fun?
+            <!-- MODULE HEADER -->
+            <div class="text-center border-b-4 border-pink-500 pb-6 mb-8">
+                <p class="text-pink-600 font-bold uppercase tracking-widest text-lg mb-2">
+                    Foundations of Cartooning
                 </p>
-                <a href="https://buy.stripe.com/28EfZg0zq4qbbcw3z5bII01" class="inline-block bg-yellow-400 text-pink-900 font-extrabold text-2xl py-4 px-16 rounded-full hover:bg-yellow-300 transition duration-300 transform hover:scale-105 shadow-2xl ring-4 ring-yellow-200">
-                    Get Instant Access!
-                </a>
+                <h1 class="text-5xl sm:text-6xl font-extrabold text-pink-800 mb-4">
+                    Module 1: Cartoon Geometry & Dynamic Foundations
+                </h1>
+                <p class="text-xl italic text-gray-600">
+                    From 2D shapes to 3D volume—master the geometry that makes characters solid.
+                </p>
             </div>
-        </div>
-    </section>
+            
+            
+            <!-- LESSON 1.1: Setting Up Your Drawing Station -->
+            <section id="lesson-1-1" class="lesson-section bg-pink-50 p-6 rounded-xl border border-pink-200 mb-10 shadow-inner">
+                <h2 class="text-3xl font-extrabold text-pink-700 mb-4 flex items-center space-x-2 border-b pb-2 border-pink-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil"><path d="M17 3a2.85 2.85 0 0 1 2 2L9 19l-4 1 1-4 10-10a2.85 2.85 0 0 1 2-2z"/></svg>
+                    <span>1.1 Setting Up Your Drawing Station</span>
+                </h2>
+                <p class="text-lg mb-4">
+                    Your environment affects your art. Before we draw a single line, let’s optimize your supplies and posture for long, comfortable, and productive sessions.
+                </p>
+                
+                <h3 class="text-xl font-bold text-pink-600 mt-4">Deep Dive: Pencils and Paper</h3>
+                <ul class="list-disc list-inside space-y-2 ml-4 mb-4">
+                    <li><strong>Sketching (Light Lines):</strong> Use an <strong>HB</strong> or a hard <strong>2H</strong> pencil. These leave light, easily erasable marks for planning and construction.</li>
+                    <li><strong>Line Art (Dark Lines):</strong> Use a soft <strong>2B</strong> or <strong>4B</strong>. These create rich, dark lines for the final outline. You can press lightly for construction and harder for line art, all with the same pencil.</li>
+                    <li><strong>Paper Type:</strong> While printer paper works, using a smooth, heavy-weight <strong>bond paper</strong> prevents tearing and feels better under the pencil. Consider using a clipboard or drawing board to ensure a flat, stable surface.</li>
+                </ul>
 
-    <!-- Footer -->
-    <footer class="bg-sky-900 text-white py-8">
+                <h3 class="text-xl font-bold text-pink-600 mt-4">Ergonomics and Posture</h3>
+                <p class="mt-2">
+                    Drawing is physical labor! Avoid hunching over your page, which causes wrist pain and cramped lines.
+                </p>
+                <ul class="list-disc list-inside space-y-2 ml-4">
+                    <li><strong>The Angle:</strong> Prop your drawing surface up (use books or a dedicated easel) so it's angled at 30-45 degrees. This is easier on your neck and allows you to see the entire page.</li>
+                    <li><strong>Lighting:</strong> Use bright, cool-toned light sources to avoid eye strain and ensure you see line contrast accurately.</li>
+                </ul>
+            </section>
+
+            <!-- LESSON 1.2: Mastering the Cartoon Geometry -->
+            <section id="lesson-1-2" class="lesson-section p-6 rounded-xl border border-gray-200 mb-10 shadow-lg">
+                <h2 class="text-3xl font-extrabold text-pink-700 mb-4 flex items-center space-x-2 border-b pb-2 border-pink-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cube"><path d="m21 8-6-4-6 4 6 4 6-4z"/><path d="m11 16 6 4 6-4"/><path d="m11 16-6-4-6 4"/></svg>
+                    <span>1.2 Mastering the Cartoon Geometry (2D to 3D)</span>
+                </h2>
+                <p class="text-lg mb-4">
+                    This is the most critical lesson. Cartoons look flat when you think in 2D shapes. We must switch our minds to <strong>3D forms</strong> to create solid characters that can be turned and posed convincingly.
+                </p>
+
+                <h3 class="text-xl font-bold text-pink-600 mt-4">The 2D Foundation & Emotional Archetypes</h3>
+                <div class="grid grid-cols-3 gap-4 text-center mt-4">
+                    <!-- Shape 1: Circle/Sphere -->
+                    <div class="p-3 bg-gray-50 rounded-lg border">
+                        <span class="text-5xl text-pink-500 mb-1 block">⬤</span>
+                        <p class="text-sm font-semibold">Circle / Sphere</p>
+                        <p class="text-xs italic text-gray-500">Softness, Safety, Youth. (e.g., Mickey Mouse, Babies)</p>
+                    </div>
+                    <!-- Shape 2: Square/Cube -->
+                    <div class="p-3 bg-gray-50 rounded-lg border">
+                        <span class="text-5xl text-pink-700 mb-1 block">■</span>
+                        <p class="text-sm font-semibold">Square / Cube</p>
+                        <p class="text-xs italic text-gray-500">Stability, Strength, Authority. (e.g., Superheroes, Bosses)</p>
+                    </div>
+                    <!-- Shape 3: Triangle/Cone -->
+                    <div class="p-3 bg-gray-50 rounded-lg border">
+                        <span class="text-5xl text-pink-900 mb-1 block">▲</span>
+                        <p class="text-sm font-semibold">Triangle / Cone</p>
+                        <p class="text-xs italic text-gray-500">Energy, Conflict, Danger. (e.g., Villains, Dynamic Poses)</p>
+                    </div>
+                </div>
+
+                <h3 class="text-xl font-bold text-pink-600 mt-6 pt-4 border-t">The 3D Leap: Drawing Volume</h3>
+                <p class="mt-2">
+                    To make a <strong>Circle</strong> look like a <strong>Sphere</strong> (a ball), you must add minor axes. These are guidelines that wrap around the form.
+                </p>
+                <ul class="list-disc list-inside space-y-2 ml-4 mb-4">
+                    <li><strong>The Equator:</strong> The line wrapping horizontally around the middle of the sphere.</li>
+                    <li><strong>The Prime Meridian:</strong> The line wrapping vertically, usually used as the center line for faces.</li>
+                    <li><strong>Curvature is Key:</strong> When drawing these lines, remember they must always be <strong>curved</strong> to follow the shape of the ball. If you draw a straight line across a circle, it flattens it instantly.</li>
+                </ul>
+
+                <h3 class="text-xl font-bold text-pink-600 mt-6 pt-4 border-t">Exercise: Overlapping and Grouping</h3>
+                <p class="mt-2">
+                    Characters are assembled like mannequins. Draw a simple figure by grouping 3D shapes.
+                </p>
+                <div class="bg-gray-100 p-4 rounded-lg mt-3">
+                    <p class="text-sm italic">
+                        1. Draw a large <strong>Sphere</strong> (Head).
+                        2. Below it, draw a slightly smaller <strong>Cube</strong> (Torso).
+                        3. Draw two smaller <strong>Spheres</strong> for shoulders, making sure they overlap the Cube slightly.
+                        4. Draw two long, overlapping <strong>Cylinders</strong> for the upper and lower arms.
+                    </p>
+                    <p class="text-sm mt-2">
+                        Notice how the areas where the shapes overlap automatically suggest depth. This is how you build solid anatomy.
+                    </p>
+                </div>
+            </section>
+
+            <!-- LESSON 1.3: Advanced Warm-Up and Line Confidence -->
+            <section id="lesson-1-3" class="lesson-section bg-pink-50 p-6 rounded-xl border border-pink-200 mb-10 shadow-inner">
+                <h2 class="text-3xl font-extrabold text-pink-700 mb-4 flex items-center space-x-2 border-b pb-2 border-pink-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-gauge"><path d="m12 14 4-4"/><path d="M3.34 19A10 10 0 1 1 20.66 19"/><path d="M17 14h3"/><path d="M7 14h3"/></svg>
+                    <span>1.3 Advanced Warm-Up and Line Confidence</span>
+                </h2>
+                <p class="text-lg mb-4">
+                    A wobbly line means a shaky idea. Your goal is to draw every line in one fluid stroke. This requires physical practice and learning to draw from the right joints.
+                </p>
+
+                <h3 class="text-xl font-bold text-pink-600 mt-4">The Power of the Elbow and Shoulder</h3>
+                <p class="mt-2">
+                    Avoid drawing tiny lines using only your <strong>wrist and fingers</strong>. This leads to cramped, hesitant, "hairy" lines. Instead, move your entire arm from the <strong>elbow or shoulder</strong> for larger, sweeping strokes. This generates confidence and smoothness.
+                </p>
+
+                <h3 class="text-xl font-bold text-pink-600 mt-4 border-t pt-4">Warm-Up Drills (10 Minutes Daily):</h3>
+                <ol class="list-decimal list-inside space-y-3 ml-4">
+                    <li><strong>The Tapered Line:</strong> Draw long, straight lines quickly. Press down hard at the start, quickly lift your pencil off the page near the end, and stop completely. This trains you to control line thickness and speed.</li>
+                    <li><strong>Overlapping Spirals:</strong> Draw a large spiral continuously for 30 seconds, maintaining even spacing between the lines. Then, draw another spiral, intentionally overlapping the first. This develops hand-eye coordination for curved forms.</li>
+                    <li><strong>Ghosting Practice:</strong> Before drawing a line, move your pencil tip along the path you *intend* to draw, without touching the paper (ghosting). Once you’ve traced the path 2-3 times, commit and draw the final line in one fast, confident stroke. This builds muscle memory.</li>
+                </ol>
+            </section>
+
+            <!-- LESSON 1.4: The Spherical Head and Crosshatch -->
+            <section id="lesson-1-4" class="lesson-section p-6 rounded-xl border border-gray-200 mb-10 shadow-lg">
+                <h2 class="text-3xl font-extrabold text-pink-700 mb-4 flex items-center space-x-2 border-b pb-2 border-pink-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg>
+                    <span>1.4 The Spherical Head and Placement</span>
+                </h2>
+                <p class="text-lg mb-4">
+                    The head is our primary tool for storytelling. We use the spherical form from Lesson 1.2 and apply placement lines to turn it into a dynamic cartoon skull, ready for features.
+                </p>
+                
+                <h3 class="text-xl font-bold text-pink-600 mt-4">The Basic Construction (Loomis Method Simplified)</h3>
+                <ol class="list-decimal list-inside space-y-3 ml-4 mb-4">
+                    <li><strong>The Sphere:</strong> Start with a perfect sphere (practice ghosting!).</li>
+                    <li><strong>The Center Line (A):</strong> Draw the vertical Prime Meridian, curving it to follow the round surface. This dictates which way the head is facing horizontally.</li>
+                    <li><strong>The Eye Line (B):</strong> Draw the horizontal Equator, curving it to follow the round surface. This dictates which way the head is tilting vertically (up or down).</li>
+                    <li><strong>The Jawline:</strong> Attach a triangle, oval, or squared shape at the bottom-front of the sphere. This is the jaw and chin. The jawline defines the character's age, weight, and personality.</li>
+                </ol>
+
+                <h3 class="text-xl font-bold text-pink-600 mt-4 border-t pt-4">Action Line and Perspective</h3>
+                <p class="mt-2">
+                    The two lines you drew (A and B) must always meet at the same point on the surface of the sphere. This intersection is the nose placement. By adjusting the curve and position of these lines, you can make a character look up, down, left, right, or three-quarters—all from the initial sphere.
+                </p>
+            </section>
+
+            <!-- LESSON 1.5: The Anatomy of a Funny Face -->
+            <section id="lesson-1-5" class="lesson-section bg-pink-50 p-6 rounded-xl border border-pink-200 mb-10 shadow-inner">
+                <h2 class="text-3xl font-extrabold text-pink-700 mb-4 flex items-center space-x-2 border-b pb-2 border-pink-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-smile-plus"><path d="M22 12A10 10 0 1 1 12 2v0a10 10 0 0 1 10 10Z"/><path d="M8 15s1.5 2 4 2 4-2 4-2"/><line x1="9" x2="9.01" y1="9" y2="9"/><line x1="15" x2="15.01" y1="9" y2="9"/><path d="M16 5h6"/><path d="M19 2v6"/></svg>
+                    <span>1.5 The Anatomy of a Funny Face (The Trifecta of Emotion)</span>
+                </h2>
+                <p class="text-lg mb-4">
+                    Cartoon expressions are carried by three elements: the eyebrows, the eyes, and the mouth. Master these, and you can draw any emotion imaginable.
+                </p>
+
+                <h3 class="text-xl font-bold text-pink-600 mt-4">1. The Eyebrows: The Emotional Accelerators</h3>
+                <p class="mt-2">
+                    Eyebrows are the most powerful tool for conveying emotion, even more than the mouth.
+                </p>
+                <ul class="list-disc list-inside space-y-2 ml-4 mb-4">
+                    <li><strong>Anger/Focus:</strong> The brows angle downwards and inward, pushing toward the center. They create shadows over the eyes.</li>
+                    <li><strong>Sadness/Worry:</strong> The brows angle upwards and inward, creating a 'V' shape where the outer edges droop.</li>
+                    <li><strong>Surprise/Shock:</strong> The brows arch high above the eye sockets, becoming thin and light.</li>
+                </ul>
+
+                <h3 class="text-xl font-bold text-pink-600 mt-4 border-t pt-4">2. The Eyes: Shape vs. Pupil</h3>
+                <p class="mt-2">
+                    In cartooning, the shape of the eye often tells the mood, while the pupil tells the focus.
+                </p>
+                <ul class="list-disc list-inside space-y-2 ml-4 mb-4">
+                    <li><strong>Dot Eyes:</strong> Simple dots are best for generic, friendly characters (e.g., Peanuts).</li>
+                    <li><strong>Pie-Cut Eyes:</strong> An oval or circle with a wedge removed (like Pac-Man) is excellent for intense focus or surprise.</li>
+                    <li><strong>Eye Squint:</strong> When a character is laughing hard or feeling suspicious, draw the eyes as simple curved lines (squinting) rather than full shapes.</li>
+                </ul>
+
+                <h3 class="text-xl font-bold text-pink-600 mt-4 border-t pt-4">3. The Mouth and Jawline: The Expression Finisher</h3>
+                <p class="mt-2">
+                    The mouth follows the lead of the eyebrows, but the shape of the jaw and chin is vital for strong emotional poses.
+                </p>
+                <ul class="list-disc list-inside space-y-2 ml-4">
+                    <li><strong>Mouth Position:</strong> The mouth should always follow the curvature of the jawline. If the jaw is tilted up, the mouth curves up slightly too.</li>
+                    <li><strong>Jaw Drop:</strong> For fear or shock, simply draw the mouth shape lower on the head, almost disconnecting it from the rest of the features, and elongate the chin slightly.</li>
+                    <li><strong>Subtlety:</strong> A simple line with upturned corners conveys a friendly smile; no teeth needed!</li>
+                </ul>
+            </section>
+
+
+            <!-- MODULE CONCLUSION & NEXT STEP -->
+            <div class="text-center bg-amber-50 p-6 rounded-xl border border-amber-300 shadow-xl">
+                <h3 class="text-3xl font-extrabold text-pink-800 mb-3">Module 1: Complete!</h3>
+                <p class="mb-5 text-gray-700">
+                    You have mastered the geometry (2D to 3D), line confidence, and the foundational structure of the cartoon head. You are now fully prepared to tackle more complex character design.
+                </p>
+                <button class="flex items-center justify-center mx-auto space-x-2 bg-pink-500 text-white font-extrabold px-8 py-4 rounded-xl hover:bg-pink-600 transition duration-300 shadow-lg text-lg ring-4 ring-pink-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevrons-right"><path d="m15 17 5-5-5-5"/><path d="m4 17 5-5-5-5"/></svg>
+                    <span>Proceed to Module 2: Full Character Turnarounds</span>
+                </button>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer (Deep Pink Theme) -->
+    <footer class="bg-pink-800 text-white py-8 mt-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p class="text-sm">Learn How to Draw Hub. | Contact: [Email Address]</p>
+            <p class="text-sm mb-4">© 2025 Learn How to Draw Hub. All course content is for student use only.</p>
         </div>
     </footer>
 
-    <script>
-        // Icon rendering
-        lucide.createIcons();
-    </script>
 </body>
+<script>
+    // This script ensures Lucide icons render properly
+    lucide.createIcons();
+</script>
 </html>
