@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Module 2: Character Design & Turnarounds</title>
+    <title>Module 2: Awesome Animals & Creatures</title>
     <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Load Lucide Icons -->
@@ -20,6 +20,17 @@
         .lesson-section {
             scroll-margin-top: 80px; 
         }
+        /* Styling for Definitions/Tips Boxes */
+        .tip-box {
+            border-left-width: 4px;
+            border-color: #db2777; /* Deep Pink */
+        }
+        /* Style for Sub-section Dividers */
+        .sub-divider {
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-top: 2px dashed #f9a8d4; /* Light Pink Dash */
+        }
     </style>
 </head>
 <body class="text-gray-800 min-h-screen flex flex-col">
@@ -27,201 +38,330 @@
     <!-- Header & Quick Navigation (Deep Pink Theme) -->
     <header class="bg-pink-800 shadow-lg sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
-            <!-- START: Added Dashboard link and grouped with module title -->
+            <!-- Dashboard link and UPDATED Module Title -->
             <div class="flex items-center space-x-4">
-                <!-- NEW LINK: Dashboard Button -->
+                <!-- Dashboard Icon (Layout Grid) linking to cartoon_dashboard3.html -->
                 <a href="cartoon_dashboard3.html" class="flex items-center space-x-1 p-2 rounded-full text-white hover:bg-pink-700 transition duration-150" aria-label="Back to Dashboard">
-                    <!-- Dashboard Icon (Layout Grid) -->
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-grid"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="3" x2="21" y1="12" y2="12"/><line x1="12" x2="12" y1="3" y2="21"/></svg>
                 </a>
-                <!-- Existing Title Link -->
+                <!-- UPDATED Title Link -->
                 <a href="#" class="flex items-center space-x-2 text-xl font-extrabold text-white tracking-tight">
-                    <span>Module 2: Character Turnarounds</span>
+                    <span>Module 2: Awesome Animals & Creatures</span>
                 </a>
             </div>
-            <!-- END: Grouping -->
             
             <nav class="hidden md:flex space-x-4">
-                <a href="#lesson-2-1" class="text-sm font-semibold text-white hover:text-amber-300 transition duration-150">2.1 The LoA</a>
-                <a href="#lesson-2-2" class="text-sm font-semibold text-white hover:text-amber-300 transition duration-150">2.2 Proportions</a>
-                <a href="#lesson-2-3" class="text-sm font-semibold text-white hover:text-amber-300 transition duration-150">2.3 Block Man</a>
-                <a href="#lesson-2-4" class="text-sm font-semibold text-white hover:text-amber-300 transition duration-150">2.4 The Turnaround</a>
-                <a href="#lesson-2-5" class="text-sm font-semibold text-white hover:text-amber-300 transition duration-150">2.5 Weight & Balance</a>
+                <a href="#lesson-2-1" class="text-sm font-semibold text-white hover:text-amber-300 transition duration-150">2.1 Biomechanics</a>
+                <a href="#lesson-2-2" class="text-sm font-semibold text-white hover:text-amber-300 transition duration-150">2.2 Cranial Forms</a>
+                <a href="#lesson-2-3" class="text-sm font-semibold text-white hover:text-amber-300 transition duration-150">2.3 Kinematics</a>
+                <a href="#lesson-2-4" class="text-sm font-semibold text-white hover:text-amber-300 transition duration-150">2.4 Design Theory</a>
+                <a href="#lesson-2-5" class="text-sm font-semibold text-white hover:text-amber-300 transition duration-150">2.5 Advanced Rendering</a>
             </nav>
         </div>
     </header>
 
     <!-- Main Content: Module Overview and Lessons -->
-    <main class="flex-grow max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
+    <main class="flex-grow max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
         <div class="bg-white p-6 md:p-10 rounded-3xl shadow-2xl">
 
             <!-- MODULE HEADER -->
-            <div class="text-center border-b-4 border-pink-500 pb-6 mb-8">
-                <p class="text-pink-600 font-bold uppercase tracking-widest text-lg mb-2">
-                    Foundations of Cartooning
+            <div class="text-center border-b-8 border-pink-600 pb-8 mb-10">
+                <p class="text-pink-700 font-extrabold uppercase tracking-widest text-xl mb-3">
+                    Advanced Comparative Character Design
                 </p>
-                <h1 class="text-5xl sm:text-6xl font-extrabold text-pink-800 mb-4">
-                    Module 2: Character Design & Turnarounds
+                <!-- UPDATED H1 Title -->
+                <h1 class="text-6xl sm:text-7xl font-black text-pink-900 mb-4 leading-tight">
+                    Module 2: Awesome Animals & Creatures
                 </h1>
-                <p class="text-xl italic text-gray-600">
-                    Designing characters that are solid, consistent, and ready for action.
+                <!-- UPDATED Subtitle -->
+                <p class="text-2xl italic text-gray-700">
+                    A deep dive into anatomical geometry, functional biomechanics, and evolutionary design principles for creating believable and dynamic characters.
                 </p>
             </div>
             
             
-            <!-- LESSON 2.1: The Line of Action (LoA) -->
-            <section id="lesson-2-1" class="lesson-section bg-pink-50 p-6 rounded-xl border border-pink-200 mb-10 shadow-inner">
-                <h2 class="text-3xl font-extrabold text-pink-700 mb-4 flex items-center space-x-2 border-b pb-2 border-pink-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-activity"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-                    <span>2.1 The Line of Action (LoA): Capturing Energy</span>
+            <!-- LESSON 2.1: Core Forms, Proportion, and Skeletal Anchors (SUPER EXPANDED) -->
+            <section id="lesson-2-1" class="lesson-section bg-pink-50 p-8 rounded-2xl border border-pink-300 mb-12 shadow-2xl shadow-pink-100">
+                <h2 class="text-4xl font-extrabold text-pink-800 mb-6 flex items-center space-x-3 border-b-4 pb-3 border-pink-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-panel-left"><rect width="7" height="18" x="3" y="3" rx="2"/><path d="M10 3h11a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H10"/></svg>
+                    <span>2.1 Biomechanics: Core Forms, Girdles, and Homology</span>
                 </h2>
-                <p class="text-lg mb-4">
-                    The <strong>Line of Action (LoA)</strong> is a single, sweeping curve that defines the pose, energy, and flow of your character. It's the first line you draw and the foundation of dynamic drawing.
+                <p class="text-xl mb-8">
+                    Mastery begins with the <strong>internal architecture</strong>. We must treat the animal as a sophisticated machine, using <strong>spheres, cylinders, and boxes</strong> to map the precise location of bone, muscle, and <strong>center of mass</strong>.
                 </p>
+
+                <div class="p-4 bg-white rounded-xl shadow-lg mb-6 tip-box border-l-8">
+                    <p class="font-bold text-pink-700 text-xl flex items-center space-x-2"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ruler"><path d="M16 3l1-1 3 3-1 1"/></svg> DEFINITION: The Principle of Homology</p>
+                    <p class="text-base mt-1">This principle states that all vertebrate limbs share the same fundamental bone structure: <strong>one bone (humerus/femur), two bones (radius/ulna or tibia/fibula), and many small bones (wrist/ankle/digits)</strong>. Recognizing this allows you to immediately understand and draw any creature's limb, from a bat's wing to a whale's flipper.</p>
+                </div>
                 
-                <h3 class="text-xl font-bold text-pink-600 mt-4">LoA vs. Center Line</h3>
-                <ul class="list-disc list-inside space-y-2 ml-4 mb-4">
-                    <li><strong>Center Line:</strong> Divides the form down the middle. It's often static and structural.</li>
-                    <li><strong>LoA:</strong> Captures the **motion** or **intent** of the character, often running from the head, down the spine, and through a primary limb. It always follows a <strong>curve</strong> (S, C, or reverse-C shape).</li>
-                    <li><strong>The Rule:</strong> Never draw a figure with a straight LoA. A straight spine equals a stiff, lifeless character. Even in a standing pose, use a slight S-curve.</li>
+                <h3 class="text-2xl font-bold text-pink-600 mt-8">I. The Torso as a Kinetic Anchor</h3>
+                <p class="mt-2">The torso is the single largest mass, housing the essential organs. Its geometry defines the creature's overall <strong>power profile</strong> and <strong>weight distribution</strong>.</p>
+                <ul class="list-disc list-inside space-y-3 ml-6 mt-4">
+                    <li><strong>The Rib Cage Mass:</strong> Model this as a tapered wedge or a barrel-like cylinder. The widest part is typically at the back, tapering sharply to the sternum. In predators (e.g., Cheetah), the rib cage is deep for large lung capacity. In scavengers (e.g., Hyena), it's often more barrel-shaped for processing large meals.</li>
+                    <li><strong>The Pelvic Girdle Block:</strong> This block is responsible for transferring the propulsive force of the hind legs to the spine. It is a stable, wide, flatter box. Its angle determines the creature's stance: a steep, high angle (like a rabbit or kangaroo) is optimized for jumping and vertical power; a flat angle (like a crocodile) is optimized for low, horizontal stability.</li>
+                    <li><strong>The Center of Mass (CoM):</strong> For most mammals, the CoM rests just behind the <strong>front legs</strong>, high in the chest cavity. When designing a creature, shifting the CoM (e.g., giving a dragon an oversized head and chest) creates narrative imbalance, making it appear more cumbersome or top-heavy.</li>
                 </ul>
 
-                <h3 class="text-xl font-bold text-pink-600 mt-4">Exercise: LoA Exploration</h3>
-                <p class="mt-2">
-                    Fill a page with just LoAs. Draw one long, curved line, then draw simple body shapes (spheres/ovals) along that curve. Don't worry about details—just capture the *feeling* of a jump, a stretch, or a recoil.
-                </p>
-            </section>
-
-            <!-- LESSON 2.2: Defining Character Proportions -->
-            <section id="lesson-2-2" class="lesson-section p-6 rounded-xl border border-gray-200 mb-10 shadow-lg">
-                <h2 class="text-3xl font-extrabold text-pink-700 mb-4 flex items-center space-x-2 border-b pb-2 border-pink-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ruler"><path d="M22 21h-5m-1 0v-4m-1 0h-4m-1 0v-4m-1 0h-4m-1 0v-4m-1 0h-4m-1 0v-4M2 3h20v20H2V3z"/></svg>
-                    <span>2.2 Defining Character Proportions (The Head Unit)</span>
-                </h2>
-                <p class="text-lg mb-4">
-                    Cartoon characters aren't built on realistic proportions, they're built on **stylized head units**. The size of the head determines the entire body's length and character type.
-                </p>
-
-                <h3 class="text-xl font-bold text-pink-600 mt-4">The Head Unit System</h3>
-                <p class="mt-2">
-                    The height of the head (from crown to chin) is the basic unit of measurement for the whole body.
-                </p>
-                <div class="grid grid-cols-2 gap-4 text-center mt-4">
-                    <!-- Unit 1: Heroic/Adult -->
-                    <div class="p-3 bg-gray-50 rounded-lg border">
-                        <p class="text-2xl font-semibold text-pink-700">6-8 Heads Tall</p>
-                        <p class="text-sm font-semibold">Heroic/Dramatic</p>
-                        <p class="text-xs italic text-gray-500">Standard adult proportions (e.g., action characters, realistic animation).</p>
+                <h3 class="text-2xl font-bold text-pink-600 mt-8">II. Vertebral Architecture and the Spine</h3>
+                <p class="mt-2">The spine is not a single line but a series of distinct regions that govern flexibility and support. Understanding these regions is vital for believable poses.</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+                    <div class="p-4 bg-pink-100 rounded-lg">
+                        <h4 class="font-semibold text-pink-700">Cervical (Neck)</h4>
+                        <p class="text-sm">The neck vertebrae are optimized for <strong>rotation and extension</strong>. A long, thick neck implies leverage (e.g., giraffe fighting) while a short, thick neck implies stability and strength (e.g., bear). <strong>Tip:</strong> Always use a C-curve or S-curve, never a straight cylinder.</p>
                     </div>
-                    <!-- Unit 2: Toony/Youthful -->
-                    <div class="p-3 bg-gray-50 rounded-lg border">
-                        <p class="text-2xl font-semibold text-pink-700">3-4 Heads Tall</p>
-                        <p class="text-sm font-semibold">Toony/Youthful</p>
-                        <p class="text-xs italic text-gray-500">Exaggerated, cute, or young characters (e.g., classic cartoon mascot).</p>
+                    <div class="p-4 bg-pink-100 rounded-lg">
+                        <h4 class="font-semibold text-pink-700">Thoracic (Chest/Ribs)</h4>
+                        <p class="text-sm">This is the most <strong>rigid</strong> section, anchored by the rib cage. The high spinal processes here create the <strong>scapular hump</strong> or shoulder mass. This area defines the creature's vertical height and profile.</p>
+                    </div>
+                    <div class="p-4 bg-pink-100 rounded-lg">
+                        <h4 class="font-semibold text-pink-700">Lumbar (Lower Back)</h4>
+                        <p class="text-sm">This section is the most <strong>flexible</strong> (between the rib cage and pelvis). It is the true engine of speed, enabling the arch and sag motion essential for the gallop and the powerful spring of a leap.</p>
                     </div>
                 </div>
 
-                <h3 class="text-xl font-bold text-pink-600 mt-6 pt-4 border-t">Key Proportional Breakdown (3 Head System Example)</h3>
-                <ul class="list-disc list-inside space-y-2 ml-4">
-                    <li><strong>Head Unit 1:</strong> The Head and Neck.</li>
-                    <li><strong>Head Unit 2:</strong> From the shoulders down to the waist/bottom of the torso.</li>
-                    <li><strong>Head Unit 3:</strong> From the waist down to the feet (legs and feet).</li>
-                    <li><strong>The Midpoint:</strong> In a 6-head figure, the crotch is the halfway point. In a 3-head figure, the crotch sits much higher, closer to the 1.5-head mark. Stylization is key!</li>
+                <div class="sub-divider"></div>
+
+                <h3 class="text-2xl font-bold text-pink-600 mt-8">III. Advanced Limb and Girdle Mechanics</h3>
+                <p class="mt-2">The limb girdles are the scaffolding that transfers force. Their design explains the animal's mode of travel.</p>
+                <ul class="list-disc list-inside space-y-3 ml-6 mt-4">
+                    <li><strong>The Shoulder Girdle (Front):</strong> For most fast quadrupeds, the <strong>Scapula (shoulder blade) floats</strong>, held only by powerful muscle (no collarbone). This dramatically increases the forward reach and stride length. <strong>Cartoon Exaggeration:</strong> When drawing fast animals, show the scapula pushing out as a large, defined oval of muscle mass under the skin. </li>
+                    <li><strong>The Hind Limb Lever:</strong> The hind leg functions as a series of levers designed for propulsion. The <strong>Femur (thigh)</strong> is often short, acting as the power piston. The <strong>Tibia/Fibula (lower leg)</strong> and especially the elongated metatarsals (the lower portion of the Digitigrade leg) act as long levers for speed. The most common mistake is drawing a straight "reverse knee" when it's actually an <strong>elongated ankle bone (the hock joint)</strong>.</li>
+                    <li><strong>Tapering and Volume Physics:</strong> The volume of any limb must taper consistently. Always start with the largest cylinder at the muscle mass (hip/shoulder) and ensure it smoothly reduces in size down to the wrist/ankle. This reinforces the realistic distribution of force and mass.</li>
                 </ul>
+
+                <p class="p-2 bg-pink-200 rounded-lg text-sm italic mt-4">
+                    <strong>FUN FACT:</strong> An elephant's knee joints are surprisingly similar to a human's, allowing it to kneel. However, their ankle joints are highly rigid, meaning they essentially walk on their toes, with huge, fatty pads acting as shock absorbers (a type of modified plantigrade stance).
+                </p>
             </section>
 
-            <!-- LESSON 2.3: Building the Block Man (Limb Construction) -->
-            <section id="lesson-2-3" class="lesson-section bg-pink-50 p-6 rounded-xl border border-pink-200 mb-10 shadow-inner">
-                <h2 class="text-3xl font-extrabold text-pink-700 mb-4 flex items-center space-x-2 border-b pb-2 border-pink-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-hard-hat"><path d="M10 2v2"/><path d="M14 2v2"/><path d="M8 12V4c0-.75.36-1.46.97-1.92C9.8 1.58 10.84 1 12 1c1.16 0 2.2.58 3.03 1.08.61.46.97 1.17.97 1.92v8H8z"/><path d="M2 12c0 2.76 1.84 5 5 5 2.45 0 4.24-1.2 5-3.2.76 2 2.55 3.2 5 3.2 3.16 0 5-2.24 5-5 0-2.2-1.33-4-3-4H5c-1.67 0-3 1.8-3 4z"/></svg>
-                    <span>2.3 Building the Block Man (Joints and Connectors)</span>
+            <!-- LESSON 2.2: Adapting the Head Unit (Skull Shapes) (SUPER EXPANDED) -->
+            <section id="lesson-2-2" class="lesson-section p-8 rounded-2xl border border-gray-400 mb-12 shadow-2xl">
+                <h2 class="text-4xl font-extrabold text-pink-800 mb-6 flex items-center space-x-3 border-b-4 pb-3 border-pink-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bone"><path d="M17 10c.85 0 1.63.14 2.33.37L22 8l-3-3-2 1-2-1-3 3-2-2-3 3c-3 3-4 4-5 5s-1 2 0 3 2 1 5 0 3-1 3-5"/></svg>
+                    <span>2.2 Cranial Forms, Sensory Adaptation, and Emotional Readability</span>
                 </h2>
-                <p class="text-lg mb-4">
-                    The **Block Man** is the construction layer you draw *over* the LoA. It replaces the stick figure with solid, 3D forms (spheres and cylinders) placed at joints.
-                </p>
-
-                <h3 class="text-xl font-bold text-pink-600 mt-4">The Joint-to-Joint System</h3>
-                <p class="mt-2">
-                    Limb segments should be drawn as cylinders or tapered tubes that connect spheres (joints).
-                </p>
-                <ul class="list-disc list-inside space-y-2 ml-4 mb-4">
-                    <li><strong>Torso:</strong> A large, simplified **box or barrel shape** that twists along the LoA.</li>
-                    <li><strong>Shoulders/Hips:</strong> Always use **spheres** for the shoulders and hips. These spheres indicate the range of motion and where the cylinders of the limbs attach.</li>
-                    <li><strong>Forearms/Shins:</strong> Draw these as cylinders that **taper**. They should be slightly wider at the top (near the joint) and narrow toward the wrist/ankle.</li>
-                    <li><strong>Overlapping:</strong> Ensure the spheres of the joints are drawn **overlapping** the cylinders to maintain the illusion of depth from Module 1.</li>
-                </ul>
-            </section>
-
-            <!-- LESSON 2.4: Executing the 4-View Turnaround -->
-            <section id="lesson-2-4" class="lesson-section p-6 rounded-xl border border-gray-200 mb-10 shadow-lg">
-                <h2 class="text-3xl font-extrabold text-pink-700 mb-4 flex items-center space-x-2 border-b pb-2 border-pink-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-crosshair"><circle cx="12" cy="12" r="10"/><path d="M22 12h-4"/><path d="M6 12H2"/><path d="M12 6V2"/><path d="M12 22v-4"/></svg>
-                    <span>2.4 Executing the 4-View Turnaround (The Consistency Check)</span>
-                </h2>
-                <p class="text-lg mb-4">
-                    The <strong>Character Turnaround</strong> is the blueprint. It guarantees that the character will look the same, from the front, side, and back, which is crucial for animation or licensing.
+                <p class="text-xl mb-8">
+                    The head is the most complex mass and the center of <strong>emotional communication</strong>. We must look beyond the skull sphere and analyze the specialized structures that define its purpose, from feeding to sensing.
                 </p>
                 
-                <h3 class="text-xl font-bold text-pink-600 mt-4">The Grid Technique (Mandatory)</h3>
-                <ol class="list-decimal list-inside space-y-3 ml-4 mb-4">
-                    <li><strong>The Base:</strong> Draw your **Front View** figure first, establishing the proportions (Lesson 2.2) and a neutral, balanced pose.</li>
-                    <li><strong>Horizontal Guides:</strong> Use a ruler to draw horizontal construction lines extending from **every key point** of the Front View: the top of the head, eye line, shoulders, elbows, wrists, hips, knees, and feet.</li>
-                    <li><strong>The Side View:</strong> Place the Side View next to the Front View. Every joint on the Side View **must align horizontally** with the corresponding line from the Front View. This locks in the character's height and limb lengths.</li>
-                    <li><strong>The 3/4 View:</strong> This is the toughest! It shows depth. Draw this figure **freehand** but still use the **horizontal guides** for height consistency. The body parts closest to the viewer should be slightly larger (perspective).</li>
-                </ol>
+                <div class="p-4 bg-white rounded-xl shadow-lg mb-6 tip-box border-l-8">
+                    <p class="font-bold text-pink-700 text-xl flex items-center space-x-2"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg> FUN FACT: Predator vs. Prey Pupils</p>
+                    <p class="text-base mt-1">Horizontal pupils (like goats and deer) are optimized for a wide, panoramic view, minimizing glare from the sun. Vertical slit pupils (like cats and crocodiles) allow for a massive change in light intake, optimizing for low-light hunting while also providing excellent depth perception near the ground.</p>
+                </div>
 
-                <h3 class="text-xl font-bold text-pink-600 mt-4 border-t pt-4">Drawing the Rear View</h3>
-                <p class="mt-2">
-                    The Back View should follow the same horizontal guides. Pay special attention to the overlapping curves of the back, shoulders, and rear when rendering the final shapes. This view confirms the 3D volume of the body blocks.
+                <h3 class="text-2xl font-bold text-pink-600 mt-8">I. The Mechanics of the Muzzle and Jaw</h3>
+                <p class="mt-2">The muzzle's shape is determined by the muscle necessary for chewing (the <strong>Masseter</strong> and <strong>Temporalis</strong> muscles) and the type of dentition.</p>
+                <ul class="list-disc list-inside space-y-3 ml-6 mt-4">
+                    <li><strong>Power Jaws (Omnivores/Heavy Predators):</strong> Characterized by a massive <strong>Sagittal Crest</strong> (the bony ridge on top of the skull) which anchors the Temporalis muscle. This results in a wide, dome-like forehead and a short, powerful muzzle (e.g., Bear, Gorilla).</li>
+                    <li><strong>Snout Jaws (Light Predators/Canines):</strong> Characterized by a long, slender muzzle (cylindrical or trapezoidal). The strength is in the hinge, allowing for speed and piercing. When drawing a snarl, the facial muscles (levator labii superioris) pull back sharply, revealing the canines and deepening the orbital socket shadow.</li>
+                    <li><strong>Beak and Shearing Forms (Avian/Chephalopods):</strong> Beaks are lightweight, keratinous structures. They are best modeled with two large <strong>triangular planes</strong> that meet at a sharp point. Exaggerate the curvature and sharpness for a cartoon villain, or flatten the top plane for a gentle, grazing bird.</li>
+                </ul>
+
+                <h3 class="text-2xl font-bold text-pink-600 mt-8">II. Sensory Specialization and Detail</h3>
+                <p class="mt-2">The design of external sensory features is crucial for communicating the creature's primary interaction with its environment.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                    <div class="p-4 bg-gray-100 rounded-lg">
+                        <h4 class="font-semibold text-pink-700">Auditory Design (Ears)</h4>
+                        <p class="text-sm">Large, thin ears (Fennec Fox) are used for cooling and subtle sound collection. Small, rounded ears (Bear, Otter) are adapted for warmth or aquatic environments. Cartooning Tip: Use ears as <strong>motion indicators</strong>—a swivel or twitch shows alertness and directs viewer attention.</p>
+                    </div>
+                    <div class="p-4 bg-gray-100 rounded-lg">
+                        <h4 class="font-semibold text-pink-700">Olfactory Design (Noses)</h4>
+                        <p class="text-sm">A wet nose (Dog) implies excellent scent tracking and moisture conservation. A broad, flat nose (Pig, Tapir) is designed for rooting or tactile sensation. The nose must be drawn as a separate geometric form (a small cone or sphere) attached to the muzzle block.</p>
+                    </div>
+                </div>
+
+                <div class="sub-divider"></div>
+
+                <h3 class="text-2xl font-bold text-pink-600 mt-8">III. Emotional Amplification (Cartooning Principles)</h3>
+                <p class="mt-2">We translate subtle anatomical shifts into clear, exaggerated emotional states for a cartoon audience.</p>
+                <ul class="list-disc list-inside space-y-3 ml-6 mt-4">
+                    <li><strong>The Squint and Arch:</strong> For <strong>concentration or aggression</strong>, the forehead skin bunches up (squints) and the outer brow arches down. This is visually amplified by darkening the shadow cast by the brow ridge onto the eye socket.</li>
+                    <li><strong>The "V" of Vulnerability:</strong> For <strong>sadness or confusion</strong>, the inner brow muscles pull up, creating an inverted "V" shape between the eyes. This opens the eye area, making the eye appear larger and more exposed (a sign of submission or distress).</li>
+                    <li><strong>Exaggerating the Mucosal Margin:</strong> The fleshy edge of the lip or eyelid (the mucosal margin) is highly expressive. Darkening or thickening this line gives the creature a more soulful or realistic expression.</li>
+                </ul>
+
+                <p class="p-2 bg-pink-200 rounded-lg text-sm italic mt-4">
+                    <strong>FUN FACT:</strong> The tapetum lucidum, a reflective layer behind the retina found in nocturnal animals (cats, wolves), causes the "eye shine" seen in photos. When designing a night creature, use this feature to justify luminous eyes in low-light environments.
                 </p>
             </section>
 
-            <!-- LESSON 2.5: Weight, Balance, and Contrapposto -->
-            <section id="lesson-2-5" class="lesson-section bg-pink-50 p-6 rounded-xl border border-pink-200 mb-10 shadow-inner">
-                <h2 class="text-3xl font-extrabold text-pink-700 mb-4 flex items-center space-x-2 border-b pb-2 border-pink-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-scale"><path d="m16 16 3-8 3 8c-.87.65-2.86 1-4 1s-3.13-.35-4-1Z"/><path d="m2 16 3-8 3 8c-.87.65-2.86 1-4 1s-3.13-.35-4-1Z"/><path d="M7 21h10"/><path d="M12 12V3"/></svg>
-                    <span>2.5 Weight, Balance, and Contrapposto</span>
+            <!-- LESSON 2.3: Locomotion and the Quadruped LoA (SUPER EXPANDED) -->
+            <section id="lesson-2-3" class="lesson-section bg-pink-50 p-8 rounded-2xl border border-pink-300 mb-12 shadow-2xl shadow-pink-100">
+                <h2 class="text-4xl font-extrabold text-pink-800 mb-6 flex items-center space-x-3 border-b-4 pb-3 border-pink-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-footprints"><path d="M22 17a4 4 0 0 1-4 4h-4V8a1 1 0 0 0-1-1v.5a.5.5 0 0 1-1 0V7a1 1 0 0 0-1-1H3"/><path d="M12 21h4a4 4 0 0 0 4-4V3"/><path d="M15 3h1"/><path d="M10 3H9"/><path d="M8 3H7"/><path d="M3 3h1"/></svg>
+                    <span>2.3 Kinematics: Elasticity, Mass Transfer, and Tail Dynamics</span>
                 </h2>
-                <p class="text-lg mb-4">
-                    A well-posed character feels heavy, not floating. The key to solid posing is understanding how the body compensates for weight shifts.
+                <p class="text-xl mb-8">
+                    Kinematics is the study of motion. We analyze how mass is transferred, how momentum is created, and how <strong>elastic energy</strong> is stored and released by the body.
                 </p>
 
-                <h3 class="text-xl font-bold text-pink-600 mt-4">The Balance Line</h3>
-                <p class="mt-2">
-                    Draw a straight, vertical line down from the character's pit of the neck (center of mass). For a balanced pose, this line **must** land between the character's feet. If it falls outside the feet, the character is falling.
-                </p>
+                <div class="p-4 bg-white rounded-xl shadow-lg mb-6 tip-box border-l-8">
+                    <p class="font-bold text-pink-700 text-xl flex items-center space-x-2"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-activity"><path d="M22 12H12l-3 9L2 3h10l3 9Z"/></svg> DEFINITION: Elastic Energy Storage</p>
+                    <p class="text-base mt-1">This is the critical function of <strong>tendons</strong> (especially the Achilles/Calcaneal tendon). When an animal lands, the tendon stretches, storing potential energy like a rubber band. This energy is then released in the subsequent push-off, significantly boosting running efficiency and jump height (e.g., Kangaroo, Springbok).</p>
+                </div>
 
-                <h3 class="text-xl font-bold text-pink-600 mt-4 border-t pt-4">The Tilt of Contrapposto</h3>
-                <p class="mt-2">
-                    **Contrapposto** is the natural, dynamic shift in the human body when weight is on one leg.
-                </p>
-                <ul class="list-disc list-inside space-y-2 ml-4">
-                    <li>When the weight is on one leg, the **hip line** will tilt **up** on the weighted side.</li>
-                    <li>To compensate, the **shoulder line** will tilt in the **opposite direction** (down on the weighted side).</li>
-                    <li>This opposing tilt creates the beautiful, energetic S-curve through the torso—a perfect combination of the **LoA** and solid weight distribution.</li>
+                <h3 class="text-2xl font-bold text-pink-600 mt-8">I. Advanced Gait Mechanics and Timing</h3>
+                <p class="mt-2">Beyond the basic walk and run, specific gaits communicate different narratives about the creature's intent and energy.</p>
+                <ul class="list-disc list-inside space-y-3 ml-6 mt-4">
+                    <li><strong>The Amble (Two-Beat Lateral):</strong> Slower than a trot, but the legs on the <strong>same side</strong> of the body move almost simultaneously (e.g., camel, elephant). This is a side-to-side rocking motion that is highly energy-efficient for large, heavy animals. Drawing Tip: Emphasize the lateral sway of the rib cage.</li>
+                    <li><strong>The Pronk/Stot:</strong> All four feet leave and land on the ground almost simultaneously (e.g., deer). This is an <strong>energy display</strong> for communication or evasion, used to generate maximum height. Pose Tip: Draw the spine in an extreme arch with all four limbs gathered underneath the CoM.</li>
+                    <li><strong>The Flying Gallop Phase:</strong> The <strong>moment of suspension</strong> in a high-speed gallop where the body is fully extended. The front legs are pushed back and the rear legs are extended forward. This is the ultimate pose for speed and power in character design.</li>
                 </ul>
+
+                <div class="sub-divider"></div>
+
+                <h3 class="text-2xl font-bold text-pink-600 mt-8">II. The Counterweight System: Tail Dynamics</h3>
+                <p class="mt-2">The tail is far more than an accessory; it is a critical dynamic tool for balance, steering, and communication. Its mass must be accounted for in the CoM calculation.</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+                    <div class="p-4 bg-pink-100 rounded-lg">
+                        <h4 class="font-semibold text-pink-700">Counterweight (Cheetah/Kangaroo)</h4>
+                        <p class="text-sm">A heavy, long tail used to rapidly shift the <strong>CoM</strong> during high-speed turns, preventing the animal from tipping over due to inertia. Essential for drawing fast, agile creatures.</p>
+                    </div>
+                    <div class="p-4 bg-pink-100 rounded-lg">
+                        <h4 class="font-semibold text-pink-700">Rudder/Propeller (Aquatic/Arboreal)</h4>
+                        <p class="text-sm">Flat, paddle-like tails (Beaver, Crocodile) used for propulsion or steering in water. Prehensile tails (Monkey) are used as a fifth grasping limb in trees. <strong>Tip:</strong> The tail's curve must oppose the body's curve for balance.</p>
+                    </div>
+                    <div class="p-4 bg-pink-100 rounded-lg">
+                        <h4 class="font-semibold text-pink-700">Defensive/Display (Rattlesnake/Peacock)</h4>
+                        <p class="text-sm">Used for signaling danger or courtship. These are often highly articulated and covered in specialized scales, quills, or feathers. Drawing focus here shifts from weight to surface detail.</p>
+                    </div>
+                </div>
+
+                <h3 class="text-2xl font-bold text-pink-600 mt-8">III. Aquatic and Aerial Kinematics</h3>
+                <p class="mt-2">Motion in fluids (air or water) requires adaptation to reduce drag and maximize thrust.</p>
+                <ul class="list-disc list-inside space-y-3 ml-6 mt-4">
+                    <li><strong>Hydrodynamics (Water):</strong> Aquatic creatures are designed with a <strong>fusiform (torpedo) body shape</strong> to minimize drag. Propulsion is generated by massive caudal (tail) muscles. Drawing Tip: Emphasize the smooth, uninterrupted flow of the silhouette and the immense muscle mass around the tail base.</li>
+                    <li><strong>Aerodynamics (Air):</strong> Flight relies on generating <strong>lift</strong> (curved wing surface) and <strong>thrust</strong> (wing beat). Wings must be drawn as rigid, unified planes during the power stroke (down) and flexible during the recovery stroke (up). The highest point of the wing beat should be visually exaggerated for cartoon flight.</li>
+                </ul>
+
+                <p class="p-2 bg-pink-200 rounded-lg text-sm italic mt-4">
+                    <strong>FUN FACT:</strong> The 'walk' of a flying insect is actually a very slow, highly controlled flight, where they are constantly adjusting their CoM with their six legs and tiny wing movements. They are never truly "at rest" in the way a mammal is.
+                </p>
+            </section>
+
+            <!-- LESSON 2.4: Creature Design and Hybridization (SUPER EXPANDED) -->
+            <section id="lesson-2-4" class="lesson-section p-8 rounded-2xl border border-gray-400 mb-12 shadow-2xl">
+                <h2 class="text-4xl font-extrabold text-pink-800 mb-6 flex items-center space-x-3 border-b-4 pb-3 border-pink-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-tent"><path d="M20 21.5V8.3l-5.71-4.36a2 2 0 0 0-2.58 0L4 8.3v13.2"/><path d="m22 21.5-3.37-3.66"/><path d="m11 21.5 8-8"/></svg>
+                    <span>2.4 Creature Design: The Evolutionary Narrative and Methodology</span>
+                </h2>
+                <p class="text-xl mb-8">
+                    Exceptional creature design adheres to the <strong>W.H.Y. Principle</strong>: <strong>W</strong>hat is its primary power? <strong>H</strong>ow does it interact with its environment? <strong>Y</strong> does it look this way? The answer is always <strong>evolutionary pressure</strong>.
+                </p>
+                
+                <div class="p-4 bg-white rounded-xl shadow-lg mb-6 tip-box border-l-8">
+                    <p class="font-bold text-pink-700 text-xl flex items-center space-x-2"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-git-commit"><circle cx="12" cy="12" r="4"/><path d="M1.9 12h5.1"/><path d="m10 8 4 4-4 4"/></svg> DEFINITION: Biological Plausibility</p>
+                    <p class="text-base mt-1">A design rule stating that, even if fantastical, the creature must appear to have evolved under a set of physical laws. If it flies, it must be light. If it's armored, it must be slow. This internal logic is what makes fantasy creatures feel real.</p>
+                </div>
+
+                <h3 class="text-2xl font-bold text-pink-600 mt-8">I. Environmental & Adaptive Pressure</h3>
+                <p class="mt-2">The habitat dictates the necessity of every feature.</p>
+                <ul class="list-disc list-inside space-y-3 ml-6 mt-4">
+                    <li><strong>Deep Ocean/Caves (Abyssal):</strong> Features often include bioluminescence (for communication/luring prey), lack of eyes (sight is useless), and low muscle mass (conserving energy in a nutrient-poor environment).</li>
+                    <li><strong>Volcanic/Extreme Heat (Thermic):</strong> Requires massive heat sinks (large radiators/fins) or, conversely, extremely dense, obsidian-like armor to resist thermal shock. <strong>Texture Tip:</strong> Surfaces should look stressed, cracked, or molten.</li>
+                    <li><strong>Swamp/Jungle (Wetlands):</strong> Features include broad, splayed feet (to distribute weight on soft ground), camouflaged coloration (mottled green/brown), and external protective layers against parasites and moisture (oily skin or heavy scales).</li>
+                    <li><strong>Example:</strong> If your creature lives on a mountain where resources are scarce, it should be lean and muscular, with dense, short fur and large, sure-footed paws—like a mountain goat or yak hybrid.</li>
+                </ul>
+
+                <div class="sub-divider"></div>
+
+                <h3 class="text-2xl font-bold text-pink-600 mt-8">II. Advanced Hybridization and the Tonal Shift</h3>
+                <p class="mt-2">Successful hybrids combine forms that create a new, compelling function and emotional tone.</p>
+                <ul class="list-disc list-inside space-y-3 ml-6 mt-4">
+                    <li><strong>The Function-Tonal Map:</strong>
+                        <ul>
+                            <li><strong>Friendly/Playful:</strong> Base animal (Squirrel) + Feature (Dolphin Fin) + Accessory (Human Eyes). Result: An agile, intelligent, playful aquatic creature. Uses Circle and C-curves.</li>
+                            <li><strong>Menacing/Horror:</strong> Base animal (Crocodile) + Feature (Insect Carapace) + Accessory (Human Teeth). Result: A rigid, ancient, visceral threat. Uses Triangles and sharp, broken lines.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Designing Symbiosis and Parasitism:</strong> You can design two creatures that exist as one. A giant, slow-moving host creature (Rhino-like, rectangular form) with smaller, fast-moving scavenger/defender creatures (Raptor-like, triangular forms) permanently attached. This adds immediate narrative depth.</li>
+                    <li><strong>The Principle of Unnecessary Complexity:</strong> When designing a villain, often the most frightening features are those that seem biologically <strong>inefficient</strong> or terrifyingly unnatural (e.g., extra joints, too many eyes, or asymmetrical limbs). This breaks the expectation of "plausibility."</li>
+                </ul>
+
+                <div class="p-4 bg-amber-100 rounded-lg shadow-md mt-6">
+                    <p class="font-bold text-pink-700">SIDE TIP: Exaggerating Scale</p>
+                    <p class="text-sm mt-1">To show a creature is truly massive, do not just make it large. Show <strong>geological features</strong> on its body (moss, small waterfalls, deep crevices). Compare its foot or claw to a human figure (as a tiny dot). Use <strong>atmospheric perspective</strong> (fog or haze) to show how far away its top features are.</p>
+                </div>
+
+                <p class="p-2 bg-pink-200 rounded-lg text-sm italic mt-4">
+                    <strong>FUN FACT:</strong> The basilisk, a mythical serpent, was often described as being able to kill with a glance. In design terms, this translates to drawing its eyes as the <strong>central focal point</strong>, with radiating patterns or scales emphasizing the power source.
+                </p>
+            </section>
+
+            <!-- LESSON 2.5: Drawing Textures (SUPER EXPANDED) -->
+            <section id="lesson-2-5" class="lesson-section bg-pink-50 p-8 rounded-2xl border border-pink-300 mb-12 shadow-2xl shadow-pink-100">
+                <h2 class="text-4xl font-extrabold text-pink-800 mb-6 flex items-center space-x-3 border-b-4 pb-3 border-pink-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-feather"><path d="M20.25 15.25L10 5"/><path d="M16 16 4 4"/><path d="M12.5 17.5 7 12"/><path d="m14 20-3-3"/><path d="m5 15 3-3"/><path d="m11 20-3-3"/></svg>
+                    <span>2.5 Advanced Rendering: Materiality, Light, and Volume</span>
+                </h2>
+                <p class="text-xl mb-8">
+                    Rendering is about simulating how light interacts with the material, giving it presence. We move beyond simple shading to focus on <strong>reflectivity, roughness, and subsurface scatter</strong> to make textures look physically real.
+                </p>
+
+                <div class="p-4 bg-white rounded-xl shadow-lg mb-6 tip-box border-l-8">
+                    <p class="font-bold text-pink-700 text-xl flex items-center space-x-2"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg> DEFINITION: Subsurface Scattering (SSS)</p>
+                    <p class="text-base mt-1">The phenomenon where light penetrates a translucent object (skin, wax, leaves, ears) and scatters beneath the surface before reflecting back out. In drawing, this is rendered as a <strong>subtle reddish or yellowish glow</strong> along the shadow side edges, giving the material a soft, organic quality.</p>
+                </div>
+
+                <h3 class="text-2xl font-bold text-pink-600 mt-8">I. The Language of Reflectivity and Roughness</h3>
+                <p class="mt-2">These two properties, often simplified, are key to defining the material's surface quality.</p>
+                <ul class="list-disc list-inside space-y-3 ml-6 mt-4">
+                    <li><strong>High Specularity (Shiny):</strong> Used for wet scales, insect chitin, and slick membranes. Requires <strong>small, hard-edged, pure white highlights</strong>. The core shadow (darkest area) is sharply defined.</li>
+                    <li><strong>Low Specularity (Matte/Rough):</strong> Used for wool, moss, dry dirt, and feathers. The highlights are <strong>broad, soft, and desaturated</strong>. There are no pure white points, and shadows transition softly, absorbing light.</li>
+                    <li><strong>Drawing Dry Scales:</strong> The texture is rough, meaning the reflected light is scattered. This creates a <strong>dull, granular surface</strong>. Use sharp line work to define the edges, but shade the surface softly to avoid looking plastic.</li>
+                </ul>
+
+                <h3 class="text-2xl font-bold text-pink-600 mt-8">II. Rendering Weight and Density</h3>
+                <p class="mt-2">Texture helps convince the viewer of the creature's physical mass.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                    <div class="p-4 bg-gray-100 rounded-lg">
+                        <h4 class="font-semibold text-pink-700">Heavy Weight (Thick Armor/Rock)</h4>
+                        <p class="text-sm">Conveyed by <strong>thick edges</strong>, deep crevasses, and a high contrast between light and shadow. The wrinkles must have clear, dark pockets where light cannot penetrate. This implies slow, massive motion.</p>
+                    </div>
+                    <div class="p-4 bg-gray-100 rounded-lg">
+                        <h4 class="font-semibold text-pink-700">Light Weight (Gossamer Wings/Fine Fur)</h4>
+                        <p class="text-sm">Conveyed by <strong>thin, delicate line work</strong>, subtle SSS, and low contrast. Wings should have light visible <strong>through</strong> them (translucency), and shadows should be soft and diffuse, implying fast, agile motion.</p>
+                    </div>
+                </div>
+
+                <div class="sub-divider"></div>
+
+                <h3 class="text-2xl font-bold text-pink-600 mt-8">III. Dynamic Environmental Textures</h3>
+                <p class="mt-2">Adding textures that hint at the environment grounds the creature in its setting.</p>
+                <ul class="list-disc list-inside space-y-3 ml-6 mt-4">
+                    <li><strong>Iced or Frosty Textures:</strong> Requires drawing the underlying texture (e.g., fur) with soft, matte lighting, then applying a thin, irregular layer of <strong>highly specular, bright-white texture</strong> on the exposed edges, simulating ice buildup. Shadows should be cold (blue/purple).</li>
+                    <li><strong>Bioluminescence:</strong> A texture that acts as its own light source. The illuminated part (e.g., a lure, internal organs) must be the <strong>brightest value on the canvas</strong>. It should cast a strong, colored light (often blue or green) onto the surrounding anatomy and environment, overriding the primary light source.</li>
+                    <li><strong>Wound and Damage Textures:</strong> Damage must follow the underlying <strong>anatomy</strong>. A cut across the grain of muscle will gape open more severely than one parallel to the muscle fibers. Broken armor should reveal the softer material underneath, providing a textural contrast (smooth metal breaking to reveal rough, organic flesh).</li>
+                </ul>
+
+                <p class="p-2 bg-pink-200 rounded-lg text-sm italic mt-4">
+                    <strong>FUN FACT:</strong> The illusion of wetness is achieved not by adding blue color, but by decreasing the <strong>roughness</strong> of the material to zero, causing the highlights to become extremely crisp, small, and intense (specular).
+                </p>
             </section>
 
 
             <!-- MODULE CONCLUSION & NEXT STEP -->
-            <div class="text-center bg-amber-50 p-6 rounded-xl border border-amber-300 shadow-xl">
-                <h3 class="text-3xl font-extrabold text-pink-800 mb-3">Module 2: Complete!</h3>
-                <p class="mb-5 text-gray-700">
-                    You have mastered dynamic posing with the LoA, established clear proportional rules, and executed the essential 4-View Turnaround. The next step is bringing this structure to life with clothing, hair, and style.
+            <div class="text-center bg-amber-50 p-8 rounded-2xl border border-amber-400 shadow-xl ring-4 ring-amber-200">
+                <h3 class="text-4xl font-black text-pink-900 mb-4">Module 2: Mastery Achieved!</h3>
+                <p class="mb-6 text-xl text-gray-800">
+                    You have moved beyond drawing what you see to designing what is <strong>biologically and kinetically plausible</strong>. This advanced foundation in biomechanics, ecological design, and material rendering is the core of thesis-level character development.
                 </p>
-                <button class="flex items-center justify-center mx-auto space-x-2 bg-pink-500 text-white font-extrabold px-8 py-4 rounded-xl hover:bg-pink-600 transition duration-300 shadow-lg text-lg ring-4 ring-pink-200">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevrons-right"><path d="m15 17 5-5-5-5"/><path d="m4 17 5-5-5-5"/></svg>
-                    <span>Proceed to Module 3: Clothes, Folds, and Hair</span>
-                </button>
+                <!-- CORRECTED Button link and text -->
+                <a href="cartoon_dashboard3.html"
+                   class="flex items-center justify-center mx-auto space-x-3 bg-pink-600 text-white font-black px-10 py-5 rounded-2xl hover:bg-pink-700 transition duration-300 shadow-2xl text-xl ring-4 ring-pink-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevrons-right"><path d="m15 17 5-5-5-5"/><path d="m4 17 5-5-5-5"/></svg>
+                    <span>Proceed to Module 3: Dynamic Action Poses & Storytelling</span>
+                </a>
             </div>
 
         </div>
     </main>
 
     <!-- Footer (Deep Pink Theme) -->
-    <footer class="bg-pink-800 text-white py-8 mt-12">
+    <footer class="bg-pink-800 text-white py-8 mt-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p class="text-sm mb-4">© 2025 Learn How to Draw Hub. All course content is for student use only.</p>
+            <p class="text-sm mb-4">© 2025 Advanced Character Design Academy. All Rights Reserved.</p>
         </div>
     </footer>
 
