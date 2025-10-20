@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Course: The Book Launch Blueprint</title>
+    <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
@@ -13,20 +15,20 @@
             font-family: 'Inter', sans-serif;
             background-color: #f7fafc; /* Light gray background */
         }
-        /* Custom aspect ratio for the video player */
-        .video-container {
+        /* Custom styling for the horizontal navigation bar progress indicator */
+        .active-lesson {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-            height: 0;
-            overflow: hidden;
-            border-radius: 0.75rem; /* rounded-xl */
+            z-index: 10;
         }
-        .video-container iframe {
+        .active-lesson::after {
+            content: '';
             position: absolute;
-            top: 0;
+            bottom: -8px; /* Position below the text */
             left: 0;
             width: 100%;
-            height: 100%;
+            height: 4px; /* Thickness of the bar */
+            background-color: #f59e0b; /* Amber-500 */
+            border-radius: 9999px;
         }
     </style>
 </head>
@@ -37,134 +39,114 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
             <!-- Logo/Home Link -->
             <a href="index.html" class="flex items-center space-x-2 text-xl font-extrabold text-white tracking-tight">
-                <img src="lhtdhublogo.jpg" alt="lhtdhub Logo" class="h-8 w-8 rounded-full shadow-md" onerror="this.onerror=null; this.src='https://placehold.co/32x32/indigo500/ffffff?text=LTD';">
+                <img src="lhtdhublogo.jpg" alt="lhtdhub Logo" class="h-8 w-8 rounded-full shadow-md" onerror="this.onerror=null; this.src='https://placehold.co/32x32/4f46e5/ffffff?text=ASC';">
                 <span>Publishing Course Dashboard</span>
             </a>
             
-            <!-- User Status / Back to Courses -->
-            <div class="flex items-center space-x-4">
-                <span class="text-sm text-amber-400 font-semibold hidden sm:inline">Welcome, Author!</span>
-                <a href="index.html" class="text-sm font-semibold text-white hover:text-amber-400 transition duration-150 flex items-center space-x-1">
-                    <!-- Icon: Layout Grid -->
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-grid"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="3" x2="21" y1="9" y2="9"/><line x1="3" x2="21" y1="15" y2="15"/><line x1="9" x2="9" y1="9" y2="21"/><line x1="15" x2="15" y1="9" y2="21"/></svg>
-                    <span>My Courses</span>
-                </a>
+            <!-- NEW: Module Selector Dropdown (Top Right) -->
+            <div class="relative">
+                <!-- Trigger Button -->
+                <button id="module-selector-btn" class="flex items-center space-x-2 text-sm font-bold bg-amber-500 text-indigo-900 px-3 py-2 rounded-lg hover:bg-amber-400 transition duration-150 shadow-md">
+                    <span id="header-current-lesson-title" class="truncate max-w-[150px] sm:max-w-none">Jump to Lesson...</span>
+                    <!-- Icon: Chevron Down -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
+                </button>
+
+                <!-- Dropdown Menu -->
+                <div id="header-module-dropdown" class="absolute right-0 mt-2 w-72 bg-white rounded-xl shadow-2xl z-50 border border-gray-100 hidden origin-top-right transform scale-95 transition-transform duration-200">
+                    <div class="p-4">
+                        <h3 class="text-base font-extrabold text-indigo-900 mb-2 border-b pb-1">Course Content</h3>
+                        <div id="dropdown-lesson-list" class="max-h-80 overflow-y-auto space-y-3">
+                            <!-- Lessons injected here by JS -->
+                        </div>
+                    </div>
+                </div>
             </div>
+
         </div>
     </header>
 
-    <!-- Main Content: Player and Modules -->
+    <!-- Main Content: Course Modules and Lesson Content -->
     <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
         <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
 
             <!-- Column 1: Module Navigation (Sidebar) - Indigo Themed -->
             <aside class="lg:col-span-1 bg-white p-6 rounded-2xl shadow-xl border border-gray-100 h-fit lg:sticky lg:top-[70px]">
                 <h2 class="text-2xl font-extrabold text-indigo-900 mb-4 border-b pb-2">Course Modules</h2>
-                <nav class="space-y-2">
+                <nav id="module-nav" class="space-y-2">
 
-                    <!-- Module 1: Pre-Launch & Setup (ACTIVE) -->
+                    <!-- Module 1: Production, Editing, and Cover Design -->
                     <div class="group">
-                        <h3 class="flex items-center justify-between text-lg font-bold text-indigo-800 p-2 cursor-pointer">
-                            <span>1. Pre-Launch & Setup</span>
+                        <h3 class="flex items-center justify-between text-lg font-bold text-indigo-800 p-2">
+                            <span>1. Production, Editing, and Cover Design</span>
                         </h3>
-                        <ul class="ml-4 border-l pl-4 border-gray-200 text-gray-600 space-y-1 text-sm">
-                            <!-- Active Lesson -->
-                            <li class="p-2 bg-indigo-50 rounded-lg font-semibold text-indigo-700 border-l-2 border-amber-500 cursor-pointer hover:bg-indigo-100 transition duration-150">
-                                1.1 Welcome & Publishing Checklist
-                            </li>
-                            <li class="p-2 rounded-lg cursor-pointer hover:bg-indigo-100 transition duration-150">
-                                1.2 KDP vs. IngramSpark: Where to Publish?
-                            </li>
-                            <li class="p-2 rounded-lg cursor-pointer hover:bg-indigo-100 transition duration-150">
-                                1.3 Mastering Book Metadata (Keywords & Categories)
-                            </li>
+                        <ul class="ml-4 border-l pl-4 border-gray-200 text-gray-600 space-y-1 text-sm" data-module="1">
+                            <li class="p-2 rounded-lg cursor-pointer hover:bg-indigo-100 transition duration-150" data-lesson-index="0">1.1 Welcome & Publishing Checklist</li>
+                            <li class="p-2 rounded-lg cursor-pointer hover:bg-indigo-100 transition duration-150" data-lesson-index="1">1.2 KDP vs. IngramSpark: Where to Publish?</li>
+                            <li class="p-2 rounded-lg cursor-pointer hover:bg-indigo-100 transition duration-150" data-lesson-index="2">1.3 Mastering Book Metadata (Keywords & Categories)</li>
                         </ul>
                     </div>
 
-                    <!-- Module 2: Production & Formatting -->
+                    <!-- Module 2: Strategic Publishing & Platform Distribution -->
                     <div class="group pt-2">
-                        <h3 class="flex items-center justify-between text-lg font-bold text-indigo-800 p-2 cursor-pointer">
-                            <span>2. Production & Formatting</span>
+                        <h3 class="flex items-center justify-between text-lg font-bold text-indigo-800 p-2">
+                            <span>2. Strategic Publishing & Platform Distribution</span>
                         </h3>
-                        <ul class="ml-4 border-l pl-4 border-gray-200 text-gray-600 space-y-1 text-sm">
-                            <li class="p-2 rounded-lg cursor-pointer hover:bg-indigo-100 transition duration-150">
-                                2.1 Hiring & Managing Your Editor
-                            </li>
-                            <li class="p-2 rounded-lg cursor-pointer hover:bg-indigo-100 transition duration-150">
-                                2.2 Cover Design That Sells
-                            </li>
-                            <li class="p-2 rounded-lg cursor-pointer hover:bg-indigo-100 transition duration-150">
-                                2.3 Interior Formatting for Ebook & Print
-                            </li>
+                        <ul class="ml-4 border-l pl-4 border-gray-200 text-gray-600 space-y-1 text-sm" data-module="2">
+                            <li class="p-2 rounded-lg cursor-pointer hover:bg-indigo-100 transition duration-150" data-lesson-index="3">2.1 Hiring & Managing Your Editor</li>
+                            <li class="p-2 rounded-lg cursor-pointer hover:bg-indigo-100 transition duration-150" data-lesson-index="4">2.2 Cover Design That Sells</li>
+                            <li class="p-2 rounded-lg cursor-pointer hover:bg-indigo-100 transition duration-150" data-lesson-index="5">2.3 Interior Formatting for Ebook & Print</li>
                         </ul>
                     </div>
                     
-                    <!-- Module 3: Launch Strategy (Locked/Future) -->
+                    <!-- Module 3: The 90-Day Author Marketing Launch (NOW UNLOCKED) -->
                     <div class="group pt-2">
-                        <h3 class="flex items-center justify-between text-lg font-bold p-2 cursor-pointer text-gray-400">
-                            <span>3. Launch Strategy (Coming Soon)</span>
-                            <!-- Icon: Lock -->
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lock text-gray-400"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                        <h3 class="flex items-center justify-between text-lg font-bold text-indigo-800 p-2">
+                            <span>3. The 90-Day Author Marketing Launch</span>
                         </h3>
+                        <ul class="ml-4 border-l pl-4 border-gray-200 text-gray-600 space-y-1 text-sm" data-module="3">
+                             <li class="p-2 rounded-lg cursor-pointer hover:bg-indigo-100 transition duration-150" data-lesson-index="6">3.1 Advanced Ad Strategy</li>
+                             <li class="p-2 rounded-lg cursor-pointer hover:bg-indigo-100 transition duration-150" data-lesson-index="7">3.2 Reviewer Outreach & ARC Management</li>
+                        </ul>
                     </div>
-
                 </nav>
             </aside>
 
-            <!-- Column 2: Video Player and Lesson Content - Indigo Themed -->
+            <!-- Column 2: Lesson Content Area -->
             <section class="lg:col-span-3">
-                <div class="bg-white p-6 md:p-8 rounded-2xl shadow-2xl">
-                    <h1 class="text-3xl sm:text-4xl font-extrabold text-indigo-900 mb-2">
-                        1.1 Welcome & Publishing Checklist
+
+                <!-- Horizontal Lesson Navigation Bar (Top Right Section) -->
+                <!-- Hidden on mobile, sticky on desktop for context -->
+                <div id="horizontal-nav-bar" class="bg-indigo-900 py-4 px-6 rounded-t-2xl shadow-xl hidden lg:block sticky top-[70px] z-40">
+                    <!-- Lesson titles will be generated here -->
+                </div>
+                
+                <div class="bg-white p-6 md:p-8 rounded-2xl shadow-2xl lg:rounded-t-none">
+                    <h1 id="lesson-title" class="text-3xl sm:text-4xl font-extrabold text-indigo-900 mb-2">
+                        Loading Lesson...
                     </h1>
-                    <p class="text-amber-600 font-bold uppercase tracking-widest mb-6">
+                    <p id="lesson-subtitle" class="text-amber-600 font-bold uppercase tracking-widest mb-6">
                         The Book Launch Blueprint
                     </p>
 
-                    <!-- Video Player Embed -->
-                    <div class="video-container shadow-2xl ring-4 ring-indigo-200 rounded-xl mb-8">
-                        <!-- Placeholder Video ID - Replace with actual content -->
-                        <iframe 
-                            src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0" 
-                            frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-
-                    <!-- Lesson Description -->
-                    <div class="prose max-w-none text-gray-700">
-                        <h2 class="text-2xl font-bold text-indigo-800 mb-3">About This Lesson</h2>
-                        <p>
-                            Welcome to the Book Launch Blueprint! In this first video, we lay the foundation for your publishing journey. We'll outline the key phases of self-publishing and provide a comprehensive checklist to ensure you don't miss any critical steps, from manuscript finalization to launch day preparation.
-                        </p>
-                        
-                        <h3 class="text-xl font-bold text-indigo-700 mt-6">Publishing Readiness Checklist:</h3>
-                        <ul class="list-disc list-inside space-y-1 ml-4">
-                            <li><span class="font-semibold">Manuscript:</span> Finalized and proofread copy.</li>
-                            <li><span class="font-semibold">ISBN:</span> Purchased and assigned (if needed).</li>
-                            <li><span class="font-semibold">Cover Design:</span> High-resolution files for ebook and print.</li>
-                            <li><span class="font-semibold">Author Bio:</span> Engaging professional biography.</li>
-                            <li><span class="font-semibold">Book Description:</span> Compelling blurb for sales pages.</li>
-                        </ul>
-
-                        <h3 class="text-xl font-bold text-indigo-700 mt-6">Next Steps:</h3>
-                        <p>
-                            Once you have reviewed this checklist, click on **1.2 KDP vs. IngramSpark: Where to Publish?** in the left sidebar to determine your optimal distribution strategy.
-                        </p>
+                    <!-- Lesson Description and Checklist (Starts immediately after subtitle) -->
+                    <div id="lesson-content-area" class="prose max-w-none text-gray-700 mt-4">
+                        <!-- Content will be injected here -->
                     </div>
                 </div>
 
-                <!-- Navigation Buttons -->
+                <!-- Navigation Buttons (for mobile and explicit action) -->
                 <div class="flex justify-between mt-8">
-                    <!-- No Previous Lesson -->
-                    <span class="inline-block px-6 py-3 text-gray-400 font-bold rounded-xl cursor-not-allowed border">
-                        < Previous Lesson
-                    </span>
+                    <!-- Previous Lesson Button -->
+                    <button id="prev-button" class="flex items-center space-x-2 text-indigo-900 font-extrabold px-6 py-3 rounded-xl hover:bg-indigo-100 transition duration-300 shadow-md border border-indigo-200 disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed">
+                        <!-- Icon: Chevron Left -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>
+                        <span>Previous Lesson</span>
+                    </button>
                     
                     <!-- Next Lesson Button -->
-                    <button class="flex items-center space-x-2 bg-amber-500 text-indigo-900 font-extrabold px-6 py-3 rounded-xl hover:bg-amber-400 transition duration-300 shadow-lg">
-                        <span>Next Lesson ></span>
+                    <button id="next-button" class="flex items-center space-x-2 bg-amber-500 text-indigo-900 font-extrabold px-6 py-3 rounded-xl hover:bg-amber-400 transition duration-300 shadow-lg disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed">
+                        <span>Next Lesson</span>
                         <!-- Icon: Chevron Right -->
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>
                     </button>
@@ -183,7 +165,337 @@
 
 </body>
 <script>
-    // This script ensures Lucide icons render properly
-    lucide.createIcons();
+    // --- Course Data (All Unlocked) ---
+    const courseData = [
+        // Module 1: Production, Editing, and Cover Design 
+        { module: 1, lesson: 1, title: "Welcome & Publishing Checklist", subtitle: "The Foundation", videoId: null, 
+          content: "Welcome to the **Book Launch Blueprint**! In this first lesson, we lay the foundation for your publishing journey. We'll outline the key phases of self-publishing and provide a comprehensive checklist to ensure you don't miss any critical steps, from manuscript finalization to launch day preparation. This lesson sets the stage for success!",
+          checklist: ["Manuscript: Finalized and proofread copy.", "ISBN: Purchased and assigned (if needed).", "Cover Design: High-resolution files for ebook and print.", "Author Bio: Engaging professional biography.", "Book Description: Compelling blurb for sales pages."], 
+          nextSteps: "Once you have reviewed this checklist, click on **1.2 KDP vs. IngramSpark: Where to Publish?** in the left sidebar to determine your optimal distribution strategy."
+        },
+        { module: 1, lesson: 2, title: "KDP vs. IngramSpark: Where to Publish?", subtitle: "Distribution Strategy", videoId: null, 
+          content: "Choosing your distribution platform is a critical early decision. This lesson compares the pros and cons of Amazon KDP (Kindle Direct Publishing) for exclusivity and ease, versus IngramSpark for wide distribution to bookstores and libraries. Understand royalties, costs, and reach for each platform.",
+          checklist: ["Research KDP royalty structures.", "Check IngramSpark setup fees.", "Decide on exclusivity vs. wide distribution."],
+          nextSteps: "Proceed to lesson **1.3** to learn how to master book metadata to optimize discovery."
+        },
+        { module: 1, lesson: 3, title: "Mastering Book Metadata (Keywords & Categories)", subtitle: "The Discovery Engine", videoId: null, 
+          content: "Metadata is how readers find your book. We dive deep into keyword research tools and strategies, showing you how to select seven powerful keywords. We also cover selecting up to 10 categories to maximize your book's visibility across retail platforms.",
+          checklist: ["Select 7 Amazon Keywords.", "Choose 10 best categories.", "Use a keyword research tool (e.g., KDP Rocket)."],
+          nextSteps: "Time to start thinking about the production phase! Continue to lesson **2.1** to learn about hiring an editor."
+        },
+        // Module 2: Strategic Publishing & Platform Distribution
+        { module: 2, lesson: 1, title: "Hiring & Managing Your Editor", subtitle: "Production Phase Begins", videoId: null, 
+          content: "A professional editor is non-negotiable. Learn the difference between developmental, copy, and proofreading, and how to write a Statement of Work (SOW) to manage editor expectations, budget, and timeline effectively.",
+          checklist: ["Identify required editing types.", "Set clear budget and timeline.", "Write an effective Statement of Work (SOW)."],
+          nextSteps: "Discover the secrets of cover design that commands attention in lesson **2.2**."
+        },
+        { module: 2, lesson: 2, title: "Cover Design That Sells", subtitle: "First Impressions Count", videoId: null, 
+          content: "Your cover is your single most important marketing tool. This lesson covers genre conventions, using white space effectively, typography best practices, and working with a designer to create a cover that converts browsers into buyers.",
+          checklist: ["Analyze competitor covers.", "Choose 3 key design elements.", "Finalize designer contract and brief."],
+          nextSteps: "In lesson **2.3**, you'll learn how to format your interior for both print and ebook."
+        },
+        { module: 2, lesson: 3, title: "Interior Formatting for Ebook & Print", subtitle: "Professional Polish", videoId: null, 
+          content: "Proper interior formatting ensures a professional reading experience on any device. We review tools and best practices for creating error-free Ebook files (MOBI/EPUB) and print-ready PDF files with correct bleed and trim size.",
+          checklist: ["Set trim size and margins.", "Generate EPUB/MOBI file.", "Generate print-ready PDF with bleed."],
+          nextSteps: "Congratulations! You have completed the Production module. Continue to lesson **3.1** to begin planning your launch."
+        },
+        // Module 3: The 90-Day Author Marketing Launch (UNLOCKED)
+        { module: 3, lesson: 1, title: "Advanced Ad Strategy", subtitle: "Targeted Marketing", videoId: null, 
+          content: "This module covers advanced Amazon Ads (AMS) and Facebook Ads strategy. Learn about bid optimization, testing creatives, scaling budgets, and analyzing campaign performance to maximize your Return on Ad Spend (ROAS).", 
+          checklist: ["Set up A/B test for three ad creatives.", "Implement daily budget scaling rules.", "Review weekly ROAS and adjust bids."],
+          nextSteps: "Learn how to secure early reviews in lesson **3.2**."
+        },
+        { module: 3, lesson: 2, title: "Reviewer Outreach & ARC Management", subtitle: "Building Buzz", videoId: null, 
+          content: "Reviews drive sales. This lesson teaches you how to legally and ethically manage an Advance Reader Copy (ARC) team, use platforms like BookFunnel and Booksprout, and professionally approach book bloggers and reviewers for launch-day buzz.", 
+          checklist: ["Recruit 20 ARC readers.", "Create a Reviewer Tracking Spreadsheet.", "Send follow-up emails one week post-launch."],
+          nextSteps: "Course Complete! You are now ready to launch your book with confidence."
+        }
+    ];
+
+    let currentLessonIndex = 0; // Start at the first lesson
+
+    // --- DOM Elements ---
+    const lessonTitleEl = document.getElementById('lesson-title');
+    const lessonSubtitleEl = document.getElementById('lesson-subtitle');
+    const lessonContentAreaEl = document.getElementById('lesson-content-area');
+    const prevButton = document.getElementById('prev-button');
+    const nextButton = document.getElementById('next-button');
+    const lessonListItems = document.querySelectorAll('[data-lesson-index]');
+    const horizontalNavBar = document.getElementById('horizontal-nav-bar');
+    
+    // Header Dropdown Elements
+    const moduleSelectorBtn = document.getElementById('module-selector-btn');
+    const headerModuleDropdown = document.getElementById('header-module-dropdown');
+    const headerCurrentLessonTitle = document.getElementById('header-current-lesson-title');
+    const dropdownLessonList = document.getElementById('dropdown-lesson-list');
+
+    // --- Helper Functions ---
+
+    // Generates the content HTML structure (description, checklist, next steps)
+    function generateContentHTML(lesson) {
+        let html = `
+            <h2 class="text-2xl font-bold text-indigo-800 mb-3">About This Lesson</h2>
+            <p>${lesson.content}</p>
+        `;
+
+        if (lesson.checklist && lesson.checklist.length > 0) {
+            html += `
+                <h3 class="text-xl font-bold text-indigo-700 mt-6">Publishing Readiness Checklist:</h3>
+                <ul class="list-disc list-inside space-y-1 ml-4">
+                    ${lesson.checklist.map(item => `<li><span class="font-semibold">${item.split(':')[0]}:</span> ${item.split(':')[1] || ''}</li>`).join('')}
+                </ul>
+            `;
+        }
+
+        html += `
+            <h3 class="text-xl font-bold text-indigo-700 mt-6">Next Steps:</h3>
+            <p>${lesson.nextSteps}</p>
+        `;
+
+        return html;
+    }
+
+    // Generates the horizontal navigation bar content
+    function generateHorizontalNav() {
+        const lessonsToShow = [];
+        // Add up to 2 lessons before the current one
+        for (let i = Math.max(0, currentLessonIndex - 2); i < currentLessonIndex; i++) {
+            lessonsToShow.push({ ...courseData[i], index: i });
+        }
+        // Add the current lesson
+        lessonsToShow.push({ ...courseData[currentLessonIndex], index: currentLessonIndex });
+        // Add up to 2 lessons after the current one
+        for (let i = currentLessonIndex + 1; i < Math.min(courseData.length, currentLessonIndex + 3); i++) {
+            lessonsToShow.push({ ...courseData[i], index: i });
+        }
+
+        let navHTML = `<div class="flex space-x-6 overflow-x-auto whitespace-nowrap py-1 relative">`;
+
+        lessonsToShow.forEach(item => {
+            const isCurrent = item.index === currentLessonIndex;
+            const classList = isCurrent 
+                ? 'active-lesson text-amber-400 font-extrabold cursor-default' 
+                : 'text-white/80 font-semibold cursor-pointer hover:text-amber-300 transition duration-150';
+            
+            // Abbreviated title: 1.1 Welcome
+            const lessonLabel = `${item.module}.${item.lesson} ${item.title.split(' ')[0]}`; 
+            
+            navHTML += `
+                <span 
+                    class="${classList}" 
+                    data-lesson-index="${item.index}"
+                    onclick="updateLesson(${item.index})"
+                >
+                    ${lessonLabel}
+                </span>
+            `;
+        });
+
+        navHTML += `</div>`;
+        horizontalNavBar.innerHTML = navHTML;
+    }
+
+    // Generates the lesson links for the header dropdown
+    function generateDropdownLessons() {
+        let html = '';
+        let currentModule = 0;
+
+        courseData.forEach((lesson, index) => {
+            if (lesson.module !== currentModule) {
+                // Start new module section
+                if (currentModule !== 0) {
+                    html += `</div>`; // Close previous module group
+                }
+                // Get the module title from the first lesson in the module, truncate it
+                const moduleTitle = lesson.module === 3 ? "The 90-Day Author Marketing Launch" : lesson.title.split(',')[0].split(':')[0];
+
+                html += `
+                    <div class="pt-2">
+                        <h4 class="text-sm font-bold text-indigo-800">${lesson.module}. ${moduleTitle.split('(')[0].trim()}</h4>
+                        <div class="space-y-1 pl-2 border-l border-gray-200">
+                `;
+                currentModule = lesson.module;
+            }
+
+            const isCurrent = index === currentLessonIndex;
+
+            const classList = isCurrent
+                ? 'font-bold text-amber-600 cursor-default flex items-center'
+                : 'text-gray-700 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg p-1 transition duration-150 cursor-pointer flex items-center';
+            
+            const onclick = `onclick="updateLesson(${index}); toggleDropdown(false);"`;
+
+            html += `
+                <a ${onclick} class="${classList} text-sm">
+                    ${lesson.module}.${lesson.lesson} ${lesson.title.split(':')[0].split('(')[0].trim()}
+                </a>
+            `;
+        });
+        
+        // Close the last module group
+        html += `</div></div>`;
+        dropdownLessonList.innerHTML = html;
+        lucide.createIcons();
+    }
+
+    // Toggles the visibility of the header dropdown
+    function toggleDropdown(show) {
+        if (typeof show === 'boolean') {
+            headerModuleDropdown.classList.toggle('hidden', !show);
+            headerModuleDropdown.classList.toggle('scale-100', show);
+            headerModuleDropdown.classList.toggle('scale-95', !show);
+        } else {
+            headerModuleDropdown.classList.toggle('hidden');
+            headerModuleDropdown.classList.toggle('scale-100');
+            headerModuleDropdown.classList.toggle('scale-95');
+        }
+    }
+
+    // --- Core Functionality ---
+
+    window.updateLesson = function(newIndex) {
+        if (newIndex < 0 || newIndex >= courseData.length) {
+            console.error("Lesson index out of bounds:", newIndex);
+            return;
+        }
+
+        currentLessonIndex = newIndex;
+        const lesson = courseData[currentLessonIndex];
+
+        // 1. Update Horizontal Navigation Bar
+        generateHorizontalNav();
+        
+        // 2. Regenerate Dropdown to update current lesson highlight
+        generateDropdownLessons();
+
+        // 3. Update Header Button Text
+        headerCurrentLessonTitle.textContent = `${lesson.module}.${lesson.lesson} ${lesson.title.split(':')[0].split('(')[0].trim()}`;
+
+        // 4. Update Sidebar Active State
+        lessonListItems.forEach(item => {
+            item.classList.remove('bg-indigo-50', 'font-semibold', 'text-indigo-700', 'border-l-2', 'border-amber-500');
+            if (parseInt(item.dataset.lessonIndex) === currentLessonIndex) {
+                item.classList.add('bg-indigo-50', 'font-semibold', 'text-indigo-700', 'border-l-2', 'border-amber-500');
+            }
+        });
+
+        // 5. Update Main Title and Subtitle
+        lessonTitleEl.textContent = `${lesson.module}.${lesson.lesson} ${lesson.title}`;
+        lessonSubtitleEl.textContent = lesson.subtitle.toUpperCase();
+
+        // 6. Update Lesson Content
+        lessonContentAreaEl.innerHTML = generateContentHTML(lesson);
+
+        // 7. Update Navigation Buttons
+        prevButton.disabled = currentLessonIndex === 0;
+        nextButton.disabled = currentLessonIndex === courseData.length - 1;
+
+        // Update Next button text
+        if (currentLessonIndex === courseData.length - 1) {
+             nextButton.querySelector('span').textContent = 'Course Complete!';
+        } else {
+            nextButton.querySelector('span').textContent = 'Next Lesson';
+        }
+
+        // Update Previous button text
+        if (currentLessonIndex === 0) {
+            prevButton.querySelector('span').textContent = '< Previous Lesson';
+        } else {
+            // Display the module and lesson number of the previous lesson
+            prevButton.querySelector('span').textContent = `< ${courseData[currentLessonIndex - 1].module}.${courseData[currentLessonIndex - 1].lesson} - ${courseData[currentLessonIndex - 1].title.split(':')[0].split('(')[0].trim()}`;
+        }
+    }
+
+    // --- Event Listeners ---
+    
+    // 1. Sidebar Lesson Clicks
+    lessonListItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            const index = parseInt(e.currentTarget.dataset.lessonIndex);
+            updateLesson(index);
+            document.querySelector('main').scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+
+    // 2. Navigation Button Clicks
+    prevButton.addEventListener('click', () => {
+        if (currentLessonIndex > 0) {
+            updateLesson(currentLessonIndex - 1);
+            document.querySelector('main').scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+
+    nextButton.addEventListener('click', () => {
+        if (currentLessonIndex < courseData.length - 1) {
+            updateLesson(currentLessonIndex + 1);
+            document.querySelector('main').scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+    
+    // 3. Header Dropdown Toggles
+    moduleSelectorBtn.addEventListener('click', () => toggleDropdown());
+    
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (event) => {
+        if (!moduleSelectorBtn.contains(event.target) && !headerModuleDropdown.contains(event.target)) {
+            toggleDropdown(false);
+        }
+    });
+
+    // 4. Initial Load
+    window.onload = function() {
+        // Create Lucide icons
+        lucide.createIcons();
+        // The side bar structure is now hardcoded without the "Locked" warning
+        // but we need to update the data-lesson-index for the new lessons
+        
+        // The HTML structure in the sidebar needs fixing to match the new data indexes.
+        // We will manually fix the data-lesson-index for Module 3 in the HTML
+        // as the previous indices were incorrect due to the "coming soon" placeholder.
+        
+        // Manually update data-lesson-index for Module 3 elements in the DOM 
+        // to match the now 8 lessons total (0-7 indexes)
+        const lesson3_1 = document.querySelector('[data-module="3"] li:nth-child(1)');
+        if (lesson3_1) {
+            lesson3_1.setAttribute('data-lesson-index', '6');
+            lesson3_1.textContent = '3.1 Advanced Ad Strategy';
+            lesson3_1.classList.remove('cursor-not-allowed', 'text-gray-400', 'hover:bg-indigo-100');
+            lesson3_1.classList.add('cursor-pointer', 'text-gray-600', 'hover:bg-indigo-100');
+        }
+        
+        const lesson3_2 = document.querySelector('[data-module="3"] li:nth-child(2)');
+        if (lesson3_2) {
+            lesson3_2.setAttribute('data-lesson-index', '7');
+            lesson3_2.textContent = '3.2 Reviewer Outreach & ARC Management';
+            lesson3_2.classList.remove('cursor-not-allowed', 'text-gray-400', 'hover:bg-indigo-100');
+            lesson3_2.classList.add('cursor-pointer', 'text-gray-600', 'hover:bg-indigo-100');
+        }
+
+        // Fix Module 3 Title in Sidebar
+        const module3Title = document.querySelector('[data-module="3"]').closest('.group').querySelector('h3');
+        if (module3Title) {
+             module3Title.innerHTML = '<span>3. The 90-Day Author Marketing Launch</span>';
+             module3Title.classList.remove('text-gray-400');
+             module3Title.classList.add('text-indigo-800');
+        }
+
+        // Regenerate the list of elements for the listeners to include the updated ones
+        const newLessonListItems = document.querySelectorAll('[data-lesson-index]');
+        newLessonListItems.forEach(item => {
+            item.removeEventListener('click', item._listener); // Remove old listeners
+            item._listener = (e) => {
+                const index = parseInt(e.currentTarget.dataset.lessonIndex);
+                updateLesson(index);
+                document.querySelector('main').scrollIntoView({ behavior: 'smooth' });
+            };
+            item.addEventListener('click', item._listener); // Add new listeners
+        });
+
+        // Generate the dropdown menu content
+        generateDropdownLessons();
+
+        // Load the very first lesson on page load (index 0)
+        updateLesson(currentLessonIndex);
+    };
+
 </script>
-</html>
