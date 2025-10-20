@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Course: Digital Art Fundamentals</title>
+    <title>Course: Foundational Drawing Curriculum</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
@@ -13,41 +13,49 @@
             font-family: 'Inter', sans-serif;
             background-color: #f7fafc; /* Light gray background */
         }
-        /* Custom aspect ratio for the video player */
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-            height: 0;
-            overflow: hidden;
-            border-radius: 0.75rem; /* rounded-xl */
+        /* Custom scrollbar for the horizontal nav */
+        #header-module-nav-container::-webkit-scrollbar {
+            height: 4px;
         }
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+        /* Scrollbar thumb color */
+        #header-module-nav-container::-webkit-scrollbar-thumb {
+            background-color: rgb(245 158 11); /* amber-500 */
+            border-radius: 10px;
+        }
+        /* Class for the Module 1 consolidated content container */
+        .module-1-content-section {
+            padding: 3rem 0;
+            border-bottom: 1px solid #e5e7eb; /* Light separator line */
+        }
+        .module-1-content-section:last-child {
+            border-bottom: none;
+        }
+        /* Explicitly remove any outline/border for header lesson links on focus/active */
+        .header-lesson-link:focus, 
+        .header-lesson-link:active,
+        .header-lesson-link.text-amber-500 { /* Target the active amber link specifically */
+            outline: none !important;
+            box-shadow: none !important;
+            border: none !important;
+            text-decoration: none !important;
         }
     </style>
 </head>
 <body class="text-gray-800 min-h-screen flex flex-col">
 
-    <!-- Header & Navigation -->
+    <!-- Header & Navigation (Now contains the horizontal lesson navigation) -->
     <header class="bg-sky-900 shadow-lg sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
             <!-- Logo/Home Link -->
-            <a href="index.html" class="flex items-center space-x-2 text-xl font-extrabold text-white tracking-tight">
+            <a href="#" class="flex items-center space-x-2 text-xl font-extrabold text-white tracking-tight flex-shrink-0">
                 <img src="lhtdhublogo.jpg" alt="lhtdhub Logo" class="h-8 w-8 rounded-full shadow-md" onerror="this.onerror=null; this.src='https://placehold.co/32x32/sky500/ffffff?text=LTD';">
-                <span>Digital Art Dashboard</span>
+                <span class="hidden sm:inline">Serious Drawing Skills</span>
+                <span class="inline sm:hidden">Drawing Course</span>
             </a>
             
-            <!-- User Status / Back to Courses -->
-            <div class="flex items-center space-x-4">
-                <span class="text-sm text-amber-400 font-semibold hidden sm:inline">Welcome, Artist!</span>
-                <a href="index.html" class="text-sm font-semibold text-white hover:text-amber-400 transition duration-150 flex items-center space-x-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-grid"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="3" x2="21" y1="9" y2="9"/><line x1="3" x2="21" y1="15" y2="15"/><line x1="9" x2="9" y1="9" y2="21"/><line x1="15" x2="15" y1="9" y2="21"/></svg>
-                    <span>My Courses</span>
-                </a>
+            <!-- NEW: Module Lesson Navigation (Top Right) -->
+            <div id="header-module-nav-container" class="flex items-center space-x-3 overflow-x-auto ml-4 py-1">
+                <!-- Dynamic content rendered here by JavaScript -->
             </div>
         </div>
     </header>
@@ -59,111 +67,45 @@
             <!-- Column 1: Module Navigation (Sidebar) -->
             <aside class="lg:col-span-1 bg-white p-6 rounded-2xl shadow-xl border border-gray-100 h-fit lg:sticky lg:top-[70px]">
                 <h2 class="text-2xl font-extrabold text-sky-900 mb-4 border-b pb-2">Course Modules</h2>
-                <nav class="space-y-2">
-
-                    <!-- Module 1: Introduction -->
-                    <div class="group">
-                        <h3 class="flex items-center justify-between text-lg font-bold text-sky-800 p-2 cursor-pointer">
-                            <span>1. Setup and Software Basics</span>
-                        </h3>
-                        <ul class="ml-4 border-l pl-4 border-gray-200 text-gray-600 space-y-1 text-sm">
-                            <li class="p-2 bg-sky-50 rounded-lg font-semibold text-sky-700 border-l-2 border-amber-500 cursor-pointer hover:bg-sky-100 transition duration-150">
-                                1.1 Wacom/Tablet Setup
-                            </li>
-                            <li class="p-2 rounded-lg cursor-pointer hover:bg-sky-100 transition duration-150">
-                                1.2 Brushes and Tools Overview
-                            </li>
-                            <li class="p-2 rounded-lg cursor-pointer hover:bg-sky-100 transition duration-150">
-                                1.3 Understanding Layers
-                            </li>
-                        </ul>
-                    </div>
-
-                    <!-- Module 2: Color -->
-                    <div class="group pt-2">
-                        <h3 class="flex items-center justify-between text-lg font-bold text-sky-800 p-2 cursor-pointer">
-                            <span>2. Digital Coloring & Blending</span>
-                        </h3>
-                        <ul class="ml-4 border-l pl-4 border-gray-200 text-gray-600 space-y-1 text-sm">
-                            <li class="p-2 rounded-lg cursor-pointer hover:bg-sky-100 transition duration-150">
-                                2.1 Basic Color Theory (Digital)
-                            </li>
-                            <li class="p-2 rounded-lg cursor-pointer hover:bg-sky-100 transition duration-150">
-                                2.2 Using Clipping Masks
-                            </li>
-                            <li class="p-2 rounded-lg cursor-pointer hover:bg-sky-100 transition duration-150">
-                                2.3 Hard vs. Soft Edges
-                            </li>
-                        </ul>
-                    </div>
-                    
-                    <!-- Module 3: Advanced -->
-                    <div class="group pt-2">
-                        <h3 class="flex items-center justify-between text-lg font-bold text-sky-800 p-2 cursor-pointer text-gray-400">
-                            <span>3. Rendering and Textures (Locked)</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lock text-gray-400"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                        </h3>
-                    </div>
-
+                <!-- Modules will be populated by JavaScript here -->
+                <nav class="space-y-4" id="course-modules">
+                    <!-- Dynamic Content -->
                 </nav>
             </aside>
 
-            <!-- Column 2: Video Player and Lesson Content -->
+            <!-- Column 2: Lesson Content Container -->
             <section class="lg:col-span-3">
+                
                 <div class="bg-white p-6 md:p-8 rounded-2xl shadow-2xl">
-                    <h1 class="text-3xl sm:text-4xl font-extrabold text-sky-900 mb-2">
-                        1.1 Wacom/Tablet Setup and Configuration
-                    </h1>
-                    <p class="text-pink-600 font-bold uppercase tracking-widest mb-6">
-                        Digital Art Fundamentals Course
+                    <h1 class="text-3xl sm:text-4xl font-extrabold text-sky-900 mb-2" id="lesson-title"></h1>
+                    <p class="text-sky-800 font-bold uppercase tracking-widest mb-6" id="course-title">
+                        Perspective, Anatomy & Advanced Drawing
                     </p>
 
-                    <!-- Video Player Embed -->
-                    <div class="video-container shadow-2xl ring-4 ring-sky-200 rounded-xl mb-8">
-                        <!-- Placeholder Video: Replace 'VIDEO_ID_HERE' with your actual private YouTube video ID -->
-                        <iframe 
-                            src="https://www.youtube.com/embed/P6FfI7rT6M8?rel=0" 
-                            frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen>
-                        </iframe>
+                    <!-- Main content area to be populated by JS (can hold single lesson or consolidated module) -->
+                    <div id="lesson-content-area" class="text-gray-700">
+                        <!-- Dynamic content for the current lesson/module will be inserted here -->
                     </div>
 
-                    <!-- Lesson Description -->
-                    <div class="prose max-w-none text-gray-700">
-                        <h2 class="text-2xl font-bold text-sky-800 mb-3">About This Lesson</h2>
-                        <p>
-                            Welcome to digital creation! Before we draw a single line, we need to ensure your drawing tablet (Wacom, iPad, etc.) is set up correctly with your software. This lesson covers driver installation, pressure sensitivity, and mapping shortcuts for maximum efficiency.
-                        </p>
+                    <!-- Navigation Buttons -->
+                    <div class="flex justify-between items-center mt-8 pt-6 border-t border-gray-200">
+                        <button id="prev-button" onclick="navigateLesson('prev')" class="inline-flex items-center space-x-1 px-6 py-3 text-sky-900 font-bold rounded-xl border border-sky-900 hover:bg-sky-50 transition duration-300 shadow-md disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>
+                            <span>Previous Lesson</span>
+                        </button>
                         
-                        <h3 class="text-xl font-bold text-sky-700 mt-6">Action Items:</h3>
-                        <ul class="list-disc list-inside space-y-1 ml-4">
-                            <li><span class="font-semibold">Install Drivers:</span> Ensure you have the latest drivers for your specific hardware.</li>
-                            <li><span class="font-semibold">Test Pressure:</span> Draw light and heavy lines to confirm pressure sensitivity is working correctly.</li>
-                            <li><span class="font-semibold">Set Shortcuts:</span> Map your most-used commands (undo, brush size) to your tablet buttons.</li>
-                        </ul>
+                        <button id="mark-complete-button" onclick="markLessonCompleted()" class="flex items-center space-x-2 bg-sky-600 text-white font-extrabold px-6 py-3 rounded-xl hover:bg-sky-700 transition duration-300 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                            <span id="mark-text">Mark as Complete</span>
+                        </button>
 
-                        <h3 class="text-xl font-bold text-sky-700 mt-6">Next Steps:</h3>
-                        <p>
-                            Ready to draw? Click on **1.2 Brushes and Tools Overview** in the left sidebar to dive into the digital toolbox!
-                        </p>
+                        <button id="next-button" onclick="navigateLesson('next')" class="inline-flex items-center space-x-1 bg-amber-500 text-sky-900 font-extrabold px-6 py-3 rounded-xl hover:bg-amber-400 transition duration-300 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                            <span>Next Lesson</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>
+                        </button>
                     </div>
-                </div>
 
-                <!-- Navigation Buttons -->
-                <div class="flex justify-between mt-8">
-                    <!-- No Previous Lesson -->
-                    <span class="inline-block px-6 py-3 text-gray-400 font-bold rounded-lg cursor-not-allowed border">
-                        < Previous Lesson
-                    </span>
-                    
-                    <!-- Next Lesson Button -->
-                    <button class="flex items-center space-x-2 bg-amber-500 text-sky-900 font-extrabold px-6 py-3 rounded-xl hover:bg-amber-400 transition duration-300 shadow-lg">
-                        <span>Next Lesson ></span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>
-                    </button>
                 </div>
-
             </section>
         </div>
     </main>
@@ -177,7 +119,462 @@
 
 </body>
 <script>
-    // This script ensures Lucide icons render properly
-    lucide.createIcons();
+    // Course Data Structure
+    const courseData = [
+        {
+            id: 1,
+            title: "1. Foundational Perspective: The Building Blocks",
+            lessons: [
+                {
+                    id: '1.1',
+                    title: "Horizon Line and Eye-Level",
+                    videoId: "",
+                    description: "Establish your fundamental understanding of 3D space on a 2D plane. Learn to define and consistently use the **Horizon Line (Eye-Level)** and the concept of **Orthogonal Lines** (lines receding in space) to control depth and scale in every drawing.",
+                    actionItems: [
+                        "Practice drawing straight lines and accurate geometric volumes (cubes, cylinders) freehand.",
+                        "Draw 20 Horizon Lines and place a human head at eye-level, above, and below it.",
+                        "Execute 5 pages of hatching/cross-hatching exercises to improve line control."
+                    ],
+                    completed: true 
+                },
+                {
+                    id: '1.2',
+                    title: "1-Point Perspective",
+                    videoId: "",
+                    description: "Deep dive into **1-Point Perspective**, where one face of the object is parallel to the viewer. This is ideal for interiors, hallways, tunnels, and creating a strong sense of focused depth. Learn to divide space using diagonals.",
+                    actionItems: [
+                        "Draw a minimum of 10 cubes and prisms in 1-Point perspective.",
+                        "Design and sketch a complex room interior (e.g., a bedroom or office) using only one Vanishing Point (VP).",
+                        "Practice dividing a back wall plane into equal-sized grid squares."
+                    ],
+                    completed: false
+                },
+                {
+                    id: '1.3',
+                    title: "2-Point Perspective",
+                    videoId: "",
+                    description: "Master **2-Point Perspective**, essential for drawing buildings, furniture, and objects viewed at an angle. Learn how to place and manage two separate **Vanishing Points (VPs)** to create realistic rotation and complexity in exterior scenes.",
+                    actionItems: [
+                        "Draw 15 objects (boxes, cars, books) at various angles using 2-Point perspective.",
+                        "Sketch a street corner scene with two intersecting buildings.",
+                        "Practice the **Measuring Point** technique to accurately place details like windows and doors on a long wall."
+                    ],
+                    completed: false
+                },
+                {
+                    id: '1.4',
+                    title: "3-Point Perspective",
+                    videoId: "",
+                    description: "Advance to **3-Point Perspective**, which introduces a vertical vanishing point to simulate extreme height or depth. This is crucial for dynamic scenes like looking up at a skyscraper (Worm's Eye View) or looking down from a cliff (Bird's Eye View).",
+                    actionItems: [
+                        "Draw a cube in 3-Point perspective looking up (Worm's Eye).",
+                        "Draw a cube in 3-Point perspective looking down (Bird's Eye).",
+                        "Design a simple sci-fi cityscape using 3-Point perspective to emphasize extreme scale."
+                    ],
+                    completed: false
+                },
+                {
+                    id: '1.5',
+                    title: "Circles, Inclines, and Reflections",
+                    videoId: "",
+                    description: "Tackle challenging perspective elements: drawing perfect **ellipses** (circles in perspective) for wheels, cups, and spheres; rendering **inclined planes** (ramps, roofs, stairs); and simulating **reflections** in glass and water.",
+                    actionItems: [
+                        "Draw 10 cylinders at varying heights to practice ellipse accuracy.",
+                        "Draw a staircase receding in 2-Point perspective using construction lines.",
+                        "Sketch a scene with a flat pool of water and accurately draw the reflection of a nearby object."
+                    ],
+                    completed: false
+                }
+            ]
+        },
+        {
+            id: 2,
+            title: "2. Human and Figure Anatomy",
+            lessons: [
+                {
+                    id: '2.1',
+                    title: "Skeletal and Proportional Basics",
+                    videoId: "",
+                    description: "Explore the average **proportions** of the human figure (8-head method) and simplify the skeletal structure using basic forms (balls, cylinders, boxes). Understanding the bone structure is crucial for accurate figure drawing.",
+                    actionItems: [
+                        "Practice the 8-head proportional system for male and female figures.",
+                        "Draw 10 wireframe figures emphasizing the rib cage and pelvis as simple boxes.",
+                        "Draw quick, 30-second stick-figure gestures to capture action."
+                    ],
+                    completed: false
+                },
+                {
+                    id: '2.2',
+                    title: "Muscle Groups and Form Construction",
+                    videoId: "",
+                    description: "Study major **muscle groups** (torso, limbs) and how they attach to the simplified skeletal forms. Learn to think of muscles as volumes that wrap around the structure, defining mass and realistic contours.",
+                    actionItems: [
+                        "Draw the major muscle groups (deltoids, biceps, pectorals, etc.) over existing wireframes.",
+                        "Practice drawing torsos in twist and bend poses to understand muscle stretching and compression.",
+                        "Draw 5 complete figures focusing only on contour and muscle mass."
+                    ],
+                    completed: false
+                },
+                {
+                    id: '2.3',
+                    title: "Head, Hands, and Feet Focus",
+                    videoId: "",
+                    description: "The most expressive and challenging elements. Learn the **proportional guides for the head**, the box and wedge methods for hands, and the basic structure of the foot.",
+                    actionItems: [
+                        "Draw 10 quick sketches of hands in different grasping poses.",
+                        "Draw 5 portraits using the Loomis method or similar simplified head construction.",
+                        "Draw 5 examples of feet/shoes in various perspectives."
+                    ],
+                    completed: false
+                }
+            ]
+        },
+        {
+            id: 3,
+            title: "3. Advanced Techniques for Professionals",
+            lessons: [
+                {
+                    id: '3.1',
+                    title: "Dynamic Posing and Line of Action",
+                    videoId: "",
+                    description: "Focus on creating **energy and movement** in your figures. Learn to use the **Line of Action**, C-curves, and S-curves to generate dynamic, believable poses rather than stiff, static ones.",
+                    actionItems: [
+                        "Complete a session of 10-second gesture drawings (minimum 20 figures).",
+                        "Analyze and draw the Line of Action for 5 complex athletic poses.",
+                        "Draw a character in a leaping or running pose, emphasizing weight and momentum."
+                    ],
+                    completed: false
+                },
+                {
+                    id: '3.2',
+                    title: "Balance, Weight, and Contrapposto",
+                    videoId: "",
+                    description: "Understand the physics of a standing figure. Learn how to distribute **weight** (center of gravity) and utilize **Contrapposto** to create natural, relaxed, and balanced poses.",
+                    actionItems: [
+                        "Draw 5 standing figures and identify the central axis and weight-bearing foot.",
+                        "Sketch 3 examples of figures in motion, ensuring their center of gravity is accurate.",
+                        "Practice figure drawing focusing only on tilt of shoulders and hips."
+                    ],
+                    completed: false
+                },
+                {
+                    id: '3.3',
+                    title: "Force and Overlap for Depth",
+                    videoId: "",
+                    description: "Utilize the principles of **Force** (the direction of movement) and **Overlap** (creating spatial depth by layering forms) to make your drawings visually pop and feel three-dimensional.",
+                    actionItems: [
+                        "Draw a series of overlapping simple shapes to practice depth perception.",
+                        "Sketch a figure with emphasis on forcing the limbs to jut out toward the viewer.",
+                        "Create a composition where background elements overlap foreground elements."
+                    ],
+                    completed: false
+                },
+                {
+                    id: '3.4',
+                    title: "Staging and Composition",
+                    videoId: "",
+                    description: "Study how to effectively **stage** elements within your frame. Learn about the Rule of Thirds, leading lines, and value hierarchy to direct the viewer's eye and improve storytelling within a single image.",
+                    actionItems: [
+                        "Redraw a simple scene using the Rule of Thirds for focal placement.",
+                        "Design 3 different thumbnail compositions for a single subject, using leading lines in each.",
+                        "Practice simplifying value structure into 3 main groups (light, medium, dark)."
+                    ],
+                    completed: false
+                },
+                {
+                    id: '3.5',
+                    title: "Material Rendering and Texturing",
+                    videoId: "",
+                    description: "Learn techniques to visually communicate different **materials** (metal, glass, wood, fabric) through value control, reflectivity, and texture simulation. This applies to both traditional mediums (pen, pencil) and digital tools.",
+                    actionItems: [
+                        "Render three spheres to look like polished metal, matte plastic, and rough stone.",
+                        "Practice drawing folds and wrinkles on fabric.",
+                        "Create a small still life focusing on different materials (e.g., a glass bottle and a wooden box)."
+                    ],
+                    completed: false
+                }
+            ]
+        }
+    ];
+
+    let currentLessonId = '1.1'; // Start with the new lesson 1.1
+
+    // --- Utility Functions ---
+
+    // Finds a lesson object by its ID (e.g., '1.1', '2.1')
+    function getLesson(id) {
+        for (const module of courseData) {
+            const lesson = module.lessons.find(l => l.id === id);
+            if (lesson) return lesson;
+        }
+        return null;
+    }
+
+    // Gets the index of the current lesson in the flattened list
+    function getFlattenedIndex(id) {
+        let allLessons = [];
+        courseData.forEach(module => {
+            allLessons.push(...module.lessons);
+        });
+        return allLessons.findIndex(l => l.id === id);
+    }
+    
+    // Gets all lessons in a specific module
+    function getModuleLessons(moduleId) {
+        const module = courseData.find(m => m.id === moduleId);
+        return module ? module.lessons : [];
+    }
+
+    // --- UI Rendering Functions ---
+
+    // Renders the horizontal navigation bar for the current module in the header
+    function renderModuleLessonNav() {
+        const navContainer = document.getElementById('header-module-nav-container');
+        if (!navContainer) return;
+
+        // 1. Find the current module
+        const currentModuleId = parseInt(currentLessonId.split('.')[0]);
+        const currentModule = courseData.find(m => m.id === currentModuleId);
+
+        if (!currentModule) {
+            navContainer.innerHTML = '';
+            return;
+        }
+
+        const navHtml = currentModule.lessons.map(lesson => {
+            const isCurrent = lesson.id === currentLessonId;
+            
+            // Base classes for a clean text link. 
+            // no-underline: removes default underline. hover:no-underline: ensures no underline on hover.
+            // focus:outline-none focus:ring-0: removes any focus border/ring which might look like a highlight.
+            const baseClasses = 'header-lesson-link px-3 py-1 flex-shrink-0 font-bold whitespace-nowrap transition duration-150 rounded-md text-sm cursor-pointer no-underline hover:no-underline focus:outline-none focus:ring-0'; 
+            
+            // Active link is distinguished only by text color (Amber), inactive is White.
+            const activeColor = isCurrent 
+                ? 'text-amber-500' // Active link text is Amber (Yellow)
+                : 'text-white';   // Inactive links are white
+
+            // Use the lesson ID and only the main title text
+            const displayTitle = lesson.title.includes(':') ? lesson.title.split(':').pop().trim() : lesson.title;
+
+            return `
+                <a onclick="loadLesson('${lesson.id}')" 
+                   class="${baseClasses} ${activeColor}">
+                    ${lesson.id} ${displayTitle}
+                </a>
+            `;
+        }).join('');
+
+        navContainer.innerHTML = navHtml;
+    }
+    
+    // Renders the entire sidebar navigation
+    function renderModules() {
+        const modulesContainer = document.getElementById('course-modules');
+        modulesContainer.innerHTML = '';
+        
+        courseData.forEach(module => {
+            const moduleEl = document.createElement('div');
+            moduleEl.className = 'group pt-2';
+            
+            moduleEl.innerHTML = `
+                <h3 class="flex items-center justify-between text-lg font-bold p-2 text-sky-800 cursor-pointer">
+                    <span>${module.title}</span>
+                </h3>
+            `;
+            
+            const lessonList = document.createElement('ul');
+            lessonList.className = 'ml-4 border-l pl-4 border-gray-200 text-gray-600 space-y-1 text-sm';
+
+            module.lessons.forEach(lesson => {
+                const isCurrent = lesson.id === currentLessonId;
+                const isComplete = lesson.completed;
+
+                let classes = 'p-2 rounded-lg transition duration-150 flex justify-between items-center';
+                
+                if (isCurrent) {
+                    // This is the amber border on the LEFT in the sidebar. This is NOT the requested underline on the TOP RIGHT.
+                    classes += ' bg-sky-50 font-semibold text-sky-700 border-l-2 border-amber-500'; 
+                } else if (isComplete) {
+                    classes += ' bg-green-50 text-green-700 hover:bg-green-100 cursor-pointer';
+                } else {
+                    classes += ' hover:bg-sky-100 cursor-pointer';
+                }
+
+                const checkIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check text-green-500"><path d="M20 6 9 17l-5-5"/></svg>`;
+                
+                const statusIcon = isComplete ? checkIcon : '';
+
+                const listItem = document.createElement('li');
+                listItem.className = classes;
+                listItem.dataset.lessonId = lesson.id;
+                
+                listItem.onclick = () => loadLesson(lesson.id);
+
+                listItem.innerHTML = `
+                    <span>${lesson.id} ${lesson.title}</span>
+                    ${statusIcon}
+                `;
+                
+                lessonList.appendChild(listItem);
+            });
+            
+            moduleEl.appendChild(lessonList);
+            modulesContainer.appendChild(moduleEl);
+        });
+        
+        lucide.createIcons(); // Re-render icons after DOM update
+    }
+
+    // Renders the content for a single lesson
+    function renderLessonContent(lesson) {
+        // 1. Convert markdown bold **text** to HTML <strong>text</strong> for the description
+        const processedDescription = lesson.description.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+        // 2. Process all action items for markdown bolding
+        const actionItemsHtml = lesson.actionItems.map(item => {
+            // Apply bolding replacement to the whole item string
+            const processedItem = item.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            
+            // Re-apply the existing split and wrap logic on the processed string
+            const parts = processedItem.split(':');
+            const primaryPart = parts[0];
+            const secondaryPart = parts.slice(1).join(':');
+
+            return `<li><span class="font-semibold">${primaryPart}</span>${secondaryPart ? ': ' + secondaryPart : ''}</li>`;
+        }).join('');
+
+        return `
+            <div class="prose max-w-none text-gray-700">
+                <h2 class="text-2xl font-bold text-sky-800 mb-3">${lesson.title.split(':').pop().trim()}</h2>
+                <p id="lesson-description-${lesson.id}">${processedDescription}</p>
+                
+                <h3 class="text-xl font-bold text-sky-700 mt-6">Action Items for ${lesson.id}:</h3>
+                <ul class="list-disc list-inside space-y-1 ml-4">
+                    ${actionItemsHtml}
+                </ul>
+            </div>
+        `;
+    }
+
+    // Loads the main lesson content
+    function loadLesson(id) {
+        const lesson = getLesson(id);
+        if (!lesson) return;
+
+        currentLessonId = id;
+        const moduleId = parseInt(id.split('.')[0]);
+        const contentArea = document.getElementById('lesson-content-area');
+        const lessonTitleHeader = document.getElementById('lesson-title');
+        
+        // --- Logic for Consolidation ---
+        if (moduleId === 1) {
+            // Display Module Title and load all content for Module 1
+            const module = courseData.find(m => m.id === 1);
+            lessonTitleHeader.textContent = module.title;
+            
+            let consolidatedHtml = module.lessons.map(l => {
+                return `<div id="lesson-${l.id}" class="module-1-content-section">
+                            ${renderLessonContent(l)}
+                        </div>`;
+            }).join('');
+            
+            contentArea.innerHTML = consolidatedHtml;
+            
+            // Scroll to the currently active lesson within the consolidated view
+            const activeLessonEl = document.getElementById(`lesson-${id}`);
+            if (activeLessonEl) {
+                activeLessonEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+
+        } else {
+            // Standard single lesson display for Modules 2 and 3
+            lessonTitleHeader.textContent = `${lesson.id} ${lesson.title}`;
+            contentArea.innerHTML = renderLessonContent(lesson);
+        }
+
+        // Update buttons and state
+        updateNavigationButtons();
+        updateMarkCompleteButton(lesson);
+        renderModules(); // Re-render sidebar to update active state
+        renderModuleLessonNav(); // Re-render horizontal navigation to update active state
+    }
+
+    // Handles marking the current lesson as completed
+    function markLessonCompleted() {
+        const lesson = getLesson(currentLessonId);
+        if (lesson && !lesson.completed) {
+            lesson.completed = true;
+            // Navigate to the next lesson only if the current one was successfully marked complete
+            navigateLesson('next'); 
+        }
+        renderModules();
+    }
+
+    // Handles the Previous and Next buttons logic
+    function updateNavigationButtons() {
+        const allLessons = courseData.flatMap(m => m.lessons);
+        const currentIndex = getFlattenedIndex(currentLessonId);
+        const prevButton = document.getElementById('prev-button');
+        const nextButton = document.getElementById('next-button');
+
+        // Previous Button Logic
+        prevButton.disabled = currentIndex <= 0;
+
+        // Next Button Logic
+        if (currentIndex < allLessons.length - 1) {
+            const currentLesson = getLesson(currentLessonId);
+            // Next lesson is only clickable if the current lesson is complete
+            nextButton.disabled = !currentLesson.completed;
+        } else {
+            nextButton.disabled = true;
+        }
+    }
+    
+    // Updates the Mark Complete button text/state
+    function updateMarkCompleteButton(lesson) {
+        const markButton = document.getElementById('mark-complete-button');
+        const markText = document.getElementById('mark-text');
+        
+        if (lesson.completed) {
+            markButton.disabled = true;
+            markText.textContent = 'Lesson Completed!';
+            markButton.className = 'flex items-center space-x-2 bg-green-600 text-white font-extrabold px-6 py-3 rounded-xl shadow-lg disabled:opacity-50 disabled:cursor-not-allowed';
+        } else {
+            markButton.disabled = false;
+            markText.textContent = 'Mark as Complete';
+            // Mark button is bg-sky-600/700
+            markButton.className = 'flex items-center space-x-2 bg-sky-600 text-white font-extrabold px-6 py-3 rounded-xl hover:bg-sky-700 transition duration-300 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed';
+        }
+    }
+
+    // Logic for navigating to the previous/next lesson
+    function navigateLesson(direction) {
+        const allLessons = courseData.flatMap(m => m.lessons);
+        const currentIndex = getFlattenedIndex(currentLessonId);
+        let targetIndex;
+
+        if (direction === 'next') {
+            targetIndex = currentIndex + 1;
+        } else if (direction === 'prev') {
+            targetIndex = currentIndex - 1;
+        } else {
+            return;
+        }
+
+        if (targetIndex >= 0 && targetIndex < allLessons.length) {
+            const targetLessonId = allLessons[targetIndex].id;
+            loadLesson(targetLessonId);
+        }
+    }
+
+    // --- Initialization ---
+    window.onload = function () {
+        // Update the main course title text
+        document.getElementById('course-title').textContent = 'Perspective, Anatomy & Advanced Drawing'; 
+        
+        lucide.createIcons();
+        loadLesson(currentLessonId); // Load the initial lesson (1.1) on page load
+    };
 </script>
-</html>
+
