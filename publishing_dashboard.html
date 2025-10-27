@@ -30,6 +30,29 @@
             background-color: #f59e0b; /* Amber-500 */
             border-radius: 9999px;
         }
+        /* Styling for content area (prose wrapper) */
+        #lesson-content-area h2 {
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            font-size: 1.5rem; /* text-2xl */
+            font-weight: 700; /* font-bold */
+            color: #3730a3; /* indigo-800 */
+        }
+        #lesson-content-area h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 1.25rem; /* text-xl */
+            font-weight: 700; /* font-bold */
+            color: #4338ca; /* indigo-700 */
+        }
+        #lesson-content-area ul {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+        #lesson-content-area li {
+            margin-bottom: 0.5rem;
+        }
     </style>
 </head>
 <body class="text-gray-800 min-h-screen flex flex-col">
@@ -78,11 +101,11 @@
                     <!-- Module 1: Production, Editing, and Cover Design -->
                     <div class="group">
                         <h3 class="flex items-center justify-between text-lg font-bold text-indigo-800 p-2">
-                            <span>1. Production, Editing, and Cover Design</span>
+                            <span>1. Setup & Metadata Mastery</span>
                         </h3>
                         <ul class="ml-4 border-l pl-4 border-gray-200 text-gray-600 space-y-1 text-sm" data-module="1">
                             <li class="p-2 rounded-lg cursor-pointer hover:bg-indigo-100 transition duration-150" data-lesson-index="0">1.1 Welcome & Publishing Checklist</li>
-                            <li class="p-2 rounded-lg cursor-pointer hover:bg-indigo-100 transition duration-150" data-lesson-index="1">1.2 KDP vs. IngramSpark: Where to Publish?</li>
+                            <li class="p-2 rounded-lg cursor-pointer hover:bg-indigo-100 transition duration-150" data-lesson-index="1">1.2 KDP vs. IngramSpark: Distribution Strategy</li>
                             <li class="p-2 rounded-lg cursor-pointer hover:bg-indigo-100 transition duration-150" data-lesson-index="2">1.3 Mastering Book Metadata (Keywords & Categories)</li>
                         </ul>
                     </div>
@@ -90,7 +113,7 @@
                     <!-- Module 2: Strategic Publishing & Platform Distribution -->
                     <div class="group pt-2">
                         <h3 class="flex items-center justify-between text-lg font-bold text-indigo-800 p-2">
-                            <span>2. Strategic Publishing & Platform Distribution</span>
+                            <span>2. Professional Production & Design</span>
                         </h3>
                         <ul class="ml-4 border-l pl-4 border-gray-200 text-gray-600 space-y-1 text-sm" data-module="2">
                             <li class="p-2 rounded-lg cursor-pointer hover:bg-indigo-100 transition duration-150" data-lesson-index="3">2.1 Hiring & Managing Your Editor</li>
@@ -105,8 +128,8 @@
                             <span>3. The 90-Day Author Marketing Launch</span>
                         </h3>
                         <ul class="ml-4 border-l pl-4 border-gray-200 text-gray-600 space-y-1 text-sm" data-module="3">
-                             <li class="p-2 rounded-lg cursor-pointer hover:bg-indigo-100 transition duration-150" data-lesson-index="6">3.1 Advanced Ad Strategy</li>
-                             <li class="p-2 rounded-lg cursor-pointer hover:bg-indigo-100 transition duration-150" data-lesson-index="7">3.2 Reviewer Outreach & ARC Management</li>
+                            <li class="p-2 rounded-lg cursor-pointer hover:bg-indigo-100 transition duration-150" data-lesson-index="6">3.1 Advanced Ad Strategy</li>
+                            <li class="p-2 rounded-lg cursor-pointer hover:bg-indigo-100 transition duration-150" data-lesson-index="7">3.2 Reviewer Outreach & ARC Management</li>
                         </ul>
                     </div>
                 </nav>
@@ -167,48 +190,99 @@
 <script>
     // --- Course Data (All Unlocked) ---
     const courseData = [
-        // Module 1: Production, Editing, and Cover Design 
+        // Module 1: Setup & Metadata Mastery
         { module: 1, lesson: 1, title: "Welcome & Publishing Checklist", subtitle: "The Foundation", videoId: null, 
-          content: "Welcome to the **Book Launch Blueprint**! In this first lesson, we lay the foundation for your publishing journey. We'll outline the key phases of self-publishing and provide a comprehensive checklist to ensure you don't miss any critical steps, from manuscript finalization to launch day preparation. This lesson sets the stage for success!",
-          checklist: ["Manuscript: Finalized and proofread copy.", "ISBN: Purchased and assigned (if needed).", "Cover Design: High-resolution files for ebook and print.", "Author Bio: Engaging professional biography.", "Book Description: Compelling blurb for sales pages."], 
-          nextSteps: "Once you have reviewed this checklist, click on **1.2 KDP vs. IngramSpark: Where to Publish?** in the left sidebar to determine your optimal distribution strategy."
+          content: "Welcome to the **Book Launch Blueprint**! This foundational lesson establishes the five critical phases of the self-publishing journey: **Writing**, **Editing/Production**, **Formatting**, **Distribution/Setup**, and **Launch/Marketing**. We emphasize the importance of adopting an **author-entrepreneur mindset**, treating your book as a business product from day one. Understanding these phases allows you to sequence tasks efficiently, hire the right professionals at the right time, and avoid costly delays. This meticulous preparation is the cornerstone of a successful, stress-free book launch, ensuring all legal and technical prerequisites are handled well before your promotional campaigns begin.",
+          checklist: [
+            "Manuscript Finalization: Completed developmental, copy, and proofreading edits.", 
+            "Legal & Financial: Set up a dedicated bank account and business entity (e.g., LLC) for publishing.", 
+            "ISBN Management: Purchased blocks of ISBNs (if using IngramSpark) or recorded the free KDP/IngramSpark provided ISBNs.", 
+            "Copyright Registration: Completed copyright registration with the appropriate governmental agency.", 
+            "Cover Design Files: Received high-resolution, print-ready (CMYK) and ebook (RGB) files.", 
+            "Author Bio & Headshot: Wrote an engaging, genre-appropriate professional biography and secured a high-quality headshot.", 
+            "Book Description: Finalized the compelling, keyword-rich blurb for all sales pages and back cover.",
+            "Retail Accounts: Created and verified accounts for KDP and IngramSpark."
+          ], 
+          nextSteps: "Your next step is the crucial decision on how and where to sell your book globally. Click on **1.2 KDP vs. IngramSpark: Distribution Strategy** in the left sidebar to determine your optimal path to market."
         },
-        { module: 1, lesson: 2, title: "KDP vs. IngramSpark: Where to Publish?", subtitle: "Distribution Strategy", videoId: null, 
-          content: "Choosing your distribution platform is a critical early decision. This lesson compares the pros and cons of Amazon KDP (Kindle Direct Publishing) for exclusivity and ease, versus IngramSpark for wide distribution to bookstores and libraries. Understand royalties, costs, and reach for each platform.",
-          checklist: ["Research KDP royalty structures.", "Check IngramSpark setup fees.", "Decide on exclusivity vs. wide distribution."],
-          nextSteps: "Proceed to lesson **1.3** to learn how to master book metadata to optimize discovery."
+        { module: 1, lesson: 2, title: "KDP vs. IngramSpark: Distribution Strategy", subtitle: "The Distribution Crossroads", videoId: null, 
+          content: "Choosing your primary distribution platform determines your reach, profitability, and marketing options. This lesson conducts a detailed comparison between **Amazon KDP (Kindle Direct Publishing)** and **IngramSpark**. KDP offers ease, higher royalty options (70%) for ebooks, and integration with Kindle Unlimited (**KU**), which requires **exclusive** distribution to Amazon for 90 days. IngramSpark, conversely, is the gateway to **global wide distribution**, reaching major bookstore chains (Barnes & Noble), libraries, and international markets, but it typically requires setting a 55% retailer discount, which impacts your profit margin. The decision often hinges on whether your priority is maximizing Amazon revenue (KU exclusivity) or securing broad retail and library access (IngramSpark). You must understand the royalty implications, the cost of print setup, and the control over metadata for each platform.",
+          checklist: [
+            "KDP Royalty Confirmation: Determined if your ebook meets the price and size requirements for the 70% royalty tier.", 
+            "Kindle Unlimited Decision: Decided whether to enroll in Kindle Unlimited (KDP exclusivity) for the first 90 days.", 
+            "IngramSpark Setup Costs: Identified current setup fees for IngramSpark (e.g., print and ebook upload fees, if applicable).",
+            "Print Strategy: Compared KDP Print's distribution reach (mostly Amazon) versus IngramSpark's broader wholesale channel.", 
+            "ISBN Assignment: Assigned a unique ISBN (purchased by you) to the IngramSpark version, or used KDP's free ISBN for that platform."
+          ],
+          nextSteps: "Now that you've chosen your distribution path, proceed to lesson **1.3** where we break down the most powerful way to optimize your book's discovery: **Mastering Book Metadata**."
         },
         { module: 1, lesson: 3, title: "Mastering Book Metadata (Keywords & Categories)", subtitle: "The Discovery Engine", videoId: null, 
-          content: "Metadata is how readers find your book. We dive deep into keyword research tools and strategies, showing you how to select seven powerful keywords. We also cover selecting up to 10 categories to maximize your book's visibility across retail platforms.",
-          checklist: ["Select 7 Amazon Keywords.", "Choose 10 best categories.", "Use a keyword research tool (e.g., KDP Rocket)."],
-          nextSteps: "Time to start thinking about the production phase! Continue to lesson **2.1** to learn about hiring an editor."
+          content: "Metadata is the invisible architecture that drives book discovery. This lesson dives deep into keyword research and category selection to ensure your book is found by its target audience. **Keywords** are not just for searching; they inform Amazon's advertising algorithms and suggest related books. You must leverage the **seven KDP keyword slots** by using long-tail phrases (3-5 words) that capture reader intent, rather than single, broad words. Furthermore, we cover the strategic importance of using **BISAC codes** for IngramSpark and the technique for hitting all **ten available Amazon categories** (by contacting KDP support), rather than the two standard slots, maximizing your visibility in specialized niches. This strategic manipulation of metadata is essential for achieving bestseller status in smaller, more achievable categories.",
+          checklist: [
+            "Keyword Research Tool: Subscribed to or utilized a market research tool (e.g., KDP Rocket, Publisher Rocket) to identify highly relevant, low-competition keywords.", 
+            "KDP Keyword Slots: Optimized all seven KDP slots using long-tail phrases and including keywords that describe mood, setting, and plot devices.", 
+            "Category Selection: Identified at least ten relevant Amazon categories (including sub-categories) for maximum visibility.",
+            "BISAC Code Mapping: Mapped your chosen categories to the appropriate BISAC codes required by IngramSpark.", 
+            "Competitor Analysis: Analyzed the top three bestselling books in your core categories to determine their primary keywords and category placement."
+          ],
+          nextSteps: "Metadata is handled! Now it's time to professionalize your product. Continue to lesson **2.1** to learn the strategic process of **Hiring & Managing Your Editor**."
         },
-        // Module 2: Strategic Publishing & Platform Distribution
+        // Module 2: Professional Production & Design
         { module: 2, lesson: 1, title: "Hiring & Managing Your Editor", subtitle: "Production Phase Begins", videoId: null, 
-          content: "A professional editor is non-negotiable. Learn the difference between developmental, copy, and proofreading, and how to write a Statement of Work (SOW) to manage editor expectations, budget, and timeline effectively.",
-          checklist: ["Identify required editing types.", "Set clear budget and timeline.", "Write an effective Statement of Work (SOW)."],
-          nextSteps: "Discover the secrets of cover design that commands attention in lesson **2.2**."
+          content: "A professional editor is the single most important investment you will make in your book. This lesson demystifies the different types of editing: **Developmental Editing** (focuses on plot, character, and pacing), **Copyediting** (focuses on grammar, syntax, and consistency), and **Proofreading** (the final check for typos and minor errors). We provide a clear framework for vetting candidates, including requesting a **test edit** of 1,000-2,000 words to assess fit and quality. Crucially, you will learn how to draft a comprehensive **Statement of Work (SOW)**. The SOW must explicitly define the scope of work (which type of editing), the file format (e.g., Word with Track Changes), the number of revision rounds included, the total budget and payment schedule, and a clear conflict resolution clause, ensuring a smooth, professional collaboration that stays on budget and on deadline.",
+          checklist: [
+            "Editing Needs Assessment: Determined which type(s) of editing are required for your manuscript's current state.", 
+            "Editor Vetting: Contacted a minimum of three potential editors and checked their references and portfolios.", 
+            "Test Edit Request: Sent a 1,000-word sample to your top candidates and reviewed the results for clarity and style fit.", 
+            "SOW Finalization: Drafted the Statement of Work detailing the scope, revision rounds, payment schedule, and final delivery dates.", 
+            "Contract Signing: Executed the signed contract and initiated the payment schedule as agreed."
+          ],
+          nextSteps: "With your editor secured, the next crucial step is designing your book's face. Discover the secrets of cover design that commands attention and converts browsers in lesson **2.2**."
         },
-        { module: 2, lesson: 2, title: "Cover Design That Sells", subtitle: "First Impressions Count", videoId: null, 
-          content: "Your cover is your single most important marketing tool. This lesson covers genre conventions, using white space effectively, typography best practices, and working with a designer to create a cover that converts browsers into buyers.",
-          checklist: ["Analyze competitor covers.", "Choose 3 key design elements.", "Finalize designer contract and brief."],
-          nextSteps: "In lesson **2.3**, you'll learn how to format your interior for both print and ebook."
+        { module: 2, lesson: 2, title: "Cover Design That Sells", subtitle: "First Impressions Count: The 5-Second Rule", videoId: null, 
+          content: "Your cover is not art; it is a **business tool** responsible for 80% of your book’s purchasing decision within five seconds. This lesson focuses on making your cover **marketable** and **genre-appropriate**. We delve into the **Five-Second Rule**: ensuring a potential buyer can instantly recognize the genre, the tone, and the quality of your book from a thumbnail image. This requires strict adherence to **genre conventions** (e.g., specific fonts for thrillers, color palettes for romance). We cover the essential technical requirements: ensuring the cover is 300 DPI for print, using the correct color space (CMYK for print, RGB for digital), and preparing the full wrap (front, spine, back) dimensions required by KDP and IngramSpark. Finally, we provide a template for creating a detailed design brief, ensuring your designer delivers a market-ready final product on the first try.",
+          checklist: [
+            "Genre Convention Analysis: Gathered and analyzed the top 10 bestselling covers in your specific sub-genre for visual queues (fonts, colors, imagery).", 
+            "Design Brief Creation: Developed a brief including 3 visual mockups, target audience demographics, back cover copy, and technical specs.", 
+            "Title Visibility Check: Ensured the title and author name are legible and impactful at thumbnail size (approx. 200px wide).", 
+            "Technical Specs Confirmation: Verified designer's output is 300 DPI, CMYK for print, and adheres to the specific trim size and bleed requirements of your distributor.",
+            "Cover Mockups: Created 3D mockups of the final cover for use in early marketing materials."
+          ],
+          nextSteps: "Your cover is ready. In lesson **2.3**, you'll learn the final professional step: perfecting the reading experience through **Interior Formatting** for both print and ebook."
         },
         { module: 2, lesson: 3, title: "Interior Formatting for Ebook & Print", subtitle: "Professional Polish", videoId: null, 
-          content: "Proper interior formatting ensures a professional reading experience on any device. We review tools and best practices for creating error-free Ebook files (MOBI/EPUB) and print-ready PDF files with correct bleed and trim size.",
-          checklist: ["Set trim size and margins.", "Generate EPUB/MOBI file.", "Generate print-ready PDF with bleed."],
-          nextSteps: "Congratulations! You have completed the Production module. Continue to lesson **3.1** to begin planning your launch."
+          content: "Proper interior formatting elevates your book from amateur project to professional product, ensuring a seamless reading experience across all devices. This lesson differentiates between **reflowable EPUB** files (essential for text-heavy ebooks to adapt to screen size) and fixed-layout files (used for graphic novels or cookbooks). For **print formatting**, we detail critical steps such as selecting the optimal trim size (e.g., 6x9 in non-fiction), correctly calculating the **gutter margin** (the inner margin near the spine), and ensuring that new chapters consistently start on an odd page for visual professionalism. We also review essential software tools like **Vellum** or **Atticus** for efficient formatting, covering best practices for handling special elements like front matter, copyright pages, and maintaining consistent styles throughout the text, including proper hyphenation and avoiding 'widows' or 'orphans' (single lines isolated at the top or bottom of pages).",
+          checklist: [
+            "Trim Size & Margin Settings: Finalized the trim size and ensured correct gutter and outside margins for print-on-demand.", 
+            "Print-Ready PDF Generation: Generated the final print-ready PDF, checking that all fonts are embedded and the bleed is correct (typically 0.125 inches).", 
+            "EPUB/MOBI Creation: Created a clean, reflowable EPUB file (or MOBI for older KDP requirements) free of unnecessary HTML tags.", 
+            "Quality Control: Conducted a final check of both the print PDF and EPUB on multiple devices/previewers to ensure no formatting errors, including correct chapter breaks.",
+            "Accessibility Check: Verified that the ebook includes proper heading structure for screen reader accessibility."
+          ],
+          nextSteps: "Congratulations! You have completed the Production module. Your book is physically ready to publish. Continue to lesson **3.1** to dive into the core of the launch: **Advanced Ad Strategy**."
         },
         // Module 3: The 90-Day Author Marketing Launch (UNLOCKED)
-        { module: 3, lesson: 1, title: "Advanced Ad Strategy", subtitle: "Targeted Marketing", videoId: null, 
-          content: "This module covers advanced Amazon Ads (AMS) and Facebook Ads strategy. Learn about bid optimization, testing creatives, scaling budgets, and analyzing campaign performance to maximize your Return on Ad Spend (ROAS).", 
-          checklist: ["Set up A/B test for three ad creatives.", "Implement daily budget scaling rules.", "Review weekly ROAS and adjust bids."],
-          nextSteps: "Learn how to secure early reviews in lesson **3.2**."
+        { module: 3, lesson: 1, title: "Advanced Ad Strategy", subtitle: "Targeted Marketing: Maximizing ROAS", videoId: null, 
+          content: "Moving beyond basic promotion, this lesson focuses on advanced **Amazon Ads (AMS)** and platform-specific marketing strategies designed to maximize your **Return on Ad Spend (ROAS)**. We break down the three primary campaign types you need to master on Amazon: **Sponsored Products** (Automatic and Manual campaigns targeting keywords), **Product Targeting** (targeting specific competitor books), and **Category Targeting** (broad visibility within a genre). The key metric is not just **ACoS** (Advertising Cost of Sales), but **TACOS** (Total ACoS), which measures ad spend against total book sales (both organic and paid). We introduce a strategic, rule-based approach to **scaling your budget**, showing you exactly when to increase bids and budgets for profitable campaigns and when to harvest high-performing keywords from your Automatic campaigns to migrate into Manual campaigns. This structured approach ensures continuous, profitable growth rather than sporadic sales spikes.",
+          checklist: [
+            "Campaign Structure: Established a minimum of five distinct AMS campaigns (Auto, Manual Keyword, Manual Product, Category, and Defensive).", 
+            "A/B Testing: Set up A/B tests for three different ad creatives and blurb variations to optimize click-through rates (CTR).", 
+            "Search Term Report Migration: Analyzed the Search Term Report from Auto campaigns weekly, harvesting high-converting keywords to add to Manual campaigns.",
+            "Bid Optimization: Implemented a daily review process to increase bids by 5% on profitable keywords (ACoS < target) and decrease bids by 10% on underperforming ones.", 
+            "ROAS/TACOS Tracking: Created a dedicated spreadsheet to track both ACoS and TACOS weekly to monitor overall campaign health."
+          ], 
+          nextSteps: "Ads bring traffic, but reviews drive conversion. Learn how to legally and ethically secure critical launch-day buzz in lesson **3.2**."
         },
-        { module: 3, lesson: 2, title: "Reviewer Outreach & ARC Management", subtitle: "Building Buzz", videoId: null, 
-          content: "Reviews drive sales. This lesson teaches you how to legally and ethically manage an Advance Reader Copy (ARC) team, use platforms like BookFunnel and Booksprout, and professionally approach book bloggers and reviewers for launch-day buzz.", 
-          checklist: ["Recruit 20 ARC readers.", "Create a Reviewer Tracking Spreadsheet.", "Send follow-up emails one week post-launch."],
-          nextSteps: "Course Complete! You are now ready to launch your book with confidence."
+        { module: 3, lesson: 2, title: "Reviewer Outreach & ARC Management", subtitle: "Building Buzz and Social Proof", videoId: null, 
+          content: "Social proof, driven by early reviews, is essential for converting ad traffic into sales. This lesson provides a masterclass in legally and ethically managing an **Advance Reader Copy (ARC)** team, adhering strictly to Amazon's Terms of Service (TOS) regarding paid or solicited reviews. We review key platforms like **BookFunnel** for streamlined ebook delivery to ARC readers and **Booksprout** for managing reviewer pools. You will learn the art of professional outreach: crafting personalized emails to book bloggers, influencers, and niche reviewers. The goal is to secure a critical mass of 15-25 reviews within the first week of launch. We also detail the post-launch follow-up strategy, including creating a 'Reviewer Tracking Spreadsheet' to monitor who posted where and when, and sending a single, polite follow-up email one week after the book's release to gently remind readers to post their reviews.",
+          checklist: [
+            "ARC Recruitment: Created a dedicated landing page (using a tool like BookFunnel) and recruited 20-30 ARC readers via newsletter, social media, and Booksprout.", 
+            "Reviewer Tracking: Developed a Reviewer Tracking Spreadsheet listing names, email addresses, delivery status, and a column for the date the review was posted.", 
+            "Outreach List: Curated a personalized list of 10-15 book bloggers/reviewers in your niche for one-on-one outreach.", 
+            "Review Request: Sent the first official review request email immediately upon release.",
+            "Follow-up Scheduling: Pre-scheduled a polite, non-demanding follow-up email for one week post-launch to maximize review placement."
+          ],
+          nextSteps: "Course Complete! You now possess the comprehensive **Book Launch Blueprint**. It’s time to apply these strategies and launch your book with complete confidence. Good luck!"
         }
     ];
 
@@ -293,7 +367,7 @@
                 : 'text-white/80 font-semibold cursor-pointer hover:text-amber-300 transition duration-150';
             
             // Abbreviated title: 1.1 Welcome
-            const lessonLabel = `${item.module}.${item.lesson} ${item.title.split(' ')[0]}`; 
+            const lessonLabel = `${item.module}.${item.lesson} ${item.title.split(':')[0].split('(')[0].trim()}`; 
             
             navHTML += `
                 <span 
@@ -322,11 +396,15 @@
                     html += `</div>`; // Close previous module group
                 }
                 // Get the module title from the first lesson in the module, truncate it
-                const moduleTitle = lesson.module === 3 ? "The 90-Day Author Marketing Launch" : lesson.title.split(',')[0].split(':')[0];
+                let moduleTitle;
+                if (lesson.module === 1) moduleTitle = "Setup & Metadata Mastery";
+                else if (lesson.module === 2) moduleTitle = "Professional Production & Design";
+                else if (lesson.module === 3) moduleTitle = "The 90-Day Author Marketing Launch";
+                else moduleTitle = "Module " + lesson.module;
 
                 html += `
                     <div class="pt-2">
-                        <h4 class="text-sm font-bold text-indigo-800">${lesson.module}. ${moduleTitle.split('(')[0].trim()}</h4>
+                        <h4 class="text-sm font-bold text-indigo-800">${lesson.module}. ${moduleTitle.trim()}</h4>
                         <div class="space-y-1 pl-2 border-l border-gray-200">
                 `;
                 currentModule = lesson.module;
@@ -390,7 +468,7 @@
         // Remove previous active state and add new one
         const allLessonItems = document.querySelectorAll('#module-nav [data-lesson-index]');
         allLessonItems.forEach(item => {
-            item.classList.remove('bg-indigo-50', 'font-semibold', 'text-indigo-700', 'border-l-2', 'border-amber-500');
+            item.classList.remove('bg-indigo-50', 'font-semibold', 'text-indigo-700', 'border-l-4', 'border-amber-500');
             item.classList.add('text-gray-600', 'hover:bg-indigo-100'); // Ensure hover is maintained
 
             if (parseInt(item.dataset.lessonIndex) === currentLessonIndex) {
@@ -419,7 +497,7 @@
 
         // Update Previous button text
         if (currentLessonIndex === 0) {
-            prevButton.querySelector('span').textContent = '< Previous Lesson';
+            prevButton.querySelector('span').textContent = 'Previous Lesson';
         } else {
             // Display the module and lesson number of the previous lesson
             prevButton.querySelector('span').textContent = `< ${courseData[currentLessonIndex - 1].module}.${courseData[currentLessonIndex - 1].lesson} - ${courseData[currentLessonIndex - 1].title.split(':')[0].split('(')[0].trim()}`;
@@ -489,3 +567,4 @@
     };
 
 </script>
+
