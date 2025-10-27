@@ -231,11 +231,26 @@
 
     // --- Helper Functions ---
 
+    /**
+     * Converts markdown-style bolding (**text**) to HTML <strong>text</strong>.
+     * @param {string} text The input string containing markdown bolds.
+     * @returns {string} The HTML string with bold tags.
+     */
+    function processMarkdownBolds(text) {
+        if (!text) return '';
+        // Replace **text** with <strong>text</strong> globally and non-greedily
+        return text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    }
+
     // Generates the content HTML structure (description, checklist, next steps)
     function generateContentHTML(lesson) {
+        // Process markdown bolds for the main content and next steps
+        const processedContent = processMarkdownBolds(lesson.content);
+        const processedNextSteps = processMarkdownBolds(lesson.nextSteps);
+
         let html = `
             <h2 class="text-2xl font-bold text-indigo-800 mb-3">About This Lesson</h2>
-            <p>${lesson.content}</p>
+            <p>${processedContent}</p>
         `;
 
         if (lesson.checklist && lesson.checklist.length > 0) {
@@ -249,7 +264,7 @@
 
         html += `
             <h3 class="text-xl font-bold text-indigo-700 mt-6">Next Steps:</h3>
-            <p>${lesson.nextSteps}</p>
+            <p>${processedNextSteps}</p>
         `;
 
         return html;
@@ -372,10 +387,15 @@
         headerCurrentLessonTitle.textContent = `${lesson.module}.${lesson.lesson} ${lesson.title.split(':')[0].split('(')[0].trim()}`;
 
         // 4. Update Sidebar Active State
-        lessonListItems.forEach(item => {
+        // Remove previous active state and add new one
+        const allLessonItems = document.querySelectorAll('#module-nav [data-lesson-index]');
+        allLessonItems.forEach(item => {
             item.classList.remove('bg-indigo-50', 'font-semibold', 'text-indigo-700', 'border-l-2', 'border-amber-500');
+            item.classList.add('text-gray-600', 'hover:bg-indigo-100'); // Ensure hover is maintained
+
             if (parseInt(item.dataset.lessonIndex) === currentLessonIndex) {
-                item.classList.add('bg-indigo-50', 'font-semibold', 'text-indigo-700', 'border-l-2', 'border-amber-500');
+                item.classList.remove('text-gray-600', 'hover:bg-indigo-100');
+                item.classList.add('bg-indigo-50', 'font-semibold', 'text-indigo-700', 'border-l-4', 'border-amber-500'); // Increased border for prominence
             }
         });
 
@@ -406,16 +426,27 @@
         }
     }
 
-    // --- Event Listeners ---
+    // --- Event Listeners and Initialization ---
     
     // 1. Sidebar Lesson Clicks
-    lessonListItems.forEach(item => {
-        item.addEventListener('click', (e) => {
-            const index = parseInt(e.currentTarget.dataset.lessonIndex);
-            updateLesson(index);
-            document.querySelector('main').scrollIntoView({ behavior: 'smooth' });
+    function setupSidebarListeners() {
+        const items = document.querySelectorAll('#module-nav [data-lesson-index]');
+        items.forEach(item => {
+            // Remove previous listeners to prevent duplicates
+            item.removeEventListener('click', item._listener); 
+
+            item._listener = (e) => {
+                const index = parseInt(e.currentTarget.dataset.lessonIndex);
+                updateLesson(index);
+                // Scroll to the main content area on mobile, or keep in view on desktop
+                const mainContent = document.querySelector('main');
+                if (mainContent) {
+                    mainContent.scrollIntoView({ behavior: 'smooth' });
+                }
+            };
+            item.addEventListener('click', item._listener);
         });
-    });
+    }
 
     // 2. Navigation Button Clicks
     prevButton.addEventListener('click', () => {
@@ -446,51 +477,10 @@
     window.onload = function() {
         // Create Lucide icons
         lucide.createIcons();
-        // The side bar structure is now hardcoded without the "Locked" warning
-        // but we need to update the data-lesson-index for the new lessons
         
-        // The HTML structure in the sidebar needs fixing to match the new data indexes.
-        // We will manually fix the data-lesson-index for Module 3 in the HTML
-        // as the previous indices were incorrect due to the "coming soon" placeholder.
+        // Setup initial sidebar listeners (no DOM fixes needed as the hardcoded HTML is correct)
+        setupSidebarListeners();
         
-        // Manually update data-lesson-index for Module 3 elements in the DOM 
-        // to match the now 8 lessons total (0-7 indexes)
-        const lesson3_1 = document.querySelector('[data-module="3"] li:nth-child(1)');
-        if (lesson3_1) {
-            lesson3_1.setAttribute('data-lesson-index', '6');
-            lesson3_1.textContent = '3.1 Advanced Ad Strategy';
-            lesson3_1.classList.remove('cursor-not-allowed', 'text-gray-400', 'hover:bg-indigo-100');
-            lesson3_1.classList.add('cursor-pointer', 'text-gray-600', 'hover:bg-indigo-100');
-        }
-        
-        const lesson3_2 = document.querySelector('[data-module="3"] li:nth-child(2)');
-        if (lesson3_2) {
-            lesson3_2.setAttribute('data-lesson-index', '7');
-            lesson3_2.textContent = '3.2 Reviewer Outreach & ARC Management';
-            lesson3_2.classList.remove('cursor-not-allowed', 'text-gray-400', 'hover:bg-indigo-100');
-            lesson3_2.classList.add('cursor-pointer', 'text-gray-600', 'hover:bg-indigo-100');
-        }
-
-        // Fix Module 3 Title in Sidebar
-        const module3Title = document.querySelector('[data-module="3"]').closest('.group').querySelector('h3');
-        if (module3Title) {
-             module3Title.innerHTML = '<span>3. The 90-Day Author Marketing Launch</span>';
-             module3Title.classList.remove('text-gray-400');
-             module3Title.classList.add('text-indigo-800');
-        }
-
-        // Regenerate the list of elements for the listeners to include the updated ones
-        const newLessonListItems = document.querySelectorAll('[data-lesson-index]');
-        newLessonListItems.forEach(item => {
-            item.removeEventListener('click', item._listener); // Remove old listeners
-            item._listener = (e) => {
-                const index = parseInt(e.currentTarget.dataset.lessonIndex);
-                updateLesson(index);
-                document.querySelector('main').scrollIntoView({ behavior: 'smooth' });
-            };
-            item.addEventListener('click', item._listener); // Add new listeners
-        });
-
         // Generate the dropdown menu content
         generateDropdownLessons();
 
