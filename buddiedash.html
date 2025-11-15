@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
 <title>Buddie's Flap Dash</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <style>
   body {
@@ -25,11 +25,11 @@
     border-radius: 20px;
   }
 
-  /* Buddie sprite */
+  /* Buddie at half-size */
   #buddie {
     position: absolute;
-    width: 110px;   /* Adjust to match your PNG proportions */
-    height: 210px;
+    width: 55px;   /* half of 110px */
+    height: 105px; /* half of 210px */
     left: 80px;
     top: 250px;
     transform-origin: center center;
@@ -106,9 +106,9 @@
   
   <div id="score">0</div>
 
-  <!-- Buddie Sprite -->
+  <!-- Updated Buddie PNG with white background -->
   <div id="buddie">
-    <img src="IMG_7427.PNG">
+    <img src="buddie.png" />
   </div>
 
   <div id="ground"></div>
@@ -137,8 +137,11 @@ const finalScoreEl = document.getElementById("final-score");
 let gameW = 360, gameH = 640;
 let buddieY = 250;
 let velocity = 0;
-let gravity = 1500;
-let flapForce = -460;
+
+/* --- HOP FEELING (not flap) --- */
+let gravity = 2000;      // faster fall
+let hopForce = -650;     // quick sharp jump
+
 let pipes = [];
 let score = 0;
 let running = false;
@@ -168,16 +171,18 @@ function restartGame() {
   startGame();
 }
 
-function flap() {
+function hop() {
   if (!running) return;
-  velocity = flapForce;
-  buddie.style.transform = "rotate(-18deg)";
-  setTimeout(() => (buddie.style.transform = "rotate(0deg)"), 120);
+  velocity = hopForce;
+
+  /* Small hop tilt */
+  buddie.style.transform = "translateY(-4px)";
+  setTimeout(() => buddie.style.transform = "translateY(0px)", 90);
 }
 
-game.addEventListener("mousedown", flap);
+game.addEventListener("mousedown", hop);
 window.addEventListener("keydown", e => {
-  if (e.code === "Space" || e.code === "ArrowUp") flap();
+  if (e.code === "Space" || e.code === "ArrowUp") hop();
 });
 
 function spawnPipe() {
@@ -238,15 +243,15 @@ function update(time) {
     }
 
     let budLeft = 80;
-    let budRight = 80 + 110;
+    let budRight = 80 + 55;
     let budTop = buddieY;
-    let budBottom = buddieY + 210;
+    let budBottom = buddieY + 105;
 
     if (
       budRight > p.x &&
       budLeft < p.x + 70 &&
       (budTop < p.top.offsetHeight ||
-        budBottom > p.bottom.offsetTop)
+       budBottom > p.bottom.offsetTop)
     ) {
       endGame();
       return;
