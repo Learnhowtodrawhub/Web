@@ -25,7 +25,7 @@
     border-radius: 20px;
   }
 
-  /* Ground */
+  /* Ground (green line) */
   #ground {
     position: absolute;
     bottom: 0;
@@ -35,13 +35,13 @@
     background: #2fa34f;
   }
 
-  /* Buddie RUNNER */
+  /* Buddie running on ground */
   #buddie {
     position: absolute;
     width: 75px;
     height: auto;
     left: 50px;
-    bottom: 90px; /* sits on ground */
+    bottom: 90px; /* sits ON ground */
     transform-origin: center;
   }
 
@@ -51,12 +51,12 @@
     display: block;
   }
 
-  /* Obstacles */
+  /* Saws */
   .saw {
     position: absolute;
     width: 90px;
     height: auto;
-    bottom: 90px; /* sits ON the green line */
+    bottom: 90px; /* sits ON ground */
   }
 
   /* Score */
@@ -69,7 +69,7 @@
     font-weight: bold;
   }
 
-  /* Start + Game Over */
+  /* Overlays */
   #start, #over {
     position: absolute;
     inset: 0;
@@ -105,18 +105,19 @@
 
   <!-- Buddie runner -->
   <div id="buddie">
-    <img src="buddie.png">
+    <img src="IMG_7429.png">
   </div>
 
   <!-- Ground -->
   <div id="ground"></div>
 
-  <!-- Screens -->
+  <!-- Start Screen -->
   <div id="start">
     Buddie's Forest Hop<br>
     <button onclick="startGame()">Start</button>
   </div>
 
+  <!-- Game Over -->
   <div id="over">
     Game Over<br>
     <div id="final-score"></div>
@@ -137,14 +138,13 @@ const finalScoreEl = document.getElementById("final-score");
 let gameW = 360;
 let groundHeight = 90;
 
-/* Buddie physics */
 let buddieY = groundHeight;
 let velocity = 0;
+
 let gravity = 2000;
 let jumpForce = -800;
 let onGround = true;
 
-/* Game variables */
 let obstacles = [];
 let score = 0;
 let running = false;
@@ -161,8 +161,8 @@ function startGame() {
   buddieY = groundHeight;
   velocity = 0;
   onGround = true;
-
   score = 0;
+
   scoreEl.textContent = "0";
 
   obstacles.forEach(o => o.el.remove());
@@ -171,35 +171,37 @@ function startGame() {
   requestAnimationFrame(update);
 }
 
+/* Restart */
 function restartGame() {
   startGame();
 }
 
-/* JUMP action */
+/* Jump */
 function jump() {
   if (!running) return;
-  if (!onGround) return;  // prevent double jumps
+  if (!onGround) return;
 
   velocity = jumpForce;
   onGround = false;
 
-  // little jump animation pitch
-  buddie.style.transform = "rotate(-8deg)";
-  setTimeout(() => buddie.style.transform = "rotate(0deg)", 200);
+  buddie.style.transform = "rotate(-10deg)";
+  setTimeout(() => buddie.style.transform = "rotate(0deg)", 180);
 }
 
-/* Controls */
 game.addEventListener("mousedown", jump);
 window.addEventListener("keydown", e => {
   if (e.code === "Space" || e.code === "ArrowUp") jump();
 });
 
+
 /* Spawn Saw */
 function spawnSaw() {
   let el = document.createElement("img");
-  el.src = "saw.png";
+  el.src = "saw.png";  // Must match file name exactly
   el.className = "saw";
+
   el.style.left = gameW + "px";
+  el.style.bottom = "90px";
 
   game.appendChild(el);
 
@@ -211,16 +213,18 @@ function spawnSaw() {
   });
 }
 
-/* Game loop */
+
+/* Main Update Loop */
 function update(t) {
   if (!lastTime) lastTime = t;
   let dt = (t - lastTime) / 1000;
   lastTime = t;
 
-  // ---------- Buddie Physics ----------
+  // -------- Buddie Physics ----------
   velocity += gravity * dt;
   buddieY += velocity * dt;
 
+  // Collision with ground
   if (buddieY <= groundHeight) {
     buddieY = groundHeight;
     velocity = 0;
@@ -229,19 +233,19 @@ function update(t) {
 
   buddie.style.bottom = buddieY + "px";
 
-  // ---------- Spawning ----------
+  // -------- Spawn Saws ----------
   spawnTimer += dt;
   if (spawnTimer > 1.4) {
     spawnSaw();
     spawnTimer = 0;
   }
 
-  // ---------- Move Obstacles ----------
+  // -------- Move Obstacles ----------
   obstacles.forEach((o, i) => {
     o.x -= 260 * dt;
     o.el.style.left = o.x + "px";
 
-    // Scoring
+    // Score
     if (!o.scored && o.x + o.width < 50) {
       score++;
       scoreEl.textContent = score;
@@ -254,19 +258,16 @@ function update(t) {
       obstacles.splice(i, 1);
     }
 
-    // Collision
+    // Collision detection
     let budLeft = 50;
     let budRight = 50 + 75;
-    let budTop = buddieY + 150;
     let sawLeft = o.x;
     let sawRight = o.x + o.width;
-    let sawTop = groundHeight + 90;
 
-    if (
-      budRight > sawLeft &&
-      budLeft < sawRight &&
-      buddieY + 20 < 180
-    ) {
+    // Collision box at ground level
+    if (budRight > sawLeft &&
+        budLeft < sawRight &&
+        buddieY < groundHeight + 40) {
       return gameOver();
     }
   });
@@ -274,6 +275,8 @@ function update(t) {
   if (running) requestAnimationFrame(update);
 }
 
+
+/* Game Over */
 function gameOver() {
   running = false;
   overOverlay.style.display = "flex";
@@ -283,5 +286,4 @@ function gameOver() {
 
 </body>
 </html>
-
 
