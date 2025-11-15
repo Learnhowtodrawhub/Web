@@ -25,41 +25,37 @@
     border-radius: 20px;
   }
 
-  /* Ground (green line) */
+  /* GROUND */
   #ground {
     position: absolute;
     bottom: 0;
-    left: 0;
     width: 100%;
     height: 90px;
     background: #2fa34f;
   }
 
-  /* Buddie running on ground */
+  /* BUDDIE — TRIPLE SIZE */
   #buddie {
     position: absolute;
-    width: 75px;
-    height: auto;
-    left: 50px;
-    bottom: 90px; /* sits ON ground */
+    width: 225px; /* TRIPLE SIZE */
+    left: 40px;
+    bottom: 90px; /* SITS ON GROUND */
     transform-origin: center;
   }
 
   #buddie img {
     width: 100%;
     height: auto;
-    display: block;
   }
 
-  /* Saws */
+  /* SAWS — FLUSH WITH GROUND */
   .saw {
     position: absolute;
-    width: 90px;
+    width: 120px;
     height: auto;
-    bottom: 90px; /* sits ON ground */
+    bottom: 88px; /* PERFECT alignment */
   }
 
-  /* Score */
   #score {
     position: absolute;
     top: 10px;
@@ -69,7 +65,6 @@
     font-weight: bold;
   }
 
-  /* Overlays */
   #start, #over {
     position: absolute;
     inset: 0;
@@ -80,22 +75,22 @@
     align-items: center;
     color: white;
     font-size: 24px;
-    text-align: center;
   }
+
   #over { display: none; }
 
   button {
-    padding: 10px 20px;
+    padding: 10px 25px;
     background: #32c656;
-    font-size: 18px;
     color: white;
+    font-size: 20px;
     border: none;
-    border-radius: 10px;
-    margin-top: 10px;
+    border-radius: 12px;
     cursor: pointer;
+    margin-top: 12px;
   }
-</style>
 
+</style>
 </head>
 <body>
 
@@ -103,21 +98,20 @@
 
   <div id="score">0</div>
 
-  <!-- Buddie runner -->
+  <!-- BUDDIE IMAGE -->
   <div id="buddie">
     <img src="IMG_7429.png">
   </div>
 
-  <!-- Ground -->
   <div id="ground"></div>
 
-  <!-- Start Screen -->
+  <!-- START SCREEN -->
   <div id="start">
     Buddie's Forest Hop<br>
     <button onclick="startGame()">Start</button>
   </div>
 
-  <!-- Game Over -->
+  <!-- GAME OVER -->
   <div id="over">
     Game Over<br>
     <div id="final-score"></div>
@@ -126,43 +120,36 @@
 
 </div>
 
-
 <script>
-const game = document.getElementById("game");
 const buddie = document.getElementById("buddie");
 const scoreEl = document.getElementById("score");
 const startOverlay = document.getElementById("start");
 const overOverlay = document.getElementById("over");
 const finalScoreEl = document.getElementById("final-score");
 
-let gameW = 360;
-let groundHeight = 90;
+let running = false;
+let score = 0;
 
-let buddieY = groundHeight;
+let buddieY = 90;
 let velocity = 0;
-
-let gravity = 2000;
-let jumpForce = -800;
+let gravity = 2500;
+let jumpForce = -1150;
 let onGround = true;
 
 let obstacles = [];
-let score = 0;
-let running = false;
-let lastTime = null;
+let lastTime = 0;
 let spawnTimer = 0;
 
-
-/* Start Game */
 function startGame() {
   running = true;
   startOverlay.style.display = "none";
   overOverlay.style.display = "none";
 
-  buddieY = groundHeight;
+  buddieY = 90;
   velocity = 0;
   onGround = true;
-  score = 0;
 
+  score = 0;
   scoreEl.textContent = "0";
 
   obstacles.forEach(o => o.el.remove());
@@ -171,12 +158,11 @@ function startGame() {
   requestAnimationFrame(update);
 }
 
-/* Restart */
 function restartGame() {
   startGame();
 }
 
-/* Jump */
+/* Jump only when clicked */
 function jump() {
   if (!running) return;
   if (!onGround) return;
@@ -184,90 +170,91 @@ function jump() {
   velocity = jumpForce;
   onGround = false;
 
-  buddie.style.transform = "rotate(-10deg)";
-  setTimeout(() => buddie.style.transform = "rotate(0deg)", 180);
+  buddie.style.transform = "rotate(-15deg)";
+  setTimeout(() => buddie.style.transform = "rotate(0deg)", 200);
 }
 
-game.addEventListener("mousedown", jump);
+window.addEventListener("mousedown", jump);
 window.addEventListener("keydown", e => {
   if (e.code === "Space" || e.code === "ArrowUp") jump();
 });
 
 
-/* Spawn Saw */
+/* Spawn saws */
 function spawnSaw() {
   let el = document.createElement("img");
-  el.src = "saw.png";  // Must match file name exactly
+  el.src = "saw.png";
   el.className = "saw";
+  el.style.left = "360px";
+  el.style.bottom = "88px";
 
-  el.style.left = gameW + "px";
-  el.style.bottom = "90px";
-
-  game.appendChild(el);
+  document.getElementById("game").appendChild(el);
 
   obstacles.push({
-    x: gameW,
-    width: 90,
+    x: 360,
+    width: 120,
     el: el,
     scored: false
   });
 }
 
 
-/* Main Update Loop */
+/* MAIN GAME LOOP */
 function update(t) {
-  if (!lastTime) lastTime = t;
   let dt = (t - lastTime) / 1000;
   lastTime = t;
 
-  // -------- Buddie Physics ----------
+  // Gravity
   velocity += gravity * dt;
   buddieY += velocity * dt;
 
-  // Collision with ground
-  if (buddieY <= groundHeight) {
-    buddieY = groundHeight;
+  // Hit ground
+  if (buddieY <= 90) {
+    buddieY = 90;
     velocity = 0;
     onGround = true;
   }
 
   buddie.style.bottom = buddieY + "px";
 
-  // -------- Spawn Saws ----------
+  // Spawn saws
   spawnTimer += dt;
-  if (spawnTimer > 1.4) {
+  if (spawnTimer > 1.7) {
     spawnSaw();
     spawnTimer = 0;
   }
 
-  // -------- Move Obstacles ----------
+  // Move saws
   obstacles.forEach((o, i) => {
-    o.x -= 260 * dt;
+    o.x -= 300 * dt;
     o.el.style.left = o.x + "px";
 
     // Score
-    if (!o.scored && o.x + o.width < 50) {
+    if (!o.scored && o.x + o.width < 40) {
       score++;
       scoreEl.textContent = score;
       o.scored = true;
     }
 
-    // Remove old
-    if (o.x < -120) {
+    // Remove
+    if (o.x < -150) {
       o.el.remove();
       obstacles.splice(i, 1);
     }
 
-    // Collision detection
-    let budLeft = 50;
-    let budRight = 50 + 75;
+    // Collision (larger Buddie hitbox)
+    let budLeft = 40;
+    let budRight = 40 + 225;
     let sawLeft = o.x;
     let sawRight = o.x + o.width;
 
-    // Collision box at ground level
-    if (budRight > sawLeft &&
-        budLeft < sawRight &&
-        buddieY < groundHeight + 40) {
+    let budFeet = buddieY;
+
+    if (
+      budRight > sawLeft &&
+      budLeft < sawRight &&
+      budFeet < 150
+    ) {
       return gameOver();
     }
   });
@@ -275,8 +262,6 @@ function update(t) {
   if (running) requestAnimationFrame(update);
 }
 
-
-/* Game Over */
 function gameOver() {
   running = false;
   overOverlay.style.display = "flex";
