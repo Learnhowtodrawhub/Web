@@ -1,37 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
+<meta charset="UTF-8">
 <title>Buddie's Flap Dash</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
   body {
     margin: 0;
     background: #6ec9ff;
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
     font-family: sans-serif;
   }
 
   #game {
     width: 360px;
     height: 640px;
-    background: linear-gradient(#80d4ff, #4ab4ff);
-    margin: 0 auto;
+    background: linear-gradient(#7ddcff, #3aa8ff);
     position: relative;
     overflow: hidden;
-    border: 4px solid #0a4a7e;
+    border: 4px solid #074f83;
     border-radius: 20px;
   }
 
-  /* --- TEMPORARY SIMPLE BUDDIE (just to confirm screen renders) --- */
+  /* Buddie sprite */
   #buddie {
     position: absolute;
-    width: 60px;
-    height: 60px;
-    background: orange;
-    border-radius: 20px;
+    width: 110px;   /* Adjust to match your PNG proportions */
+    height: 210px;
     left: 80px;
     top: 250px;
+    transform-origin: center center;
+  }
+
+  #buddie img {
+    width: 100%;
+    height: auto;
+    display: block;
   }
 
   /* Pipes */
@@ -44,49 +51,66 @@
   .pipe.top { border-bottom: 6px solid #2f2416; }
   .pipe.bottom { border-top: 6px solid #2f2416; }
 
+  /* Ground */
   #ground {
     position: absolute;
     bottom: 0;
     left: 0;
-    height: 90px;
     width: 100%;
-    background: #2e9d4b;
+    height: 90px;
+    background: #2fa34f;
   }
 
+  /* Score */
   #score {
     position: absolute;
     top: 10px;
     right: 10px;
-    font-size: 32px;
     color: white;
+    font-size: 34px;
     font-weight: bold;
   }
 
+  /* Overlays */
   #start, #over {
     position: absolute;
     inset: 0;
     background: rgba(0,0,0,0.6);
+    color: white;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: white;
-    font-size: 24px;
+    font-size: 26px;
+    text-align: center;
   }
 
   #over { display: none; }
+
   button {
-    padding: 10px 20px;
-    font-size: 18px;
+    padding: 10px 22px;
     margin-top: 10px;
+    background: #32c656;
+    color: white;
+    font-size: 20px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
   }
 </style>
 </head>
+
 <body>
 
 <div id="game">
+  
   <div id="score">0</div>
-  <div id="buddie"></div>
+
+  <!-- Buddie Sprite -->
+  <div id="buddie">
+    <img src="IMG_7427.PNG">
+  </div>
+
   <div id="ground"></div>
 
   <div id="start">
@@ -96,36 +120,47 @@
 
   <div id="over">
     Game Over<br>
-    <div id="final"></div>
+    <div id="final-score"></div>
     <button onclick="restartGame()">Restart</button>
   </div>
+
 </div>
 
 <script>
-let game = document.getElementById("game");
-let buddie = document.getElementById("buddie");
-let scoreEl = document.getElementById("score");
-let startScreen = document.getElementById("start");
-let overScreen = document.getElementById("over");
-let finalScoreEl = document.getElementById("final");
+const game = document.getElementById("game");
+const buddie = document.getElementById("buddie");
+const scoreEl = document.getElementById("score");
+const startOverlay = document.getElementById("start");
+const overOverlay = document.getElementById("over");
+const finalScoreEl = document.getElementById("final-score");
 
 let gameW = 360, gameH = 640;
-let buddieY = 250, velocity = 0;
-let gravity = 1500, flap = -400;
-let pipes = [], score = 0;
-let lastTime = null, running = false;
+let buddieY = 250;
+let velocity = 0;
+let gravity = 1500;
+let flapForce = -460;
+let pipes = [];
+let score = 0;
+let running = false;
+let lastTime = null;
+let pipeTimer = 0;
 
 function startGame() {
   running = true;
-  startScreen.style.display = "none";
-  overScreen.style.display = "none";
+  startOverlay.style.display = "none";
+  overOverlay.style.display = "none";
+
   buddieY = 250;
   velocity = 0;
   score = 0;
   scoreEl.textContent = "0";
-  pipes.forEach(p => p.top.remove(), p.bottom.remove());
+
+  pipes.forEach(p => {
+    p.top.remove();
+    p.bottom.remove();
+  });
   pipes = [];
-  lastTime = null;
+
   requestAnimationFrame(update);
 }
 
@@ -133,17 +168,21 @@ function restartGame() {
   startGame();
 }
 
-function flapAction() {
+function flap() {
   if (!running) return;
-  velocity = flap;
+  velocity = flapForce;
+  buddie.style.transform = "rotate(-18deg)";
+  setTimeout(() => (buddie.style.transform = "rotate(0deg)"), 120);
 }
 
-game.addEventListener("mousedown", flapAction);
-window.addEventListener("keydown", e => { if(e.code==="Space") flapAction(); });
+game.addEventListener("mousedown", flap);
+window.addEventListener("keydown", e => {
+  if (e.code === "Space" || e.code === "ArrowUp") flap();
+});
 
-function spawnPipes() {
-  let gap = 150;
-  let topHeight = Math.random() * (gameH - gap - 200) + 50;
+function spawnPipe() {
+  let gap = 170;
+  let topHeight = Math.random() * (gameH - gap - 200) + 60;
   let x = gameW;
 
   let topPipe = document.createElement("div");
@@ -164,29 +203,25 @@ function spawnPipes() {
   pipes.push({ x, top: topPipe, bottom: bottomPipe, scored: false });
 }
 
-let pipeTimer = 0;
-
 function update(time) {
-  if(!lastTime) lastTime = time;
+  if (!lastTime) lastTime = time;
   let dt = (time - lastTime) / 1000;
   lastTime = time;
 
   velocity += gravity * dt;
   buddieY += velocity * dt;
 
-  if (buddieY > gameH - 150) {
-    return gameOver();
-  }
+  if (buddieY > gameH - 160) return endGame();
   buddie.style.top = buddieY + "px";
 
   pipeTimer += dt * 1000;
-  if (pipeTimer > 1400) {
-    spawnPipes();
+  if (pipeTimer > 1500) {
+    spawnPipe();
     pipeTimer = 0;
   }
 
   pipes.forEach((p, i) => {
-    p.x -= 180 * dt;
+    p.x -= 200 * dt;
     p.top.style.left = p.x + "px";
     p.bottom.style.left = p.x + "px";
 
@@ -202,24 +237,32 @@ function update(time) {
       pipes.splice(i, 1);
     }
 
+    let budLeft = 80;
+    let budRight = 80 + 110;
+    let budTop = buddieY;
+    let budBottom = buddieY + 210;
+
     if (
-      80 + 60 > p.x &&
-      80 < p.x + 70 &&
-      (buddieY < p.top.offsetHeight || buddieY + 60 > p.bottom.offsetTop)
+      budRight > p.x &&
+      budLeft < p.x + 70 &&
+      (budTop < p.top.offsetHeight ||
+        budBottom > p.bottom.offsetTop)
     ) {
-      return gameOver();
+      endGame();
+      return;
     }
   });
 
   if (running) requestAnimationFrame(update);
 }
 
-function gameOver() {
+function endGame() {
   running = false;
-  overScreen.style.display = "flex";
+  overOverlay.style.display = "flex";
   finalScoreEl.textContent = "Score: " + score;
 }
 </script>
 
 </body>
 </html>
+
