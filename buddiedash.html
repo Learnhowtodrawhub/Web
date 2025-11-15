@@ -25,11 +25,11 @@
     border-radius: 20px;
   }
 
-  /* Buddie — half size */
+  /* Buddie enlarged */
   #buddie {
     position: absolute;
-    width: 55px;     /* was 110 */
-    height: 105px;   /* was 210 */
+    width: 80px;        /* larger */
+    height: 150px;      /* larger */
     left: 80px;
     top: 260px;
     transform-origin: center center;
@@ -87,10 +87,10 @@
     cursor: pointer;
   }
 
-  /* Temporary saw obstacles */
+  /* Larger saw */
   .saw {
     position: absolute;
-    width: 80px;
+    width: 130px;   /* enlarged */
     height: auto;
   }
 </style>
@@ -102,7 +102,7 @@
 
   <div id="score">0</div>
 
-  <!-- Buddie using correct filename -->
+  <!-- Buddie -->
   <div id="buddie">
     <img src="IMG_7429.png" />
   </div>
@@ -135,32 +135,43 @@ const finalScoreEl = document.getElementById("final-score");
 let gameW = 360;
 let gameH = 640;
 
+// Buddie physics
 let buddieY = 260;
 let velocity = 0;
+let gravity = 2000;
+let hopForce = -650;
 
-/* Hop physics */
-let gravity = 2000;      // faster fall
-let hopForce = -650;     // strong hop upward
-
+// Game state
 let obstacles = [];
 let score = 0;
 let running = false;
 let lastTime = null;
 let spawnTimer = 0;
 
-/* Start game */
+// Buddie wobble timing
+let wobbleTime = 0;
+
+/* Start Game */
 function startGame() {
   running = true;
   startOverlay.style.display = "none";
   overOverlay.style.display = "none";
 
+  // Reset physics
   buddieY = 260;
   velocity = 0;
+
+  // Reset score
   score = 0;
   scoreEl.textContent = "0";
 
+  // Clear obstacles
   obstacles.forEach(o => o.el.remove());
   obstacles = [];
+
+  // Reset timers
+  lastTime = null;
+  spawnTimer = 0;
 
   requestAnimationFrame(update);
 }
@@ -170,28 +181,26 @@ function restartGame() {
   startGame();
 }
 
-/* Hop action */
+/* Hop */
 function hop() {
   if (!running) return;
   velocity = hopForce;
-
-  // small hop bounce
-  buddie.style.transform = "translateY(-6px)";
-  setTimeout(() => buddie.style.transform = "translateY(0px)", 120);
 }
 
+// Controls
 game.addEventListener("mousedown", hop);
 window.addEventListener("keydown", e => {
   if (e.code === "Space" || e.code === "ArrowUp") hop();
 });
 
-/* Spawn a saw */
+/* Spawn Saw */
 function spawnSaw() {
-  let y = 500;  // ground level
+  let y = 480; // near ground
 
   let el = document.createElement("img");
-  el.src = "saw.png"; // replace with your saw file
+  el.src = "saw.png";
   el.className = "saw";
+
   el.style.left = gameW + "px";
   el.style.top = y + "px";
 
@@ -200,50 +209,66 @@ function spawnSaw() {
   obstacles.push({
     x: gameW,
     y: y,
-    width: 80,
-    height: 80,
+    width: 130,
+    height: 130,
     el: el,
     scored: false
   });
 }
 
-/* Update loop */
+/* Update Loop */
 function update(t) {
   if (!lastTime) lastTime = t;
   let dt = (t - lastTime) / 1000;
   lastTime = t;
 
+  // Gravity
   velocity += gravity * dt;
   buddieY += velocity * dt;
 
-  if (buddieY > gameH - 160) return gameOver();
-  buddie.style.top = buddieY + "px";
+  // Keep Buddie from falling through
+  if (buddieY > gameH - 200) {
+    buddieY = gameH - 200;
+    return gameOver();
+  }
 
+  // BUDDIE WOBBLE
+  wobbleTime += dt * 3;
+  let wobbleAmount = Math.sin(wobbleTime) * 8;
+
+  buddie.style.top = buddieY + "px";
+  buddie.style.left = 80 + wobbleAmount + "px";
+
+  // Spawn saws
   spawnTimer += dt;
-  if (spawnTimer > 1.6) {
+  if (spawnTimer > 1.4) {
     spawnSaw();
     spawnTimer = 0;
   }
 
+  // Move obstacles
   obstacles.forEach((o, i) => {
-    o.x -= 280 * dt;
+    o.x -= 300 * dt;
     o.el.style.left = o.x + "px";
 
+    // Score when passing
     if (!o.scored && o.x + o.width < 80) {
       score++;
       scoreEl.textContent = score;
       o.scored = true;
     }
 
-    if (o.x < -100) {
+    // Remove old saw
+    if (o.x < -200) {
       o.el.remove();
       obstacles.splice(i, 1);
     }
 
-    let budLeft = 80;
-    let budRight = 80 + 55;
+    // Collision check
+    let budLeft = 80 + wobbleAmount;
+    let budRight = budLeft + 80;
     let budTop = buddieY;
-    let budBottom = buddieY + 105;
+    let budBottom = buddieY + 150;
 
     if (
       budRight > o.x &&
@@ -257,6 +282,7 @@ function update(t) {
   if (running) requestAnimationFrame(update);
 }
 
+/* Game Over */
 function gameOver() {
   running = false;
   overOverlay.style.display = "flex";
