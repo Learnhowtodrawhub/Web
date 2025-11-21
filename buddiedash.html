@@ -25,7 +25,7 @@
     border-radius: 20px;
   }
 
-  /* GROUND */
+  /* GROUND BAR */
   #ground {
     position: absolute;
     bottom: 0;
@@ -37,10 +37,10 @@
   /* BUDDIE */
   #buddie {
     position: absolute;
-    width: 90px;         /* PERFECT SIZE */
+    width: 90px;
     height: auto;
     left: 40px;
-    bottom: 90px;        /* EXACT ground level */
+    bottom: 40px; /* FIXED: sprite sits perfectly on ground */
     transform-origin: center;
   }
 
@@ -54,7 +54,7 @@
     position: absolute;
     width: 80px;
     height: auto;
-    bottom: 90px;        /* EXACT ground level */
+    bottom: 40px; /* FIXED: sits perfectly on ground */
   }
 
   #score {
@@ -120,6 +120,9 @@
 </div>
 
 <script>
+/* CONSTANTS */
+const FLOOR_Y = 40;  // FIXED FLOOR HEIGHT
+
 /* DOM */
 const game = document.getElementById("game");
 const buddie = document.getElementById("buddie");
@@ -132,11 +135,11 @@ const finalScoreEl = document.getElementById("final-score");
 let running = false;
 let score = 0;
 
-let buddieY = 90;
+let buddieY = FLOOR_Y;
 let velocity = 0;
 
-let gravity = -2400;     // NATURAL GRAVITY
-let jumpForce = 900;     // JUMP UP
+let gravity = -2400;
+let jumpForce = 900;
 
 let onGround = true;
 
@@ -153,7 +156,7 @@ function startGame() {
   score = 0;
   scoreEl.textContent = "0";
 
-  buddieY = 90;
+  buddieY = FLOOR_Y;
   velocity = 0;
   onGround = true;
 
@@ -212,8 +215,8 @@ function update(t) {
   velocity += gravity * dt;
   buddieY += velocity * dt;
 
-  if (buddieY <= 90) {
-    buddieY = 90;
+  if (buddieY <= FLOOR_Y) {
+    buddieY = FLOOR_Y;
     velocity = 0;
     onGround = true;
   }
@@ -254,8 +257,8 @@ function update(t) {
 
     let sawLeft = o.x;
     let sawRight = o.x + o.width;
-    let sawBottom = 90;
-    let sawTop = sawBottom + 80;
+    let sawBottom = FLOOR_Y;
+    let sawTop = FLOOR_Y + 80;
 
     /* COLLISION CHECK */
     let overlapX = budRight > sawLeft && budLeft < sawRight;
