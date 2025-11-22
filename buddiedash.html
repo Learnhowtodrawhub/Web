@@ -34,12 +34,13 @@
     background: #2fa34f;
   }
 
-  /* BUDDIE — proper size */
+  /* BUDDIE */
   #buddie {
     position: absolute;
-    width: 112px; 
+    width: 90px;         /* PERFECT SIZE */
+    height: auto;
     left: 40px;
-    bottom: 90px; /* EXACT ground position */
+    bottom: 90px;        /* EXACT ground level */
     transform-origin: center;
   }
 
@@ -48,12 +49,12 @@
     height: auto;
   }
 
-  /* Saws on ground */
+  /* SAWS */
   .saw {
     position: absolute;
-    width: 90px;
+    width: 80px;
     height: auto;
-    bottom: 90px; /* EXACT ground position */
+    bottom: 90px;        /* EXACT ground level */
   }
 
   #score {
@@ -65,7 +66,8 @@
     font-weight: bold;
   }
 
-  #start, #over {
+  #start,
+  #over {
     position: absolute;
     inset: 0;
     background: rgba(0,0,0,0.6);
@@ -118,25 +120,25 @@
 </div>
 
 <script>
-/* GAME ELEMENTS */
+/* DOM */
+const game = document.getElementById("game");
 const buddie = document.getElementById("buddie");
 const scoreEl = document.getElementById("score");
 const startOverlay = document.getElementById("start");
 const overOverlay = document.getElementById("over");
 const finalScoreEl = document.getElementById("final-score");
 
-/* GAME STATE */
+/* VARIABLES */
 let running = false;
 let score = 0;
 
 let buddieY = 90;
 let velocity = 0;
 
-let gravity = 2400;
-let jumpForce = -900;
+let gravity = -2400;     // NATURAL GRAVITY
+let jumpForce = 900;     // JUMP UP
 
 let onGround = true;
-let maxJumpHeight = 260; 
 
 let obstacles = [];
 let lastTime = 0;
@@ -148,12 +150,12 @@ function startGame() {
   startOverlay.style.display = "none";
   overOverlay.style.display = "none";
 
+  score = 0;
+  scoreEl.textContent = "0";
+
   buddieY = 90;
   velocity = 0;
   onGround = true;
-  score = 0;
-
-  scoreEl.textContent = "0";
 
   obstacles.forEach(o => o.el.remove());
   obstacles = [];
@@ -174,8 +176,8 @@ function jump() {
   velocity = jumpForce;
   onGround = false;
 
-  buddie.style.transform = "rotate(-12deg)";
-  setTimeout(() => buddie.style.transform = "rotate(0deg)", 200);
+  buddie.style.transform = "rotate(-8deg)";
+  setTimeout(() => buddie.style.transform = "rotate(0deg)", 150);
 }
 
 window.addEventListener("mousedown", jump);
@@ -183,21 +185,21 @@ window.addEventListener("keydown", e => {
   if (e.code === "Space" || e.code === "ArrowUp") jump();
 });
 
-/* SPAWN SAWS */
+/* SPAWN SAW */
 function spawnSaw() {
   let el = document.createElement("img");
   el.src = "saw.png";
   el.className = "saw";
   el.style.left = "360px";
-  el.style.bottom = "90px";
 
-  document.getElementById("game").appendChild(el);
+  game.appendChild(el);
 
   obstacles.push({
     x: 360,
-    width: 90,
-    passed: false,
-    el: el
+    width: 80,
+    height: 80,
+    el: el,
+    passed: false
   });
 }
 
@@ -206,64 +208,60 @@ function update(t) {
   let dt = (t - lastTime) / 1000;
   lastTime = t;
 
-  /* ---- PHYSICS ---- */
+  /* PHYSICS */
   velocity += gravity * dt;
   buddieY += velocity * dt;
 
-  // Floor
   if (buddieY <= 90) {
     buddieY = 90;
     velocity = 0;
     onGround = true;
   }
 
-  // Max jump height
-  if (buddieY > maxJumpHeight) {
-    buddieY = maxJumpHeight;
-  }
-
   buddie.style.bottom = buddieY + "px";
 
-  /* ---- SPAWN SAWS ---- */
+  /* SPAWNING SAWS */
   spawnTimer += dt;
-  if (spawnTimer > 1.6) {
+  if (spawnTimer > 1.5) {
     spawnSaw();
     spawnTimer = 0;
   }
 
-  /* ---- MOVE SAWS ---- */
+  /* MOVE SAWS */
   obstacles.forEach((o, i) => {
-    o.x -= 300 * dt;
+    o.x -= 250 * dt;
     o.el.style.left = o.x + "px";
 
-    // Score: saw has passed Buddie
+    /* SCORE */
     if (!o.passed && o.x + o.width < 40) {
       score++;
       scoreEl.textContent = score;
       o.passed = true;
     }
 
-    // Remove old saws
-    if (o.x < -150) {
+    /* REMOVE OLD SAWS */
+    if (o.x < -120) {
       o.el.remove();
       obstacles.splice(i, 1);
+      return;
     }
 
-    /* ---- COLLISION ---- */
+    /* COLLISION BOXES */
     let budLeft = 40;
-    let budRight = 40 + 112;
+    let budRight = budLeft + 90;
+    let budBottom = buddieY;
+    let budTop = buddieY + 90;
 
     let sawLeft = o.x;
     let sawRight = o.x + o.width;
+    let sawBottom = 90;
+    let sawTop = sawBottom + 80;
 
-    let budFeet = buddieY;
+    /* COLLISION CHECK */
+    let overlapX = budRight > sawLeft && budLeft < sawRight;
+    let overlapY = budBottom < sawTop && budTop > sawBottom;
 
-    // If Buddie is on ground & overlaps saw → game over
-    if (
-      budFeet <= 120 &&   // Buddie's feet in saw height zone
-      budRight > sawLeft &&
-      budLeft < sawRight
-    ) {
+    if (overlapX && overlapY) {
       return gameOver();
     }
   });
@@ -274,13 +272,17 @@ function update(t) {
 /* GAME OVER */
 function gameOver() {
   running = false;
-  overOverlay.style.display = "flex";
   finalScoreEl.textContent = "Score: " + score;
+  overOverlay.style.display = "flex";
 }
 </script>
 
 </body>
 </html>
+
+
+
+
 
 
 
