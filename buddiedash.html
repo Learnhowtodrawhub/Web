@@ -47,14 +47,28 @@
     width: 100%;
   }
 
+  /* Generic moving object (saw, fire, acorn) */
   .object {
     position: absolute;
-    width: 80px;
     height: auto;
+  }
+
+  .saw {
+    width: 80px;
+    /* spinning saw animation */
+    animation: spin 0.6s linear infinite;
+  }
+
+  .fire {
+    width: 80px;
+    /* fire flicker animation */
+    animation: fireFlicker 0.4s ease-in-out infinite;
   }
 
   .acorn {
     width: 55px; /* smaller acorn */
+    /* hover + slight spin */
+    animation: acornHover 1.2s ease-in-out infinite;
   }
 
   #score {
@@ -90,6 +104,73 @@
     border-radius: 12px;
     cursor: pointer;
     margin-top: 12px;
+  }
+
+  /* Immune glow */
+  #buddie.immune {
+    animation: shieldPulse 0.8s ease-in-out infinite;
+  }
+
+  /* Screen shake */
+  #game.shake {
+    animation: screenShake 0.3s ease;
+  }
+
+  /* Particles */
+  .particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    opacity: 0.9;
+    animation: particleRise 0.6s linear forwards;
+    pointer-events: none;
+  }
+
+  .particle.acorn {
+    background: #ffd54f; /* golden */
+  }
+
+  .particle.hit {
+    background: #ff5252; /* red */
+  }
+
+  /* KEYFRAMES */
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+
+  @keyframes fireFlicker {
+    0%   { transform: scale(1); filter: brightness(1); }
+    50%  { transform: scale(1.08); filter: brightness(1.3); }
+    100% { transform: scale(1); filter: brightness(1); }
+  }
+
+  @keyframes acornHover {
+    0%   { transform: translateY(0) rotate(0deg); }
+    50%  { transform: translateY(6px) rotate(5deg); }
+    100% { transform: translateY(0) rotate(0deg); }
+  }
+
+  @keyframes shieldPulse {
+    0%   { filter: drop-shadow(0 0 0px #ffee58); }
+    50%  { filter: drop-shadow(0 0 14px #ffee58); }
+    100% { filter: drop-shadow(0 0 0px #ffee58); }
+  }
+
+  @keyframes screenShake {
+    0%   { transform: translate(0, 0); }
+    25%  { transform: translate(-4px, 2px); }
+    50%  { transform: translate(4px, -2px); }
+    75%  { transform: translate(-3px, 3px); }
+    100% { transform: translate(0, 0); }
+  }
+
+  @keyframes particleRise {
+    0%   { transform: translate(0, 0); opacity: 1; }
+    100% { transform: translate(0, 30px); opacity: 0; }
   }
 </style>
 </head>
@@ -150,7 +231,7 @@ let objects = [];
 let lastTime = 0;
 let spawnTimer = 0;
 let acornTimer = 0;
-let acornInterval = 10; // 8–12 seconds randomized later
+let acornInterval = 10; // 8–12 seconds randomized
 
 /* POWER UP */
 let immune = false;
@@ -175,6 +256,8 @@ function startGame() {
   objects = [];
 
   immune = false;
+  immuneTimer = 0;
+  buddie.classList.remove("immune");
   buddie.style.filter = "none";
 
   acornTimer = 0;
@@ -202,8 +285,11 @@ function jump() {
   velocity = currentJumpForce;
   onGround = false;
 
-  buddie.style.transform = "rotate(-8deg)";
-  setTimeout(() => buddie.style.transform = "rotate(0deg)", 150);
+  // squash/stretch + tilt for a more fun jump feel
+  buddie.style.transform = "scale(1.05, 0.9) rotate(-8deg)";
+  setTimeout(() => {
+    buddie.style.transform = "scale(1,1) rotate(0deg)";
+  }, 150);
 }
 
 window.addEventListener("mousedown", jump);
@@ -215,10 +301,10 @@ window.addEventListener("keydown", e => {
 function spawnHazard() {
   let el = document.createElement("img");
 
-  let isFire = Math.random() < 0.4; 
+  let isFire = Math.random() < 0.4; // 40% fire, 60% saw
   el.src = isFire ? "buddiedash_fire.png" : "saw.png";
 
-  el.className = "object";
+  el.className = isFire ? "object fire" : "object saw";
 
   // ALIGN SAW LOWER TO MATCH FIRE
   el.style.bottom = isFire ? "90px" : "70px";
@@ -245,7 +331,7 @@ function spawnAcorn() {
   let vertical = Math.random() < 0.5 ? 90 : 250;
   el.style.bottom = vertical + "px";
 
-  // Spawn further right so it never overlaps hazards
+  // Spawn further right so it never overlaps just-spawned hazards
   let startX = 480;
   el.style.left = startX + "px";
 
@@ -261,6 +347,34 @@ function spawnAcorn() {
 
   acornTimer = 0;
   acornInterval = 8 + Math.random() * 4;
+}
+
+/* PARTICLES */
+function spawnParticles(count, kind) {
+  for (let i = 0; i < count; i++) {
+    const p = document.createElement("div");
+    p.className = "particle " + kind;
+
+    // Position near Buddie's center
+    const baseLeft = 40 + 45; // buddie left + half width
+    const baseBottom = buddieY + 40;
+
+    const offsetX = (Math.random() - 0.5) * 40; // random spread
+    const offsetY = (Math.random() - 0.5) * 20;
+
+    p.style.left = (baseLeft + offsetX) + "px";
+    p.style.bottom = (baseBottom + offsetY) + "px";
+
+    game.appendChild(p);
+
+    setTimeout(() => p.remove(), 650);
+  }
+}
+
+/* SCREEN SHAKE */
+function shakeScreen() {
+  game.classList.add("shake");
+  setTimeout(() => game.classList.remove("shake"), 300);
 }
 
 /* GAME LOOP */
@@ -301,6 +415,8 @@ function update(t) {
     immuneTimer -= dt;
     if (immuneTimer <= 0) {
       immune = false;
+      immuneTimer = 0;
+      buddie.classList.remove("immune");
       buddie.style.filter = "none";
     }
   }
@@ -341,7 +457,8 @@ function update(t) {
     if (overlapX && overlapY && o.type === "acorn") {
       immune = true;
       immuneTimer = 5;
-      buddie.style.filter = "brightness(1.8) hue-rotate(40deg)";
+      buddie.classList.add("immune");
+      spawnParticles(6, "acorn");
 
       o.el.remove();
       objects.splice(i, 1);
@@ -350,7 +467,11 @@ function update(t) {
 
     /* HAZARD COLLISION */
     if (overlapX && overlapY && (o.type === "saw" || o.type === "fire")) {
-      if (!immune) return gameOver();
+      if (!immune) {
+        spawnParticles(8, "hit");
+        shakeScreen();
+        return gameOver();
+      }
     }
   });
 
@@ -367,8 +488,6 @@ function gameOver() {
 
 </body>
 </html>
-
-
 
 
 
