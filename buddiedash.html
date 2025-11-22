@@ -38,24 +38,23 @@
   #buddie {
     position: absolute;
     width: 90px;
-    height: auto;
     left: 40px;
     bottom: 90px;
-    transform-origin: center;
     transition: filter 0.2s ease;
   }
 
   #buddie img {
     width: 100%;
+  }
+
+  .object {
+    position: absolute;
+    width: 80px;
     height: auto;
   }
 
-  /* Generic moving object (saw, fire, acorn) */
-  .object {
-    position: absolute;
-    bottom: 90px;
-    width: 80px;
-    height: auto;
+  .acorn {
+    width: 55px; /* smaller acorn */
   }
 
   #score {
@@ -120,7 +119,7 @@
 </div>
 
 <script>
-/* DOM */
+/* DOM ELEMENTS */
 const game = document.getElementById("game");
 const buddie = document.getElementById("buddie");
 const scoreEl = document.getElementById("score");
@@ -141,21 +140,19 @@ let currentJumpForce = baseJumpForce;
 
 let onGround = true;
 
-/* Multi-jump */
+/* MULTI JUMP */
 let maxJumps = 3;
 let jumpsRemaining = maxJumps;
 let jumpBoost = 250;
 
-/* Objects (saws, fire, acorns) */
+/* OBJECTS */
 let objects = [];
 let lastTime = 0;
 let spawnTimer = 0;
-
-/* Acorn timing (less frequent, random) */
 let acornTimer = 0;
-let acornInterval = 10; // will be randomized after first spawn
+let acornInterval = 10; // 8–12 seconds randomized later
 
-/* Power-up */
+/* POWER UP */
 let immune = false;
 let immuneTimer = 0;
 
@@ -181,7 +178,7 @@ function startGame() {
   buddie.style.filter = "none";
 
   acornTimer = 0;
-  acornInterval = 10;
+  acornInterval = 8 + Math.random() * 4;
 
   lastTime = performance.now();
   requestAnimationFrame(update);
@@ -214,15 +211,17 @@ window.addEventListener("keydown", e => {
   if (e.code === "Space" || e.code === "ArrowUp") jump();
 });
 
-/* SPAWN HAZARD (saw or fire) */
+/* SPAWN HAZARDS */
 function spawnHazard() {
   let el = document.createElement("img");
 
-  let isFire = Math.random() < 0.4; // 40% fire, 60% saw
+  let isFire = Math.random() < 0.4; 
   el.src = isFire ? "buddiedash_fire.png" : "saw.png";
 
   el.className = "object";
-  el.style.bottom = "90px";
+
+  // ALIGN SAW LOWER TO MATCH FIRE
+  el.style.bottom = isFire ? "90px" : "70px";
   el.style.left = "360px";
 
   game.appendChild(el);
@@ -231,23 +230,22 @@ function spawnHazard() {
     type: isFire ? "fire" : "saw",
     x: 360,
     width: 80,
-    height: 80,
     el: el,
     passed: false
   });
 }
 
-/* SPAWN ACORN (power-up) */
+/* SPAWN ACORNS */
 function spawnAcorn() {
   let el = document.createElement("img");
   el.src = "buddiedash_acorn.png";
-  el.className = "object";
+  el.className = "object acorn";
 
-  // Some acorns on ground, some in air
+  // Ground or air
   let vertical = Math.random() < 0.5 ? 90 : 250;
   el.style.bottom = vertical + "px";
 
-  // Spawn a bit further to the right so it doesn't overlap a just-spawned hazard
+  // Spawn further right so it never overlaps hazards
   let startX = 480;
   el.style.left = startX + "px";
 
@@ -256,18 +254,16 @@ function spawnAcorn() {
   objects.push({
     type: "acorn",
     x: startX,
-    width: 80,
-    height: 80,
+    width: 55,
     el: el,
     passed: false
   });
 
-  // Next acorn in 8–12 seconds
   acornTimer = 0;
   acornInterval = 8 + Math.random() * 4;
 }
 
-/* MAIN LOOP */
+/* GAME LOOP */
 function update(t) {
   let dt = (t - lastTime) / 1000;
   lastTime = t;
@@ -279,7 +275,6 @@ function update(t) {
   if (buddieY <= 90) {
     buddieY = 90;
     velocity = 0;
-
     if (!onGround) {
       onGround = true;
       jumpsRemaining = maxJumps;
@@ -295,7 +290,7 @@ function update(t) {
     spawnTimer = 0;
   }
 
-  /* SPAWN ACORNS (less frequent, random delay) */
+  /* SPAWN ACORNS */
   acornTimer += dt;
   if (acornTimer > acornInterval) {
     spawnAcorn();
@@ -310,56 +305,52 @@ function update(t) {
     }
   }
 
-  /* MOVE OBJECTS & COLLISIONS */
+  /* MOVE + COLLISIONS */
   objects.forEach((o, i) => {
     o.x -= 250 * dt;
     o.el.style.left = o.x + "px";
 
-    /* SCORE (pass Buddie) */
     if (!o.passed && o.x + o.width < 40) {
       score++;
       scoreEl.textContent = score;
       o.passed = true;
     }
 
-    /* REMOVE OFF-SCREEN */
     if (o.x < -200) {
       o.el.remove();
       objects.splice(i, 1);
       return;
     }
 
-    /* COLLISION BOXES */
-    // Slightly smaller Buddie collision box to avoid phantom deaths
-    let budLeft = 40 + 10;          // inset a bit from the sprite edge
-    let budRight = budLeft + 70;    // narrower than 90px
-    let budHeight = 70;             // shorter than full sprite
-    let budBottom = buddieY;
-    let budTop = buddieY + budHeight;
+    /* TIGHT HITBOX TO STOP FALSE COLLISIONS */
+    let budLeft = 55;
+    let budRight = budLeft + 55;
+    let budBottom = buddieY + 10;
+    let budTop = budBottom + 55;
 
     let oLeft = o.x;
     let oRight = o.x + o.width;
-    let oBottom = o.el.style.bottom ? parseInt(o.el.style.bottom) : 90;
-    let oTop = oBottom + 80;
+
+    let oBottom = parseInt(o.el.style.bottom);
+    let oTop = oBottom + 60;
 
     let overlapX = budRight > oLeft && budLeft < oRight;
     let overlapY = budBottom < oTop && budTop > oBottom;
 
-    if (overlapX && overlapY) {
-      if (o.type === "acorn") {
-        // Grant immunity power-up
-        immune = true;
-        immuneTimer = 5; // seconds
-        buddie.style.filter = "brightness(1.8) hue-rotate(40deg)";
+    /* ACORN POWER UP */
+    if (overlapX && overlapY && o.type === "acorn") {
+      immune = true;
+      immuneTimer = 5;
+      buddie.style.filter = "brightness(1.8) hue-rotate(40deg)";
 
-        o.el.remove();
-        objects.splice(i, 1);
-        return;
-      }
+      o.el.remove();
+      objects.splice(i, 1);
+      return;
+    }
 
-      if (!immune && (o.type === "saw" || o.type === "fire")) {
-        return gameOver();
-      }
+    /* HAZARD COLLISION */
+    if (overlapX && overlapY && (o.type === "saw" || o.type === "fire")) {
+      if (!immune) return gameOver();
     }
   });
 
@@ -376,6 +367,7 @@ function gameOver() {
 
 </body>
 </html>
+
 
 
 
