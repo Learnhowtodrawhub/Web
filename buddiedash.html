@@ -52,18 +52,15 @@
     position: absolute;
   }
 
-  /* Saw = NO animation */
   .saw {
-    width: 80px;
+    width: 80px; /* no animation */
   }
 
-  /* Fire flicker */
   .fire {
     width: 80px;
     animation: fireFlicker 0.4s ease-in-out infinite;
   }
 
-  /* Acorn hover */
   .acorn {
     width: 55px;
     animation: acornHover 1.2s ease-in-out infinite;
@@ -75,6 +72,15 @@
     right: 10px;
     color: white;
     font-size: 32px;
+    font-weight: bold;
+  }
+
+  #highscore {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: white;
+    font-size: 18px;
     font-weight: bold;
   }
 
@@ -159,13 +165,13 @@
     0% { transform: translate(0,0); opacity: 1; }
     100% { transform: translate(0,30px); opacity: 0; }
   }
-
 </style>
 </head>
 <body>
 
 <div id="game">
 
+  <div id="highscore">High: 0</div>
   <div id="score">0</div>
 
   <div id="buddie">
@@ -182,6 +188,7 @@
   <div id="over">
     Game Over<br>
     <div id="final-score"></div>
+    <button id="continue-btn" onclick="watchAdContinue()" style="display:none;">Watch Ad to Continue</button>
     <button onclick="restartGame()">Restart</button>
   </div>
 
@@ -191,9 +198,11 @@
 const game = document.getElementById("game");
 const buddie = document.getElementById("buddie");
 const scoreEl = document.getElementById("score");
+const highScoreEl = document.getElementById("highscore");
 const startOverlay = document.getElementById("start");
 const overOverlay = document.getElementById("over");
 const finalScoreEl = document.getElementById("final-score");
+const continueBtn = document.getElementById("continue-btn");
 
 let running = false;
 let score = 0;
@@ -219,6 +228,13 @@ let acornInterval = 10;
 let immune = false;
 let immuneTimer = 0;
 
+/* High score per device */
+let highScore = Number(localStorage.getItem("buddieHighScore") || 0);
+highScoreEl.textContent = "High: " + highScore;
+
+/* Only allow one continue per page load */
+let hasContinued = false;
+
 /* START GAME */
 function startGame() {
   running = true;
@@ -241,6 +257,8 @@ function startGame() {
   buddie.classList.remove("immune");
   buddie.style.filter = "none";
 
+  continueBtn.style.display = "none";
+
   acornTimer = 0;
   acornInterval = 8 + Math.random() * 4;
 
@@ -248,7 +266,9 @@ function startGame() {
   requestAnimationFrame(update);
 }
 
-function restartGame() { startGame(); }
+function restartGame() {
+  startGame();
+}
 
 /* JUMP */
 function jump() {
@@ -272,8 +292,7 @@ window.addEventListener("keydown", e => {
   if (e.code === "Space" || e.code === "ArrowUp") jump();
 });
 
-/* ---------------------------------- SPAWN HAZARDS ---------------------------------- */
-
+/* SPAWN HAZARDS */
 function spawnHazard() {
   let el = document.createElement("img");
 
@@ -296,8 +315,7 @@ function spawnHazard() {
   });
 }
 
-/* ---------------------------------- SPAWN ACORNS ---------------------------------- */
-
+/* SPAWN ACORNS */
 function spawnAcorn() {
   let el = document.createElement("img");
   el.src = "buddiedash_acorn.png";
@@ -323,8 +341,7 @@ function spawnAcorn() {
   acornInterval = 8 + Math.random() * 4;
 }
 
-/* ---------------------------------- PARTICLES ---------------------------------- */
-
+/* PARTICLES */
 function spawnParticles(count, kind) {
   for (let i = 0; i < count; i++) {
     const p = document.createElement("div");
@@ -340,20 +357,45 @@ function spawnParticles(count, kind) {
     p.style.bottom = (baseBottom + offsetY) + "px";
 
     game.appendChild(p);
-
     setTimeout(() => p.remove(), 650);
   }
 }
 
-/* ---------------------------------- SCREEN SHAKE ---------------------------------- */
-
+/* SCREEN SHAKE */
 function shakeScreen() {
   game.classList.add("shake");
   setTimeout(() => game.classList.remove("shake"), 300);
 }
 
-/* ---------------------------------- GAME LOOP ---------------------------------- */
+/* WATCH AD TO CONTINUE */
+function watchAdContinue() {
+  if (hasContinued || running) return;
 
+  // simulate ad; in real app you'd integrate SDK here
+  hasContinued = true;
+  continueBtn.style.display = "none";
+  overOverlay.style.display = "none";
+
+  // safe respawn on ground
+  objects.forEach(o => o.el.remove());
+  objects = [];
+
+  buddieY = 90;
+  velocity = 0;
+  onGround = true;
+  jumpsRemaining = maxJumps;
+
+  // short immunity (3 seconds)
+  immune = true;
+  immuneTimer = 3;
+  buddie.classList.add("immune");
+
+  running = true;
+  lastTime = performance.now();
+  requestAnimationFrame(update);
+}
+
+/* GAME LOOP */
 function update(t) {
   let dt = (t - lastTime) / 1000;
   lastTime = t;
@@ -409,7 +451,6 @@ function update(t) {
       return;
     }
 
-    /* TIGHT HITBOX */
     let budLeft = 55;
     let budRight = budLeft + 55;
     let budBottom = buddieY + 10;
@@ -424,7 +465,6 @@ function update(t) {
     let overlapX = budRight > oLeft && budLeft < oRight;
     let overlapY = budBottom < oTop && budTop > oBottom;
 
-    /* ACORN POWER-UP */
     if (overlapX && overlapY && o.type === "acorn") {
       immune = true;
       immuneTimer = 5;
@@ -436,7 +476,6 @@ function update(t) {
       return;
     }
 
-    /* HAZARD COLLISION */
     if (overlapX && overlapY && (o.type === "saw" || o.type === "fire")) {
       if (!immune) {
         spawnParticles(10, "hit");
@@ -452,13 +491,30 @@ function update(t) {
 /* GAME OVER */
 function gameOver() {
   running = false;
+
+  // update high score
+  if (score > highScore) {
+    highScore = score;
+    localStorage.setItem("buddieHighScore", highScore);
+    highScoreEl.textContent = "High: " + highScore;
+  }
+
   finalScoreEl.textContent = "Score: " + score;
+
+  // show continue option only if score >= 20 and not already used
+  if (score >= 20 && !hasContinued) {
+    continueBtn.style.display = "inline-block";
+  } else {
+    continueBtn.style.display = "none";
+  }
+
   overOverlay.style.display = "flex";
 }
 </script>
 
 </body>
 </html>
+
 
 
 
