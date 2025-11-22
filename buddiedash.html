@@ -2,127 +2,166 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Buddie's Forest Hop</title>
+<title>Buddie's Forest Hop - Boost Edition</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-  body {
-    margin: 0;
-    background: #6ec9ff;
-    display: flex;
-    justify-content: center;
-    padding-top: 20px;
-    font-family: sans-serif;
-  }
+  body {
+    margin: 0;
+    background: #6ec9ff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 50px;
+    font-family: sans-serif;
+  }
 
-  #game {
-    width: 360px;
-    height: 640px;
-    /* --- EDITED: Set background image --- */
-    background-image: url('background.png');
-    background-size: cover;
-    background-position: center bottom; /* Ensures the grass is at the bottom */
-    /* --- END EDITED --- */
-    position: relative;
-    overflow: hidden;
-    border: 4px solid #074f83;
-    border-radius: 20px;
-  }
+  /* Logo Styling (Assumes BuddieDashLogo.png) */
+  #logo-container {
+    width: 360px;
+    text-align: center;
+    margin-bottom: 15px;
+  }
 
-  /* GROUND */
-  #ground {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 90px;
-    /* --- EDITED: Removed green color as it's now in the background image --- */
-    background: transparent; 
-    /* --- END EDITED --- */
-  }
+  #logo {
+    max-width: 100%;
+    height: auto;
+  }
+  /* End Logo Styling */
 
-  /* BUDDIE */
-  #buddie {
-    position: absolute;
-    width: 90px;         /* PERFECT SIZE */
-    height: auto;
-    left: 40px;
-    bottom: 90px;        /* EXACT ground level */
-    transform-origin: center;
-  }
+  #game {
+    width: 360px;
+    height: 640px;
+    background-image: url('background.png');
+    background-size: cover;
+    background-position: center bottom;
+    position: relative;
+    overflow: hidden;
+    border: 4px solid #074f83;
+    border-radius: 20px;
+  }
 
-  #buddie img {
-    width: 100%;
-    height: auto;
-  }
+  /* GROUND */
+  #ground {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 90px;
+    background: transparent; 
+  }
 
-  /* SAWS */
-  .saw {
-    position: absolute;
-    width: 80px;
-    height: auto;
-    bottom: 90px;        /* EXACT ground level */
-  }
+  /* BUDDIE */
+  #buddie {
+    position: absolute;
+    width: 90px;
+    height: auto;
+    left: 40px;
+    bottom: 90px;
+    transform-origin: center;
+    transition: filter 0.1s;
+  }
 
-  #score {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    color: white;
-    font-size: 32px;
-    font-weight: bold;
-    /* You might need to change score color if the sky is too bright */
-    /* text-shadow: 2px 2px 4px rgba(0,0,0,0.5); */ 
-  }
+  #buddie img {
+    width: 100%;
+    height: auto;
+  }
 
-  #start,
-  #over {
-    position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0.6);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    font-size: 24px;
-  }
+  /* OBSTACLE/COLLECTIBLE STYLES */
+  .obstacle, .collectible {
+    position: absolute;
+    bottom: 90px;
+  }
+  
+  /* Styles for the Saw obstacle (uses saw.png) */
+  .saw {
+    width: 80px;
+    height: 80px; /* Assuming saw.png is 80px tall */
+  }
+  
+  /* Styles for the Bonfire obstacle (uses buddiedash_fire.png) */
+  .bonfire {
+    /* Bonfire image is tall and on the ground */
+    width: 90px; 
+    height: 120px; 
+  }
 
-  #over { display: none; }
+  /* Acorn (Collectible) Styles (uses buddiedash_acorn.png) */
+  .acorn {
+    /* Acorn is smaller and floats higher */
+    width: 40px; 
+    height: 40px;
+    bottom: 200px; 
+  }
+  
+  /* Ensure images fill their container */
+  .obstacle img, .collectible img {
+    width: 100%;
+    height: 100%;
+  }
+  /* END NEW STYLES */
 
-  button {
-    padding: 10px 25px;
-    background: #32c656;
-    color: white;
-    font-size: 20px;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    margin-top: 12px;
-  }
+  #score {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+  }
+
+  #start,
+  #over {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 24px;
+  }
+
+  #over { display: none; }
+
+  button {
+    padding: 10px 25px;
+    background: #32c656;
+    color: white;
+    font-size: 20px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-top: 12px;
+  }
 </style>
 </head>
 <body>
 
+<div id="logo-container">
+  <img id="logo" src="BuddieDashLogo.png" alt="Buddie Dash Logo">
+</div>
+
 <div id="game">
 
-  <div id="score">0</div>
+  <div id="score">0</div>
 
-  <div id="buddie">
-    <img src="IMG_7429.png">
-  </div>
+  <div id="buddie">
+    <img src="IMG_7429.png">
+  </div>
 
-  <div id="ground"></div>
+  <div id="ground"></div>
 
-  <div id="start">
-    Buddie's Forest Hop<br>
-    <button onclick="startGame()">Start</button>
-  </div>
+  <div id="start">
+    Buddie's Forest Hop<br>
+    <button onclick="startGame()">Start</button>
+  </div>
 
-  <div id="over">
-    Game Over<br>
-    <div id="final-score"></div>
-    <button onclick="restartGame()">Restart</button>
-  </div>
+  <div id="over">
+    Game Over<br>
+    <div id="final-score"></div>
+    <button onclick="restartGame()">Restart</button>
+  </div>
 
 </div>
 
@@ -135,183 +174,251 @@ const startOverlay = document.getElementById("start");
 const overOverlay = document.getElementById("over");
 const finalScoreEl = document.getElementById("final-score");
 
+/* CONSTANTS (for better tuning) */
+const GRAVITY = -2400;
+const BASE_JUMP_FORCE = 900;
+const MAX_JUMPS = 3;
+const JUMP_BOOST = 250;
+const SAW_WIDTH = 80;
+const SAW_HEIGHT = 80;
+const FIRE_WIDTH = 90;
+const FIRE_HEIGHT = 120; // Taller obstacle
+const ACORN_SIZE = 40;
+const ACORN_Y = 200; // Floating height
+const ACORN_DURATION = 5000; // 5 seconds of boost
+const GROUND_LEVEL = 90;
+
 /* VARIABLES */
 let running = false;
 let score = 0;
 
-let buddieY = 90;
+let buddieY = GROUND_LEVEL;
 let velocity = 0;
-
-let gravity = -2400;     // NATURAL GRAVITY
-let baseJumpForce = 900; // JUMP UP - Base value
-let currentJumpForce = baseJumpForce; // Holds the force for the current jump
-
+let currentJumpForce = BASE_JUMP_FORCE;
 let onGround = true;
-
-// Multi-jump variables
-let maxJumps = 3; 
-let jumpsRemaining = maxJumps;
-let jumpBoost = 250; // How much extra force is added per consecutive jump
+let jumpsRemaining = MAX_JUMPS;
 
 let obstacles = [];
 let lastTime = 0;
 let spawnTimer = 0;
+let gameSpeed = 250; // Dynamic speed
+
+/* ACORN BOOST STATE */
+let isAcornBoosted = false;
+let acornBoostTimeout;
+
 
 /* START GAME */
 function startGame() {
-  running = true;
-  startOverlay.style.display = "none";
-  overOverlay.style.display = "none";
+  running = true;
+  startOverlay.style.display = "none";
+  overOverlay.style.display = "none";
 
-  score = 0;
-  scoreEl.textContent = "0";
+  score = 0;
+  scoreEl.textContent = "0";
 
-  buddieY = 90;
-  velocity = 0;
-  onGround = true;
-  
-  // Reset jumps
-  jumpsRemaining = maxJumps;
-  currentJumpForce = baseJumpForce;
+  buddieY = GROUND_LEVEL;
+  velocity = 0;
+  onGround = true;
+  jumpsRemaining = MAX_JUMPS;
+  currentJumpForce = BASE_JUMP_FORCE;
+  gameSpeed = 250;
 
-  obstacles.forEach(o => o.el.remove());
-  obstacles = [];
+  obstacles.forEach(o => o.el.remove());
+  obstacles = [];
+  if (acornBoostTimeout) clearTimeout(acornBoostTimeout);
+  isAcornBoosted = false;
+  buddie.style.filter = "none";
 
-  requestAnimationFrame(update);
+  requestAnimationFrame(update);
 }
 
 /* RESTART */
 function restartGame() {
-  startGame();
+  startGame();
 }
 
 /* JUMP */
 function jump() {
-  if (!running) return;
-  
-  // Check if jumps are available
-  if (jumpsRemaining <= 0) return;
+  if (!running) return;
+  
+  if (jumpsRemaining <= 0) return;
 
-  // Decrease remaining jumps
-  jumpsRemaining--;
+  jumpsRemaining--;
 
-  // Calculate jump force based on remaining jumps
-  let consecutiveJumps = maxJumps - jumpsRemaining;
-  currentJumpForce = baseJumpForce + (consecutiveJumps - 1) * jumpBoost;
-  
-  velocity = currentJumpForce;
-  onGround = false;
+  let consecutiveJumps = MAX_JUMPS - jumpsRemaining;
+  currentJumpForce = BASE_JUMP_FORCE + (consecutiveJumps - 1) * JUMP_BOOST;
+  
+  velocity = currentJumpForce;
+  onGround = false;
 
-  buddie.style.transform = "rotate(-8deg)";
-  setTimeout(() => buddie.style.transform = "rotate(0deg)", 150);
+  buddie.style.transform = "rotate(-8deg)";
+  setTimeout(() => buddie.style.transform = "rotate(0deg)", 150);
 }
 
 window.addEventListener("mousedown", jump);
 window.addEventListener("keydown", e => {
-  if (e.code === "Space" || e.code === "ArrowUp") jump();
+  if (e.code === "Space" || e.code === "ArrowUp") jump();
 });
 
-/* SPAWN SAW */
-function spawnSaw() {
-  let el = document.createElement("img");
-  el.src = "saw.png";
-  el.className = "saw";
-  el.style.left = "360px";
+/* ACORN BOOST HANDLER */
+function activateAcornBoost() {
+  if (acornBoostTimeout) clearTimeout(acornBoostTimeout);
+  isAcornBoosted = true;
+  // Visual feedback: Glowing yellow effect
+  buddie.style.filter = "drop-shadow(0 0 10px yellow) brightness(150%)";
 
-  game.appendChild(el);
-
-  obstacles.push({
-    x: 360,
-    width: 80,
-    height: 80,
-    el: el,
-    passed: false
-  });
+  acornBoostTimeout = setTimeout(() => {
+    isAcornBoosted = false;
+    buddie.style.filter = "none";
+  }, ACORN_DURATION);
 }
+
+
+/* SPAWN FUNCTION - Creates Saw, Bonfire, or Acorn randomly */
+function spawnObstacleOrCollectible() {
+  const typeRoll = Math.random();
+  let el = document.createElement("div");
+  el.style.left = "360px";
+
+  let item = {
+    x: 360,
+    passed: false,
+    el: el,
+    isCollectible: false,
+    width: SAW_WIDTH,
+    height: SAW_HEIGHT,
+    bottom: GROUND_LEVEL
+  };
+
+  if (typeRoll < 0.5) { // 50% chance for a Saw
+    el.className = "obstacle saw";
+    el.innerHTML = '<img src="saw.png" alt="Saw Obstacle">';
+  } else if (typeRoll < 0.8) { // 30% chance for a Bonfire (taller obstacle)
+    el.className = "obstacle bonfire";
+    item.height = FIRE_HEIGHT;
+    item.width = FIRE_WIDTH;
+    // Bonfire image setup
+    el.style.height = item.height + "px";
+    el.style.width = item.width + "px";
+    el.innerHTML = '<img src="buddiedash_fire.png" alt="Bonfire Obstacle">';
+  } else { // 20% chance for an Acorn (Collectible)
+    el.className = "collectible acorn";
+    item.isCollectible = true;
+    item.height = ACORN_SIZE;
+    item.width = ACORN_SIZE;
+    item.bottom = ACORN_Y;
+    // Acorn image setup
+    el.style.width = item.width + "px";
+    el.style.height = item.height + "px";
+    el.style.bottom = item.bottom + "px";
+    el.innerHTML = '<img src="buddiedash_acorn.png" alt="Acorn Collectible">';
+  }
+  
+  game.appendChild(el);
+  obstacles.push(item);
+}
+
 
 /* MAIN LOOP */
 function update(t) {
-  let dt = (t - lastTime) / 1000;
-  lastTime = t;
+  let dt = (t - lastTime) / 1000;
+  lastTime = t;
 
-  /* PHYSICS */
-  velocity += gravity * dt;
-  buddieY += velocity * dt;
+  /* PHYSICS */
+  velocity += GRAVITY * dt;
+  buddieY += velocity * dt;
 
-  if (buddieY <= 90) {
-    buddieY = 90;
-    velocity = 0;
-    
-    // Reset jumps when hitting the ground
-    if (!onGround) {
-        onGround = true;
-        jumpsRemaining = maxJumps;
-    }
-  }
+  if (buddieY <= GROUND_LEVEL) {
+    buddieY = GROUND_LEVEL;
+    velocity = 0;
+    
+    if (!onGround) {
+        onGround = true;
+        jumpsRemaining = MAX_JUMPS;
+    }
+  }
 
-  buddie.style.bottom = buddieY + "px";
+  buddie.style.bottom = buddieY + "px";
 
-  /* SPAWNING SAWS */
-  spawnTimer += dt;
-  if (spawnTimer > 1.5) {
-    spawnSaw();
-    spawnTimer = 0;
-  }
+  /* SPAWNING */
+  spawnTimer += dt;
+  // Decrease spawn interval as speed increases, minimum interval of 0.8s
+  let spawnInterval = Math.max(1.5 - (gameSpeed - 250) * 0.005, 0.8);
+  if (spawnTimer > spawnInterval) {
+    spawnObstacleOrCollectible();
+    spawnTimer = 0;
+  }
 
-  /* MOVE SAWS */
-  obstacles.forEach((o, i) => {
-    o.x -= 250 * dt;
-    o.el.style.left = o.x + "px";
+  /* MOVE ITEMS & COLLISION CHECK */
+  obstacles.forEach((o, i) => {
+    // Move items 1.5x faster when boosted
+    let moveSpeed = isAcornBoosted ? gameSpeed * 1.5 : gameSpeed;
+    o.x -= moveSpeed * dt;
+    o.el.style.left = o.x + "px";
 
-    /* SCORE */
-    if (!o.passed && o.x + o.width < 40) {
-      score++;
-      scoreEl.textContent = score;
-      o.passed = true;
-    }
+    /* SCORE */
+    if (!o.passed && !o.isCollectible && o.x + o.width < 40) {
+      score++;
+      scoreEl.textContent = score;
+      o.passed = true;
+      
+      // DYNAMIC SPEED: Increase speed every 10 points
+      if (score % 10 === 0) {
+        gameSpeed += 25;
+      }
+    }
 
-    /* REMOVE OLD SAWS */
-    if (o.x < -120) {
-      o.el.remove();
-      obstacles.splice(i, 1);
-      return;
-    }
+    /* REMOVE OLD ITEMS */
+    if (o.x < -120) {
+      o.el.remove();
+      obstacles.splice(i, 1);
+      return;
+    }
 
-    /* COLLISION BOXES */
-    let budLeft = 40;
-    let budRight = budLeft + 90;
-    let budBottom = buddieY;
-    let budTop = buddieY + 90;
+    /* COLLISION BOXES */
+    let budLeft = 40;
+    let budRight = budLeft + 90; // Buddie's width
+    let budBottom = buddieY;
+    let budTop = buddieY + 90; // Buddie's height
 
-    let sawLeft = o.x;
-    let sawRight = o.x + o.width;
-    let sawBottom = 90;
-    let sawTop = sawBottom + 80;
+    let itemLeft = o.x;
+    let itemRight = o.x + o.width;
+    let itemBottom = o.bottom;
+    let itemTop = o.bottom + o.height;
 
-    /* COLLISION CHECK */
-    let overlapX = budRight > sawLeft && budLeft < sawRight;
-    let overlapY = budBottom < sawTop && budTop > sawBottom;
+    /* COLLISION CHECK */
+    let overlapX = budRight > itemLeft && budLeft < itemRight;
+    let overlapY = budBottom < itemTop && budTop > itemBottom;
 
-    if (overlapX && overlapY) {
-      return gameOver();
-    }
-  });
+    if (overlapX && overlapY) {
+      if (o.isCollectible) {
+        // COLLECTIBLE HIT
+        activateAcornBoost();
+        o.el.remove();
+        obstacles.splice(i, 1);
+        return;
+      } else {
+        // OBSTACLE HIT (Saw or Bonfire)
+        return gameOver();
+      }
+    }
+  });
 
-  if (running) requestAnimationFrame(update);
+  if (running) requestAnimationFrame(update);
 }
 
 /* GAME OVER */
 function gameOver() {
-  running = false;
-  finalScoreEl.textContent = "Score: " + score;
-  overOverlay.style.display = "flex";
+  running = false;
+  finalScoreEl.textContent = "Score: " + score;
+  overOverlay.style.display = "flex";
+  if (acornBoostTimeout) clearTimeout(acornBoostTimeout);
 }
 </script>
 
 </body>
 </html>
-
-
 
 
 
