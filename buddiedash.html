@@ -10,19 +10,30 @@
     margin: 0;
     background: #6ec9ff;
     display: flex;
+    /* --- EDITED: Centering using Flexbox --- */
     justify-content: center;
-    padding-top: 20px;
+    align-items: center; 
+    min-height: 100vh; /* Ensure body takes full screen height */
+    padding: 0; /* Remove top padding */
+    /* --- END EDITED --- */
     font-family: sans-serif;
   }
 
   #game {
-    width: 360px;
-    height: 640px;
-    /* --- EDITED: Set background image --- */
+    /* --- EDITED: Resizing to fit screen while maintaining ratio (360/640 ≈ 0.5625) --- */
+    width: 90vw; /* Try to take 90% of viewport width */
+    max-width: 50vh; /* Don't get wider than half of viewport height */
+    aspect-ratio: 9 / 16; /* Maintain 360x640 ratio */
+    height: auto;
+    
+    /* Ensure it doesn't get too small or too big (optional limits) */
+    min-width: 200px;
+    max-height: 90vh;
+    /* --- END EDITED --- */
+    
     background-image: url('buddie_dash_backgroundimg.png');
     background-size: cover;
-    background-position: center bottom; /* Ensures the grass is at the bottom */
-    /* --- END EDITED --- */
+    background-position: center bottom;
     position: relative;
     overflow: hidden;
     border: 4px solid #074f83;
@@ -34,16 +45,15 @@
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 90px;
-    /* --- EDITED: Removed green color as it's now in the background image --- */
+    /* NOTE: Height remains a fixed 90px in the code, but its visual proportion will be relative to the game size. */
+    height: 90px; 
     background: transparent; 
-    /* --- END EDITED --- */
   }
 
   /* BUDDIE */
   #buddie {
     position: absolute;
-    width: 90px;         /* PERFECT SIZE */
+    width: 90px;         /* This will now be 90px relative to the *resized* game container */
     height: auto;
     left: 40px;
     bottom: 90px;        /* EXACT ground level */
@@ -70,8 +80,6 @@
     color: white;
     font-size: 32px;
     font-weight: bold;
-    /* You might need to change score color if the sky is too bright */
-    /* text-shadow: 2px 2px 4px rgba(0,0,0,0.5); */ 
   }
 
   #start,
@@ -310,7 +318,6 @@ function gameOver() {
 
 </body>
 </html>
-
 
 
 
