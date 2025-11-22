@@ -99,7 +99,6 @@
 
   <div id="score">0</div>
 
-  <!-- BUDDIE -->
   <div id="buddie">
     <img src="IMG_7429.png">
   </div>
@@ -136,9 +135,15 @@ let buddieY = 90;
 let velocity = 0;
 
 let gravity = -2400;     // NATURAL GRAVITY
-let jumpForce = 900;     // JUMP UP
+let baseJumpForce = 900; // JUMP UP - Base value
+let currentJumpForce = baseJumpForce; // Holds the force for the current jump
 
 let onGround = true;
+
+// NEW: Multi-jump variables
+let maxJumps = 3; 
+let jumpsRemaining = maxJumps;
+let jumpBoost = 250; // How much extra force is added per consecutive jump
 
 let obstacles = [];
 let lastTime = 0;
@@ -156,6 +161,10 @@ function startGame() {
   buddieY = 90;
   velocity = 0;
   onGround = true;
+  
+  // Reset jumps
+  jumpsRemaining = maxJumps;
+  currentJumpForce = baseJumpForce;
 
   obstacles.forEach(o => o.el.remove());
   obstacles = [];
@@ -171,9 +180,19 @@ function restartGame() {
 /* JUMP */
 function jump() {
   if (!running) return;
-  if (!onGround) return;
+  
+  // Check if jumps are available
+  if (jumpsRemaining <= 0) return;
 
-  velocity = jumpForce;
+  // Decrease remaining jumps
+  jumpsRemaining--;
+
+  // Calculate jump force based on remaining jumps
+  // The first jump (jumpsRemaining = maxJumps - 1) uses baseJumpForce
+  let consecutiveJumps = maxJumps - jumpsRemaining;
+  currentJumpForce = baseJumpForce + (consecutiveJumps - 1) * jumpBoost;
+  
+  velocity = currentJumpForce;
   onGround = false;
 
   buddie.style.transform = "rotate(-8deg)";
@@ -215,7 +234,12 @@ function update(t) {
   if (buddieY <= 90) {
     buddieY = 90;
     velocity = 0;
-    onGround = true;
+    
+    // Reset jumps when hitting the ground
+    if (!onGround) {
+        onGround = true;
+        jumpsRemaining = maxJumps;
+    }
   }
 
   buddie.style.bottom = buddieY + "px";
@@ -279,8 +303,6 @@ function gameOver() {
 
 </body>
 </html>
-
-
 
 
 
