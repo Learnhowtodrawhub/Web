@@ -6,140 +6,123 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-  body {
-    margin: 0;
-    background: #6ec9ff;
-    display: flex;
-    justify-content: center;
-    padding-top: 20px;
-    font-family: sans-serif;
-  }
+  body {
+    margin: 0;
+    background: #6ec9ff;
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+    font-family: sans-serif;
+  }
 
-  #game {
-    width: 360px;
-    height: 640px;
-    background-image: url('background.png');
-    background-size: cover;
-    background-position: center bottom;
-    position: relative;
-    overflow: hidden;
-    border: 4px solid #074f83;
-    border-radius: 20px;
-  }
+  #game {
+    width: 360px;
+    height: 640px;
+    /* --- EDITED: Set background image --- */
+    background-image: url('background.png');
+    background-size: cover;
+    background-position: center bottom; /* Ensures the grass is at the bottom */
+    /* --- END EDITED --- */
+    position: relative;
+    overflow: hidden;
+    border: 4px solid #074f83;
+    border-radius: 20px;
+  }
 
-  /* GROUND */
-  #ground {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 90px;
-    background: transparent;
-  }
+  /* GROUND */
+  #ground {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 90px;
+    /* --- EDITED: Removed green color as it's now in the background image --- */
+    background: transparent; 
+    /* --- END EDITED --- */
+  }
 
-  /* BUDDIE */
-  #buddie {
-    position: absolute;
-    width: 90px;
-    height: auto;
-    left: 40px;
-    bottom: 90px;
-    transform-origin: center;
-    /* --- EDITED: Add transition for visual effect when immune --- */
-    transition: opacity 0.1s ease-in-out;
-  }
+  /* BUDDIE */
+  #buddie {
+    position: absolute;
+    width: 90px;         /* PERFECT SIZE */
+    height: auto;
+    left: 40px;
+    bottom: 90px;        /* EXACT ground level */
+    transform-origin: center;
+  }
 
-  #buddie img {
-    width: 100%;
-    height: auto;
-  }
-  
-  /* HAZARDS (SAWS and FIRE) and POWER-UPS (ACORN) common styles */
-  .hazard, .powerup {
-    position: absolute;
-    bottom: 90px;
-    height: auto;
-  }
+  #buddie img {
+    width: 100%;
+    height: auto;
+  }
 
-  .saw {
-    width: 80px;
-  }
+  /* SAWS */
+  .saw {
+    position: absolute;
+    width: 80px;
+    height: auto;
+    bottom: 90px;        /* EXACT ground level */
+  }
 
-  .fire {
-    /* Fire is often taller, but we keep the collision box on the ground */
-    width: 60px;
-    bottom: 80px; /* Adjust bottom slightly so the fire stands on the ground */
-  }
+  #score {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+    /* You might need to change score color if the sky is too bright */
+    /* text-shadow: 2px 2px 4px rgba(0,0,0,0.5); */ 
+  }
 
-  .acorn {
-    /* Acorn is usually smaller and might be slightly above the ground */
-    width: 50px;
-    bottom: 120px; /* Float it slightly higher for variety */
-  }
+  #start,
+  #over {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 24px;
+  }
 
-  /* Utility Class for blinking effect */
-  .immune {
-    opacity: 0.4;
-  }
+  #over { display: none; }
 
-
-  #score {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    color: white;
-    font-size: 32px;
-    font-weight: bold;
-  }
-
-  #start,
-  #over {
-    position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0.6);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    font-size: 24px;
-  }
-
-  #over { display: none; }
-
-  button {
-    padding: 10px 25px;
-    background: #32c656;
-    color: white;
-    font-size: 20px;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    margin-top: 12px;
-  }
+  button {
+    padding: 10px 25px;
+    background: #32c656;
+    color: white;
+    font-size: 20px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-top: 12px;
+  }
 </style>
 </head>
 <body>
 
 <div id="game">
 
-  <div id="score">0</div>
+  <div id="score">0</div>
 
-  <div id="buddie">
-    <img src="IMG_7429.png">
-  </div>
+  <div id="buddie">
+    <img src="IMG_7429.png">
+  </div>
 
-  <div id="ground"></div>
+  <div id="ground"></div>
 
-  <div id="start">
-    Buddie's Forest Hop<br>
-    <button onclick="startGame()">Start</button>
-  </div>
+  <div id="start">
+    Buddie's Forest Hop<br>
+    <button onclick="startGame()">Start</button>
+  </div>
 
-  <div id="over">
-    Game Over<br>
-    <div id="final-score"></div>
-    <button onclick="restartGame()">Restart</button>
-  </div>
+  <div id="over">
+    Game Over<br>
+    <div id="final-score"></div>
+    <button onclick="restartGame()">Restart</button>
+  </div>
 
 </div>
 
@@ -159,279 +142,203 @@ let score = 0;
 let buddieY = 90;
 let velocity = 0;
 
-let gravity = -2400;
-let baseJumpForce = 900;
-let currentJumpForce = baseJumpForce;
+let gravity = -2400;     // NATURAL GRAVITY
+let baseJumpForce = 900; // JUMP UP - Base value
+let currentJumpForce = baseJumpForce; // Holds the force for the current jump
 
 let onGround = true;
 
 // Multi-jump variables
-let maxJumps = 3;
+let maxJumps = 3; 
 let jumpsRemaining = maxJumps;
-let jumpBoost = 250;
+let jumpBoost = 250; // How much extra force is added per consecutive jump
 
 let obstacles = [];
 let lastTime = 0;
 let spawnTimer = 0;
 
-// NEW: Immunity Variables
-let isImmune = false;
-const immunityDuration = 5; // 5 seconds of immunity
-let immunityTimer = 0;
-
-// NEW: Obstacle configuration (to make spawning easier)
-const obstacleTypes = [
-  {
-    name: "saw",
-    src: "saw.png",
-    className: "saw hazard",
-    width: 80,
-    height: 80,
-    bottom: 90,
-    type: "hazard"
-  },
-  {
-    name: "fire",
-    src: "buddiedash_fire.png", // Use your specified filename
-    className: "fire hazard",
-    width: 60,
-    height: 100, // Fire is taller
-    bottom: 80,
-    type: "hazard"
-  },
-  {
-    name: "acorn",
-    src: "buddiedash_acorn.png", // Use your specified filename
-    className: "acorn powerup",
-    width: 50,
-    height: 50,
-    bottom: 120, // Float slightly
-    type: "powerup"
-  }
-];
-
 /* START GAME */
 function startGame() {
-  running = true;
-  startOverlay.style.display = "none";
-  overOverlay.style.display = "none";
+  running = true;
+  startOverlay.style.display = "none";
+  overOverlay.style.display = "none";
 
-  score = 0;
-  scoreEl.textContent = "0";
+  score = 0;
+  scoreEl.textContent = "0";
 
-  buddieY = 90;
-  velocity = 0;
-  onGround = true;
+  buddieY = 90;
+  velocity = 0;
+  onGround = true;
+  
+  // Reset jumps
+  jumpsRemaining = maxJumps;
+  currentJumpForce = baseJumpForce;
 
-  // Reset jumps
-  jumpsRemaining = maxJumps;
-  currentJumpForce = baseJumpForce;
+  obstacles.forEach(o => o.el.remove());
+  obstacles = [];
 
-  // NEW: Reset Immunity
-  isImmune = false;
-  immunityTimer = 0;
-  buddie.classList.remove("immune");
-
-  obstacles.forEach(o => o.el.remove());
-  obstacles = [];
-
-  requestAnimationFrame(update);
+  requestAnimationFrame(update);
 }
 
 /* RESTART */
 function restartGame() {
-  startGame();
+  startGame();
 }
 
 /* JUMP */
 function jump() {
-  if (!running) return;
+  if (!running) return;
+  
+  // Check if jumps are available
+  if (jumpsRemaining <= 0) return;
 
-  // Check if jumps are available
-  if (jumpsRemaining <= 0) return;
+  // Decrease remaining jumps
+  jumpsRemaining--;
 
-  // Decrease remaining jumps
-  jumpsRemaining--;
+  // Calculate jump force based on remaining jumps
+  let consecutiveJumps = maxJumps - jumpsRemaining;
+  currentJumpForce = baseJumpForce + (consecutiveJumps - 1) * jumpBoost;
+  
+  velocity = currentJumpForce;
+  onGround = false;
 
-  // Calculate jump force based on remaining jumps
-  let consecutiveJumps = maxJumps - jumpsRemaining;
-  currentJumpForce = baseJumpForce + (consecutiveJumps - 1) * jumpBoost;
-
-  velocity = currentJumpForce;
-  onGround = false;
-
-  buddie.style.transform = "rotate(-8deg)";
-  setTimeout(() => buddie.style.transform = "rotate(0deg)", 150);
+  buddie.style.transform = "rotate(-8deg)";
+  setTimeout(() => buddie.style.transform = "rotate(0deg)", 150);
 }
 
 window.addEventListener("mousedown", jump);
 window.addEventListener("keydown", e => {
-  if (e.code === "Space" || e.code === "ArrowUp") jump();
+  if (e.code === "Space" || e.code === "ArrowUp") jump();
 });
 
-/* NEW: APPLY IMMUNITY */
-function applyImmunity() {
-  if (isImmune) {
-    // If already immune, reset timer to get full duration again
-    immunityTimer = 0;
-    return;
-  }
-  isImmune = true;
-  // Add a CSS class for a visual effect (e.g., blinking)
-  buddie.classList.add("immune");
-  console.log("Acorn collected! Immunity granted!");
-}
+/* SPAWN SAW */
+function spawnSaw() {
+  let el = document.createElement("img");
+  el.src = "saw.png";
+  el.className = "saw";
+  el.style.left = "360px";
 
-/* SPAWN OBJECT */
-function spawnObject() {
-  // Randomly select an object to spawn (Saw: 40%, Fire: 40%, Acorn: 20%)
-  let chance = Math.random();
-  let typeIndex;
-  if (chance < 0.40) {
-    typeIndex = 0; // Saw
-  } else if (chance < 0.80) {
-    typeIndex = 1; // Fire
-  } else {
-    typeIndex = 2; // Acorn
-  }
+  game.appendChild(el);
 
-  let config = obstacleTypes[typeIndex];
-
-  let el = document.createElement("img");
-  el.src = config.src;
-  el.className = config.className;
-  el.style.left = "360px";
-  el.style.width = config.width + "px"; // Set width from config
-  el.style.bottom = config.bottom + "px"; // Set bottom from config
-
-  game.appendChild(el);
-
-  obstacles.push({
-    x: 360,
-    width: config.width,
-    height: config.height,
-    bottom: config.bottom, // Store bottom position for accurate collision
-    el: el,
-    passed: false,
-    type: config.type // Store type (hazard or powerup)
-  });
+  obstacles.push({
+    x: 360,
+    width: 80,
+    height: 80,
+    el: el,
+    passed: false
+  });
 }
 
 /* MAIN LOOP */
 function update(t) {
-  let dt = (t - lastTime) / 1000;
-  lastTime = t;
+  let dt = (t - lastTime) / 1000;
+  lastTime = t;
 
-  /* IMMUNITY TIMER UPDATE */
-  if (isImmune) {
-    immunityTimer += dt;
-    if (immunityTimer >= immunityDuration) {
-      isImmune = false;
-      immunityTimer = 0;
-      buddie.classList.remove("immune");
-      console.log("Immunity wore off.");
-    }
-  }
+  /* PHYSICS */
+  velocity += gravity * dt;
+  buddieY += velocity * dt;
 
-  /* PHYSICS */
-  velocity += gravity * dt;
-  buddieY += velocity * dt;
+  if (buddieY <= 90) {
+    buddieY = 90;
+    velocity = 0;
+    
+    // Reset jumps when hitting the ground
+    if (!onGround) {
+        onGround = true;
+        jumpsRemaining = maxJumps;
+    }
+  }
 
-  if (buddieY <= 90) {
-    buddieY = 90;
-    velocity = 0;
+  buddie.style.bottom = buddieY + "px";
 
-    // Reset jumps when hitting the ground
-    if (!onGround) {
-        onGround = true;
-        jumpsRemaining = maxJumps;
-    }
-  }
+  /* SPAWNING SAWS */
+  spawnTimer += dt;
+  if (spawnTimer > 1.5) {
+    spawnSaw();
+    spawnTimer = 0;
+  }
 
-  buddie.style.bottom = buddieY + "px";
+  /* MOVE SAWS */
+  obstacles.forEach((o, i) => {
+    o.x -= 250 * dt;
+    o.el.style.left = o.x + "px";
 
-  /* SPAWNING OBJECTS */
-  spawnTimer += dt;
-  // Decrease the spawn timer slightly to allow for more variety
-  if (spawnTimer > 1.2) {
-    spawnObject();
-    // Randomize the next spawn time slightly between 1.0s and 1.4s
-    spawnTimer = 0.8 + Math.random() * 0.4;
-  }
+    /* SCORE */
+    if (!o.passed && o.x + o.width < 40) {
+      score++;
+      scoreEl.textContent = score;
+      o.passed = true;
+    }
 
-  /* MOVE OBJECTS AND CHECK COLLISIONS */
-  for (let i = obstacles.length - 1; i >= 0; i--) {
-    let o = obstacles[i];
-    o.x -= 250 * dt; // Obstacle/Object Speed
-    o.el.style.left = o.x + "px";
+    /* REMOVE OLD SAWS */
+    if (o.x < -120) {
+      o.el.remove();
+      obstacles.splice(i, 1);
+      return;
+    }
 
-    /* SCORE */
-    if (!o.passed && o.x + o.width < 40) {
-      // Only score if it's a hazard that was successfully avoided
-      if (o.type === "hazard") {
-        score++;
-        scoreEl.textContent = score;
-      }
-      o.passed = true;
-    }
+    /* COLLISION BOXES */
+    let budLeft = 40;
+    let budRight = budLeft + 90;
+    let budBottom = buddieY;
+    let budTop = buddieY + 90;
 
-    /* REMOVE OLD OBJECTS */
-    if (o.x < -120) {
-      o.el.remove();
-      obstacles.splice(i, 1);
-      continue; // Go to next item
-    }
+    let sawLeft = o.x;
+    let sawRight = o.x + o.width;
+    let sawBottom = 90;
+    let sawTop = sawBottom + 80;
 
-    /* COLLISION BOXES */
-    let budLeft = 40;
-    let budRight = budLeft + 90;
-    let budBottom = buddieY;
-    let budTop = buddieY + 90;
+    /* COLLISION CHECK */
+    let overlapX = budRight > sawLeft && budLeft < sawRight;
+    let overlapY = budBottom < sawTop && budTop > sawBottom;
 
-    let objLeft = o.x;
-    let objRight = o.x + o.width;
-    let objBottom = o.bottom;
-    let objTop = o.bottom + o.height;
+    if (overlapX && overlapY) {
+      return gameOver();
+    }
+  });
 
-    /* COLLISION CHECK */
-    let overlapX = budRight > objLeft && budLeft < objRight;
-    let overlapY = budBottom < objTop && budTop > objBottom;
-
-    if (overlapX && overlapY) {
-      if (o.type === "powerup") {
-        // Collect Acorn power-up
-        applyImmunity();
-        o.el.remove();
-        obstacles.splice(i, 1);
-        continue;
-      } else if (o.type === "hazard") {
-        // Hit a Saw or Fire hazard
-        if (!isImmune) {
-          return gameOver();
-        } else {
-          // If immune, the hazard is destroyed and the player continues
-          console.log("Immunity blocked a hazard!");
-          o.el.remove();
-          obstacles.splice(i, 1);
-          continue;
-        }
-      }
-    }
-  }
-
-  if (running) requestAnimationFrame(update);
+  if (running) requestAnimationFrame(update);
 }
 
 /* GAME OVER */
 function gameOver() {
-  running = false;
-  finalScoreEl.textContent = "Score: " + score;
-  overOverlay.style.display = "flex";
+  running = false;
+  finalScoreEl.textContent = "Score: " + score;
+  overOverlay.style.display = "flex";
 }
 </script>
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
