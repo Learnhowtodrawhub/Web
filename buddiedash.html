@@ -18,7 +18,11 @@
   #game {
     width: 360px;
     height: 640px;
-    background: linear-gradient(#7ddcff, #3aa8ff);
+    /* --- EDITED: Set background image --- */
+    background-image: url('buddie_dash_backgroundimg.png');
+    background-size: cover;
+    background-position: center bottom; /* Ensures the grass is at the bottom */
+    /* --- END EDITED --- */
     position: relative;
     overflow: hidden;
     border: 4px solid #074f83;
@@ -31,7 +35,9 @@
     bottom: 0;
     width: 100%;
     height: 90px;
-    background: #2fa34f;
+    /* --- EDITED: Removed green color as it's now in the background image --- */
+    background: transparent; 
+    /* --- END EDITED --- */
   }
 
   /* BUDDIE */
@@ -64,6 +70,8 @@
     color: white;
     font-size: 32px;
     font-weight: bold;
+    /* You might need to change score color if the sky is too bright */
+    /* text-shadow: 2px 2px 4px rgba(0,0,0,0.5); */ 
   }
 
   #start,
@@ -140,7 +148,7 @@ let currentJumpForce = baseJumpForce; // Holds the force for the current jump
 
 let onGround = true;
 
-// NEW: Multi-jump variables
+// Multi-jump variables
 let maxJumps = 3; 
 let jumpsRemaining = maxJumps;
 let jumpBoost = 250; // How much extra force is added per consecutive jump
@@ -188,7 +196,6 @@ function jump() {
   jumpsRemaining--;
 
   // Calculate jump force based on remaining jumps
-  // The first jump (jumpsRemaining = maxJumps - 1) uses baseJumpForce
   let consecutiveJumps = maxJumps - jumpsRemaining;
   currentJumpForce = baseJumpForce + (consecutiveJumps - 1) * jumpBoost;
   
@@ -303,8 +310,6 @@ function gameOver() {
 
 </body>
 </html>
-
-
 
 
 
