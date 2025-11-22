@@ -228,12 +228,24 @@ let acornInterval = 10;
 let immune = false;
 let immuneTimer = 0;
 
+/* Speed scaling */
+let speedMultiplier = 1;
+
 /* High score per device */
 let highScore = Number(localStorage.getItem("buddieHighScore") || 0);
 highScoreEl.textContent = "High: " + highScore;
 
 /* Only allow one continue per page load */
 let hasContinued = false;
+
+/* Update speed based on score */
+function updateSpeed() {
+  if (score >= 250) speedMultiplier = 1.72;
+  else if (score >= 60) speedMultiplier = 1.6;
+  else if (score >= 33) speedMultiplier = 1.35;
+  else if (score >= 20) speedMultiplier = 1.2;
+  else speedMultiplier = 1;
+}
 
 /* START GAME */
 function startGame() {
@@ -247,8 +259,8 @@ function startGame() {
   buddieY = 90;
   velocity = 0;
   onGround = true;
-
   jumpsRemaining = maxJumps;
+
   objects.forEach(o => o.el.remove());
   objects = [];
 
@@ -261,6 +273,8 @@ function startGame() {
 
   acornTimer = 0;
   acornInterval = 8 + Math.random() * 4;
+
+  speedMultiplier = 1;
 
   lastTime = performance.now();
   requestAnimationFrame(update);
@@ -371,21 +385,21 @@ function shakeScreen() {
 function watchAdContinue() {
   if (hasContinued || running) return;
 
-  // simulate ad; in real app you'd integrate SDK here
   hasContinued = true;
   continueBtn.style.display = "none";
   overOverlay.style.display = "none";
 
-  // safe respawn on ground
+  // Clear hazards on screen
   objects.forEach(o => o.el.remove());
   objects = [];
 
+  // Safe respawn
   buddieY = 90;
   velocity = 0;
   onGround = true;
   jumpsRemaining = maxJumps;
 
-  // short immunity (3 seconds)
+  // 3 seconds of immunity
   immune = true;
   immuneTimer = 3;
   buddie.classList.add("immune");
@@ -414,13 +428,14 @@ function update(t) {
 
   buddie.style.bottom = buddieY + "px";
 
-  spawnTimer += dt;
+  // Speed-based spawning
+  spawnTimer += dt * speedMultiplier;
   if (spawnTimer > 1.4) {
     spawnHazard();
     spawnTimer = 0;
   }
 
-  acornTimer += dt;
+  acornTimer += dt * speedMultiplier;
   if (acornTimer > acornInterval) {
     spawnAcorn();
   }
@@ -436,7 +451,7 @@ function update(t) {
   }
 
   objects.forEach((o, i) => {
-    o.x -= 250 * dt;
+    o.x -= 250 * speedMultiplier * dt;
     o.el.style.left = o.x + "px";
 
     if (!o.passed && o.x + o.width < 40) {
@@ -485,6 +500,9 @@ function update(t) {
     }
   });
 
+  // Update speed based on latest score
+  updateSpeed();
+
   if (running) requestAnimationFrame(update);
 }
 
@@ -492,7 +510,6 @@ function update(t) {
 function gameOver() {
   running = false;
 
-  // update high score
   if (score > highScore) {
     highScore = score;
     localStorage.setItem("buddieHighScore", highScore);
@@ -501,7 +518,6 @@ function gameOver() {
 
   finalScoreEl.textContent = "Score: " + score;
 
-  // show continue option only if score >= 20 and not already used
   if (score >= 20 && !hasContinued) {
     continueBtn.style.display = "inline-block";
   } else {
