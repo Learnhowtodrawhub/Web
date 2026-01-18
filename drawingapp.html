@@ -5,58 +5,62 @@
   <!-- iOS-friendly viewport + safe areas -->
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#0ea5e9" />
-  <title>Learn How to Draw Hub • Kids Draw & Color Game</title>
+  <title>Learn How to Draw Hub • Kids App</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;800;900&display=swap" rel="stylesheet" />
 
   <style>
     :root{
-      /* Brand palette (from your site) */
-      --blue:#0ea5e9;      /* sky-500 */
-      --blue2:#38bdf8;     /* sky-400 */
-      --blue3:#075985;     /* sky-800 */
-      --amber:#f59e0b;
-      --amber2:#fbbf24;
+      /* Use the same blue theme as your page (Tailwind sky) */
+      --sky-50:#f0f9ff;
+      --sky-100:#e0f2fe;
+      --sky-200:#bae6fd;
+      --sky-300:#7dd3fc;
+      --sky-400:#38bdf8;
+      --sky-500:#0ea5e9;   /* main */
+      --sky-600:#0284c7;
+      --sky-800:#075985;
+      --sky-900:#0c4a6e;
 
-      --bg:#f7fafc;
+      --bg: var(--sky-50);
       --card:#ffffff;
       --ink:#0f172a;
       --muted:#64748b;
 
       --radius:22px;
-      --shadow: 0 14px 40px rgba(2,6,23,.12);
-      --shadow2: 0 10px 24px rgba(2,6,23,.10);
-      --ring: 0 0 0 4px rgba(14,165,233,.18);
+      --shadow: 0 14px 40px rgba(2,6,23,.10);
+      --shadow2: 0 10px 24px rgba(2,6,23,.08);
+
       --safeT: env(safe-area-inset-top);
       --safeB: env(safe-area-inset-bottom);
       --safeL: env(safe-area-inset-left);
       --safeR: env(safe-area-inset-right);
     }
 
-    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-    html, body { height: 100%; }
+    *{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+    html, body{ height:100%; }
     body{
       margin:0;
       font-family:'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: radial-gradient(900px 540px at 50% -10%, rgba(56,189,248,.35), transparent 55%),
-                  radial-gradient(700px 460px at 10% 10%, rgba(245,158,11,.16), transparent 55%),
-                  var(--bg);
+      background:
+        radial-gradient(900px 520px at 50% -10%, rgba(56,189,248,.35), transparent 55%),
+        radial-gradient(700px 460px at 15% 10%, rgba(125,211,252,.35), transparent 58%),
+        var(--bg);
       color: var(--ink);
-      overflow: hidden; /* app-like */
+      overflow:hidden;
     }
 
-    /* iOS: stop rubber-band from feeling broken */
     .app{
       height:100%;
       display:flex;
       flex-direction:column;
+      gap:10px;
       padding: calc(12px + var(--safeT)) calc(12px + var(--safeR)) calc(12px + var(--safeB)) calc(12px + var(--safeL));
-      gap: 10px;
     }
 
-    /* Top header */
+    /* Simple header */
     .topbar{
       display:flex;
       align-items:center;
@@ -64,10 +68,10 @@
       gap:10px;
       padding: 10px 12px;
       border-radius: 18px;
-      background: rgba(255,255,255,.82);
-      backdrop-filter: blur(12px);
-      box-shadow: var(--shadow2);
+      background: rgba(255,255,255,.88);
+      backdrop-filter: blur(10px);
       border: 1px solid rgba(14,165,233,.20);
+      box-shadow: var(--shadow2);
     }
     .brand{
       display:flex; align-items:center; gap:10px;
@@ -75,258 +79,168 @@
     }
     .brand img{
       width:40px; height:40px;
-      border-radius: 12px;
+      border-radius: 14px;
       object-fit: cover;
+      border: 1px solid rgba(2,6,23,.08);
       box-shadow: 0 10px 18px rgba(2,6,23,.10);
-      border: 1px solid rgba(2,6,23,.06);
       flex:0 0 auto;
     }
-    .brand .title{
-      display:flex; flex-direction:column; min-width:0;
-    }
-    .brand .title b{
+    .brand b{
       font-size: 14px;
-      line-height: 1.05;
+      font-weight: 1000;
+      color: var(--sky-800);
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
+      display:block;
+      line-height:1.1;
     }
-    .brand .title span{
+    .brand span{
       font-size: 12px;
+      font-weight: 900;
       color: var(--muted);
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
+      display:block;
+      margin-top:2px;
     }
 
     .pill{
-      display:flex; align-items:center; gap:10px;
-      background: rgba(14,165,233,.10);
-      border: 1px solid rgba(14,165,233,.25);
+      display:flex;
+      align-items:center;
+      gap:10px;
       padding: 8px 10px;
       border-radius: 999px;
-    }
-    .stat{
-      display:flex; align-items:center; gap:6px;
+      background: rgba(14,165,233,.10);
+      border: 1px solid rgba(14,165,233,.22);
+      color: var(--sky-800);
+      font-weight: 1000;
       font-size: 12px;
-      font-weight: 800;
-      color: var(--blue3);
       white-space:nowrap;
     }
-    .dot{
-      width:10px; height:10px;
-      border-radius:999px;
-      background: var(--blue);
-      box-shadow: 0 0 0 4px rgba(14,165,233,.18);
-    }
-    .coin{
-      width:10px; height:10px;
-      border-radius:999px;
-      background: var(--amber);
-      box-shadow: 0 0 0 4px rgba(245,158,11,.18);
-    }
 
-    /* Main area */
-    .main{
-      flex:1;
-      min-height:0;
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-    }
-
+    /* Main container */
     .panel{
       flex:1;
       min-height:0;
-      background: rgba(255,255,255,.88);
-      border: 1px solid rgba(2,6,23,.08);
       border-radius: var(--radius);
+      background: rgba(255,255,255,.90);
+      border: 1px solid rgba(2,6,23,.08);
       box-shadow: var(--shadow);
       overflow:hidden;
-      position:relative;
-    }
-
-    .screen{
-      height:100%;
-      display:none;
+      display:flex;
       flex-direction:column;
     }
-    .screen.active{ display:flex; }
 
-    .screenHead{
+    .screen{ display:none; height:100%; }
+    .screen.active{ display:flex; flex-direction:column; }
+
+    .head{
       padding: 14px 14px 10px;
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-start;
-      gap:10px;
       border-bottom: 1px solid rgba(2,6,23,.06);
-      background: linear-gradient(180deg, rgba(14,165,233,.10), transparent);
+      background: linear-gradient(180deg, rgba(14,165,233,.14), transparent);
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
     }
-    .screenHead h2{
+    .head h1, .head h2{
       margin:0;
       font-size: 18px;
+      font-weight: 1000;
       letter-spacing: -0.02em;
-      font-weight: 900;
+      color: var(--sky-900);
     }
-    .screenHead p{
+    .head p{
       margin: 6px 0 0;
       font-size: 12px;
+      font-weight: 900;
       color: var(--muted);
-      font-weight: 700;
     }
-
-    .miniBtn{
+    .mini{
       border:0;
       background: rgba(2,6,23,.06);
       color: var(--ink);
-      font-weight: 900;
+      font-weight: 1000;
       font-size: 12px;
       padding: 10px 12px;
       border-radius: 14px;
     }
-    .miniBtn:active{ transform: scale(.98); }
+    .mini:active{ transform: scale(.98); }
 
-    /* Home cards */
     .content{
-      flex:1; min-height:0;
+      flex:1;
+      min-height:0;
       overflow:auto;
       padding: 12px;
     }
+    .content::-webkit-scrollbar{ width:0; height:0; }
 
-    .grid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .card{
-      border-radius: 20px;
-      background: var(--card);
-      border: 1px solid rgba(2,6,23,.08);
-      box-shadow: 0 10px 22px rgba(2,6,23,.08);
-      overflow:hidden;
+    /* Home: two big buttons only */
+    .twoButtons{
       display:flex;
       flex-direction:column;
-      min-height: 140px;
+      gap:12px;
+      margin-top: 6px;
     }
-    .cardTop{
-      padding: 12px;
-      background: linear-gradient(180deg, rgba(56,189,248,.22), transparent);
+    .bigBtn{
+      border:0;
+      width:100%;
+      padding: 18px 16px;
+      border-radius: 22px;
+      text-align:left;
+      background: linear-gradient(180deg, var(--sky-500), var(--sky-600));
+      color: white;
+      box-shadow: 0 14px 26px rgba(14,165,233,.28);
+    }
+    .bigBtn:active{ transform: scale(.99); }
+    .bigBtn .row{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+    }
+    .bigBtn .title{
+      font-size: 18px;
+      font-weight: 1000;
+      letter-spacing: -0.02em;
+    }
+    .bigBtn .sub{
+      margin-top: 8px;
+      font-size: 12px;
+      font-weight: 900;
+      color: rgba(255,255,255,.88);
+      line-height:1.35;
     }
     .badge{
       display:inline-flex;
       align-items:center;
       gap:8px;
-      padding: 6px 10px;
+      padding: 7px 10px;
       border-radius: 999px;
-      font-size: 11px;
-      font-weight: 900;
-      letter-spacing: .02em;
-      background: rgba(14,165,233,.12);
-      border: 1px solid rgba(14,165,233,.22);
-      color: var(--blue3);
-    }
-    .card h3{
-      margin: 10px 0 0;
-      font-size: 16px;
-      font-weight: 900;
-      letter-spacing: -0.02em;
-    }
-    .card p{
-      margin: 8px 0 0;
       font-size: 12px;
-      font-weight: 700;
-      color: var(--muted);
-      line-height: 1.35;
-    }
-    .cardBottom{
-      margin-top:auto;
-      padding: 12px;
-      display:flex;
-      gap:10px;
-      align-items:center;
-      justify-content:space-between;
-      border-top: 1px solid rgba(2,6,23,.06);
-      background: rgba(2,6,23,.02);
-    }
-    .cta{
-      width:100%;
-      border:0;
-      padding: 12px 14px;
-      border-radius: 16px;
-      font-size: 14px;
       font-weight: 1000;
-      color: white;
-      background: linear-gradient(180deg, var(--blue), #0284c7);
-      box-shadow: 0 10px 18px rgba(14,165,233,.30);
-    }
-    .cta:active{ transform: scale(.99); }
-
-    .ctaAmber{
-      background: linear-gradient(180deg, var(--amber2), var(--amber));
-      color: #0b1220;
-      box-shadow: 0 10px 18px rgba(245,158,11,.28);
+      background: rgba(255,255,255,.18);
+      border: 1px solid rgba(255,255,255,.25);
+      white-space:nowrap;
     }
 
-    .bigLine{
-      display:flex; align-items:center; justify-content:space-between;
-      gap: 10px;
+    .card{
       margin-top: 12px;
-      padding: 12px 12px;
-      border-radius: 18px;
-      background: rgba(14,165,233,.08);
-      border: 1px solid rgba(14,165,233,.18);
-    }
-    .bigLine b{ font-weight: 1000; }
-    .bigLine span{ color: var(--muted); font-weight: 800; font-size: 12px; }
-
-    /* Bottom tab bar */
-    .tabs{
-      display:flex;
-      gap: 10px;
-      padding: 10px;
       border-radius: 22px;
-      background: rgba(255,255,255,.88);
+      background: white;
       border: 1px solid rgba(2,6,23,.08);
-      box-shadow: var(--shadow2);
+      box-shadow: 0 10px 22px rgba(2,6,23,.08);
+      padding: 12px;
     }
-    .tab{
-      flex:1;
-      border:0;
-      padding: 10px 8px;
-      border-radius: 18px;
-      font-weight: 1000;
-      font-size: 12px;
-      background: transparent;
+    .card b{ font-weight:1000; color: var(--sky-900); }
+    .card .hint{
+      margin-top: 8px;
       color: var(--muted);
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:6px;
-    }
-    .tab .ico{
-      width: 22px;
-      height: 22px;
-      border-radius: 10px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background: rgba(2,6,23,.06);
-      color: var(--ink);
-      font-weight: 1000;
-    }
-    .tab.active{
-      color: var(--blue3);
-      background: rgba(14,165,233,.12);
-      border: 1px solid rgba(14,165,233,.22);
-      box-shadow: var(--ring);
-    }
-    .tab.active .ico{
-      background: rgba(14,165,233,.20);
-      color: var(--blue3);
+      font-size: 12px;
+      font-weight: 900;
+      line-height:1.35;
     }
 
-    /* Draw/Color game area */
+    /* Game */
     .gameWrap{
       flex:1;
       min-height:0;
@@ -335,62 +249,50 @@
       gap:10px;
       padding: 12px;
     }
-
     .hud{
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:10px;
-    }
-    .hudLeft{
-      display:flex;
-      flex-direction:column;
-      gap:6px;
-      min-width:0;
-    }
-    .hudLeft .titleRow{
-      display:flex; align-items:center; gap:8px;
-      min-width:0;
+      flex-wrap:wrap;
     }
     .chip{
       display:inline-flex;
       align-items:center;
       gap:8px;
-      padding: 8px 10px;
+      padding: 9px 10px;
       border-radius: 999px;
-      border: 1px solid rgba(2,6,23,.08);
-      background: rgba(255,255,255,.9);
+      border: 1px solid rgba(14,165,233,.22);
+      background: rgba(14,165,233,.08);
+      color: var(--sky-900);
       font-weight: 1000;
       font-size: 12px;
-      color: var(--blue3);
-      white-space:nowrap;
     }
     .chip small{
       font-size: 11px;
-      font-weight: 1000;
       color: var(--muted);
+      font-weight: 1000;
     }
-    .hudRight{
-      display:flex; gap:8px; align-items:center;
+
+    .btnRow{
+      display:flex;
+      gap:10px;
+      width:100%;
     }
     .btn{
       border:0;
+      flex:1;
       padding: 12px 12px;
-      border-radius: 16px;
+      border-radius: 18px;
       font-weight: 1000;
       font-size: 13px;
       background: rgba(2,6,23,.06);
       color: var(--ink);
     }
     .btn.primary{
-      background: linear-gradient(180deg, var(--blue), #0284c7);
+      background: linear-gradient(180deg, var(--sky-500), var(--sky-600));
       color:white;
-      box-shadow: 0 10px 18px rgba(14,165,233,.26);
-    }
-    .btn.amber{
-      background: linear-gradient(180deg, var(--amber2), var(--amber));
-      color:#0b1220;
-      box-shadow: 0 10px 18px rgba(245,158,11,.22);
+      box-shadow: 0 12px 20px rgba(14,165,233,.22);
     }
     .btn:active{ transform: scale(.99); }
 
@@ -403,86 +305,68 @@
       box-shadow: var(--shadow2);
       overflow:hidden;
       position:relative;
-      display:flex;
-      align-items:stretch;
-      justify-content:stretch;
     }
-
-    /* Background guide image & target overlay */
-    .bgGuide, .targetOverlay{
-      position:absolute;
-      inset:0;
-      pointer-events:none;
-      object-fit: contain;
-      width:100%;
-      height:100%;
-      opacity: .18;
-      filter: saturate(1.05);
-    }
-    .targetOverlay{ opacity: .12; }
-
     canvas{
       width:100%;
       height:100%;
-      touch-action: none; /* essential for iOS drawing */
       display:block;
+      touch-action:none; /* iOS drawing */
     }
 
-    .tools{
-      display:flex;
-      gap: 10px;
-      align-items:center;
-      justify-content:space-between;
-      flex-wrap:wrap;
+    /* For trace mode: show faint guide overlay */
+    .guide{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      opacity:.16;
+      pointer-events:none;
+      filter: saturate(1.1);
     }
+
+    /* Color palette (very simple) */
     .palette{
-      display:flex; gap:8px; align-items:center; flex-wrap:wrap;
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:center;
       padding: 10px;
-      border-radius: 18px;
-      background: rgba(2,6,23,.03);
+      border-radius: 20px;
       border: 1px solid rgba(2,6,23,.06);
+      background: rgba(2,6,23,.03);
     }
     .swatch{
-      width: 28px; height: 28px;
-      border-radius: 10px;
+      width: 30px;
+      height: 30px;
+      border-radius: 12px;
       border: 2px solid rgba(2,6,23,.12);
       box-shadow: 0 8px 14px rgba(2,6,23,.10);
     }
     .swatch.active{
       outline: 4px solid rgba(14,165,233,.22);
-      border-color: rgba(14,165,233,.6);
+      border-color: rgba(14,165,233,.55);
     }
 
-    .sliderRow{
-      display:flex; align-items:center; gap:10px;
-      padding: 10px 12px;
-      border-radius: 18px;
-      background: rgba(2,6,23,.03);
-      border: 1px solid rgba(2,6,23,.06);
-      font-weight: 1000;
-      font-size: 12px;
-      color: var(--muted);
-    }
-    input[type="range"]{ width: 130px; }
-
-    /* Modals */
+    /* Modal */
     .modalBackdrop{
       position:fixed;
       inset:0;
-      background: rgba(2,6,23,.45);
       display:none;
       align-items:flex-end;
       justify-content:center;
       padding: 12px;
       padding-bottom: calc(12px + var(--safeB));
+      background: rgba(2,6,23,.45);
       z-index: 999;
     }
     .modalBackdrop.show{ display:flex; }
     .modal{
       width:100%;
       max-width: 520px;
-      border-radius: 24px;
       background: rgba(255,255,255,.96);
+      border-radius: 24px;
       border: 1px solid rgba(2,6,23,.10);
       box-shadow: var(--shadow);
       overflow:hidden;
@@ -490,637 +374,244 @@
     .modalHead{
       padding: 14px 14px 10px;
       border-bottom: 1px solid rgba(2,6,23,.06);
-      background: linear-gradient(180deg, rgba(14,165,233,.12), transparent);
+      background: linear-gradient(180deg, rgba(14,165,233,.14), transparent);
     }
-    .modalHead h3{
-      margin:0;
-      font-size: 16px;
-      font-weight: 1000;
-    }
-    .modalBody{ padding: 12px 14px; }
-    .row{ display:flex; gap:10px; align-items:center; justify-content:space-between; padding: 10px 0; }
-    .row b{ font-size: 13px; font-weight: 1000; }
-    .row span{ font-size: 12px; font-weight: 800; color: var(--muted); }
-
-    .field{
-      width:100%;
-      border-radius: 16px;
-      padding: 12px 12px;
-      border: 1px solid rgba(2,6,23,.12);
-      font-weight: 900;
-      font-size: 14px;
-      outline: none;
-      background: white;
-    }
+    .modalHead h3{ margin:0; font-size: 16px; font-weight:1000; color: var(--sky-900); }
+    .modalBody{ padding: 12px 14px; font-weight:900; color: var(--ink); line-height:1.35; }
     .modalActions{
       padding: 12px 14px;
       border-top: 1px solid rgba(2,6,23,.06);
-      display:flex;
-      gap:10px;
+      display:flex; gap:10px;
     }
     .modalActions .btn{ flex:1; }
 
-    /* Leaderboard */
-    .lbCard{
-      background: white;
-      border: 1px solid rgba(2,6,23,.08);
-      border-radius: 20px;
-      padding: 12px;
-      box-shadow: 0 10px 22px rgba(2,6,23,.08);
-    }
-    .lbRow{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      padding: 10px 0;
-      border-top: 1px solid rgba(2,6,23,.06);
-      font-weight: 900;
+    /* Toast */
+    #toast{
+      position:fixed;
+      left:12px; right:12px;
+      bottom: calc(22px + env(safe-area-inset-bottom));
+      padding: 12px 14px;
+      border-radius: 18px;
+      background: rgba(2,6,23,.92);
+      color:#fff;
+      font-weight:1000;
       font-size: 13px;
+      box-shadow: 0 14px 40px rgba(0,0,0,.25);
+      z-index: 9999;
+      text-align:center;
+      transform: translateY(12px);
+      opacity:0;
+      transition: all .18s ease;
+      pointer-events:none;
     }
-    .lbRow:first-child{ border-top:0; padding-top:0; }
-    .rank{
-      width: 28px; height: 28px;
-      border-radius: 12px;
-      display:flex; align-items:center; justify-content:center;
-      background: rgba(14,165,233,.12);
-      color: var(--blue3);
-      border: 1px solid rgba(14,165,233,.22);
-      font-weight: 1000;
-      flex:0 0 auto;
-    }
-    .name{ color: var(--ink); font-weight: 1000; }
-    .score{ color: var(--blue3); font-weight: 1000; }
-    .hint{
-      margin-top: 8px;
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 800;
-      line-height: 1.35;
-    }
-
-    /* iOS scrollbars hidden */
-    .content::-webkit-scrollbar{ width:0; height:0; }
   </style>
 </head>
 
 <body>
-  <div class="app" id="app">
-    <!-- Top Bar -->
+  <div class="app">
+    <!-- Header -->
     <div class="topbar">
-      <div class="brand" aria-label="Learn How to Draw Hub">
+      <div class="brand">
         <img src="lhtdhublogo.jpg" alt="LHTD Hub Logo"
              onerror="this.onerror=null; this.src='https://placehold.co/80x80/0ea5e9/ffffff?text=LHD';" />
-        <div class="title">
+        <div>
           <b>Learn How to Draw Hub</b>
-          <span id="subtitle">Play • Draw • Color • Score</span>
+          <span id="subline">Two games: Color + Trace</span>
         </div>
       </div>
-
-      <div class="pill" aria-label="Player stats">
-        <div class="stat"><span class="dot"></span><span id="xpTxt">XP 0</span></div>
-        <div class="stat"><span class="coin"></span><span id="coinTxt">Coins 0</span></div>
-      </div>
+      <div class="pill">Level <span id="lvl">1</span></div>
     </div>
 
-    <!-- Main Panel -->
-    <div class="main">
-      <div class="panel">
-
-        <!-- HOME -->
-        <div class="screen active" id="screen-home">
-          <div class="screenHead">
-            <div>
-              <h2 id="homeGreeting">Hi, Artist! 🎨</h2>
-              <p>Pick a game. Earn XP. Level up. Have fun.</p>
-            </div>
-            <button class="miniBtn" id="openProfileBtn">Profile</button>
+    <!-- Panel -->
+    <div class="panel">
+      <!-- HOME -->
+      <div class="screen active" id="home">
+        <div class="head">
+          <div>
+            <h1>Pick a Game</h1>
+            <p>Finish a round to unlock the next one.</p>
           </div>
-
-          <div class="content">
-            <div class="bigLine">
-              <div>
-                <b id="dailyTitle">Daily Challenge</b><br />
-                <span id="dailySub">Trace the “Star” in 45 seconds ⭐</span>
-              </div>
-              <button class="btn primary" id="dailyGoBtn">GO</button>
-            </div>
-
-            <div style="height:12px"></div>
-
-            <div class="grid">
-              <div class="card">
-                <div class="cardTop">
-                  <span class="badge">FAST TRACE</span>
-                  <h3>Draw Sprint</h3>
-                  <p>Trace the picture as fast as you can. Finish to get a score.</p>
-                </div>
-                <div class="cardBottom">
-                  <button class="cta" id="goDrawBtn">Start Draw Sprint</button>
-                </div>
-              </div>
-
-              <div class="card">
-                <div class="cardTop">
-                  <span class="badge" style="background:rgba(245,158,11,.14); border-color:rgba(245,158,11,.25); color:#7c2d12;">COLOR MATCH</span>
-                  <h3>Color Challenge</h3>
-                  <p>Color the picture to match the target. Accuracy + speed = score.</p>
-                </div>
-                <div class="cardBottom">
-                  <button class="cta ctaAmber" id="goColorBtn">Start Color Match</button>
-                </div>
-              </div>
-            </div>
-
-            <div style="height:12px"></div>
-
-            <div class="lbCard">
-              <b style="font-weight:1000; font-size:14px;">Quick Goals</b>
-              <div class="hint">
-                • Finish 3 rounds today to start a streak 🔥<br />
-                • Beat your best score to earn bonus coins 💰<br />
-                • Leaderboards show local scores now (state/global later).
-              </div>
-              <div style="height:10px"></div>
-              <button class="btn" id="howToBtn" style="width:100%;">How to Play</button>
-            </div>
-          </div>
+          <button class="mini" id="resetBtn">Reset</button>
         </div>
 
-        <!-- DRAW -->
-        <div class="screen" id="screen-draw">
-          <div class="screenHead">
-            <div>
-              <h2>Draw Sprint ✍️</h2>
-              <p>Trace the guide. Finish for a score.</p>
-            </div>
-            <button class="miniBtn" id="drawExitBtn">Exit</button>
-          </div>
-
-          <div class="gameWrap">
-            <div class="hud">
-              <div class="hudLeft">
-                <div class="titleRow">
-                  <div class="chip"><small>Challenge</small> <span id="drawChallengeName">Star</span></div>
-                  <div class="chip"><small>Timer</small> <span id="drawTimer">00:45</span></div>
-                </div>
-                <div class="chip"><small>Goal</small> Trace the lines • Try to stay on the guide</div>
-              </div>
-              <div class="hudRight">
-                <button class="btn" id="drawUndoBtn">Undo</button>
-                <button class="btn" id="drawClearBtn">Clear</button>
-                <button class="btn primary" id="drawFinishBtn">Finish</button>
-              </div>
-            </div>
-
-            <div class="canvasCard">
-              <!-- Guide image (put your PNG in /assets/ and update src) -->
-              <img class="bgGuide" id="drawGuideImg" alt="" />
-              <!-- User canvas -->
-              <canvas id="drawCanvas"></canvas>
-            </div>
-
-            <div class="tools">
-              <div class="sliderRow">
-                Brush
-                <input type="range" id="drawBrush" min="3" max="26" value="10" />
-                <span id="drawBrushVal">10</span>
-              </div>
-
-              <div class="palette" id="drawPalette">
-                <!-- For draw sprint we keep it simple: one “ink” color + eraser -->
-              </div>
-
-              <button class="btn amber" id="drawStartBtn">Start Timer</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- COLOR -->
-        <div class="screen" id="screen-color">
-          <div class="screenHead">
-            <div>
-              <h2>Color Match 🖍️</h2>
-              <p>Match the target as best you can.</p>
-            </div>
-            <button class="miniBtn" id="colorExitBtn">Exit</button>
-          </div>
-
-          <div class="gameWrap">
-            <div class="hud">
-              <div class="hudLeft">
-                <div class="titleRow">
-                  <div class="chip"><small>Challenge</small> <span id="colorChallengeName">Rainbow</span></div>
-                  <div class="chip"><small>Timer</small> <span id="colorTimer">01:00</span></div>
-                </div>
-                <div class="chip"><small>Goal</small> Color it • Match colors • Be fast</div>
-              </div>
-              <div class="hudRight">
-                <button class="btn" id="colorUndoBtn">Undo</button>
-                <button class="btn" id="colorClearBtn">Clear</button>
-                <button class="btn primary" id="colorFinishBtn">Finish</button>
-              </div>
-            </div>
-
-            <div class="canvasCard">
-              <!-- Line art / guide -->
-              <img class="bgGuide" id="colorLineImg" alt="" />
-              <!-- Target image faint overlay (optional) -->
-              <img class="targetOverlay" id="colorTargetImg" alt="" />
-              <canvas id="colorCanvas"></canvas>
-            </div>
-
-            <div class="tools">
-              <div class="sliderRow">
-                Brush
-                <input type="range" id="colorBrush" min="5" max="34" value="16" />
-                <span id="colorBrushVal">16</span>
-              </div>
-
-              <div class="palette" id="colorPalette"></div>
-
-              <button class="btn amber" id="colorStartBtn">Start Timer</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- LEADERBOARD -->
-        <div class="screen" id="screen-leaderboard">
-          <div class="screenHead">
-            <div>
-              <h2>Leaderboards 🏆</h2>
-              <p>Local scores (device). State/Global can be added later.</p>
-            </div>
-            <button class="miniBtn" id="lbRefreshBtn">Refresh</button>
-          </div>
-
-          <div class="content">
-            <div class="lbCard">
-              <b style="font-weight:1000; font-size:14px;">Top Scores (Local)</b>
-              <div id="lbList" style="margin-top:8px;"></div>
-              <div class="hint">
-                Want state/global leaderboards? You’ll connect this to a backend (Firebase/Firestore is a good option).
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- PROFILE -->
-        <div class="screen" id="screen-profile">
-          <div class="screenHead">
-            <div>
-              <h2>Profile 👤</h2>
-              <p>Nickname, streak, and kid-safe settings.</p>
-            </div>
-            <button class="miniBtn" id="profileExitBtn">Done</button>
-          </div>
-
-          <div class="content">
-            <div class="lbCard">
-              <b style="font-weight:1000; font-size:14px;">Your Artist Name</b>
-              <div style="height:10px"></div>
-              <input class="field" id="nameInput" maxlength="18" placeholder="Pick a nickname (ex: StarKid)" />
-              <div class="hint">Tip: Keep it short and fun!</div>
-              <div style="height:10px"></div>
-              <button class="btn primary" id="saveProfileBtn" style="width:100%;">Save</button>
-            </div>
-
-            <div style="height:12px"></div>
-
-            <div class="lbCard">
-              <b style="font-weight:1000; font-size:14px;">Kid Safe Mode</b>
-              <div class="hint">Kids Mode hides ads + external links. (Recommended ON by default.)</div>
-              <div style="height:10px"></div>
-              <button class="btn" id="parentGateBtn" style="width:100%;">Parent Gate (Hold)</button>
-              <div style="height:10px"></div>
+        <div class="content">
+          <div class="twoButtons">
+            <button class="bigBtn" id="goColor">
               <div class="row">
-                <b>Kids Mode</b>
-                <button class="btn" id="kidsModeBtn">ON</button>
+                <div class="title">🖍️ Color</div>
+                <div class="badge">Stage <span id="colorStageBadge">1</span></div>
               </div>
+              <div class="sub">Color inside the picture. Do 1 round → unlock the next.</div>
+            </button>
+
+            <button class="bigBtn" id="goTrace" style="background: linear-gradient(180deg, var(--sky-400), var(--sky-600));">
               <div class="row">
-                <b>Ads</b>
-                <span id="adsStatus">Hidden (Kids Mode)</span>
+                <div class="title">✍️ Trace</div>
+                <div class="badge">Stage <span id="traceStageBadge">1</span></div>
               </div>
-              <div class="hint">
-                AdMob is added with a Capacitor plugin (native), not by pasting web ad scripts into HTML.
-              </div>
-            </div>
+              <div class="sub">Trace the lines. Stay close to the guide. Beat it → next stage.</div>
+            </button>
+          </div>
 
-            <div style="height:12px"></div>
-
-            <div class="lbCard">
-              <b style="font-weight:1000; font-size:14px;">Reset</b>
-              <div class="hint">Clears local progress (scores, XP, coins).</div>
-              <div style="height:10px"></div>
-              <button class="btn" id="resetBtn" style="width:100%;">Reset Progress</button>
-            </div>
+          <div class="card">
+            <b>Progress</b>
+            <div class="hint" id="progressText">Color Stage 1 • Trace Stage 1</div>
+            <div class="hint" style="margin-top:8px;">Tip: This is kid-simple on purpose: pick a game → draw → tap “Done”.</div>
           </div>
         </div>
-
       </div>
 
-      <!-- Bottom Tabs -->
-      <div class="tabs" role="tablist" aria-label="Navigation">
-        <button class="tab active" data-go="home"><div class="ico">🏠</div>Home</button>
-        <button class="tab" data-go="draw"><div class="ico">✍️</div>Draw</button>
-        <button class="tab" data-go="color"><div class="ico">🖍️</div>Color</button>
-        <button class="tab" data-go="leaderboard"><div class="ico">🏆</div>Scores</button>
-        <button class="tab" data-go="profile"><div class="ico">👤</div>Me</button>
+      <!-- COLOR -->
+      <div class="screen" id="color">
+        <div class="head">
+          <div>
+            <h2>🖍️ Color</h2>
+            <p id="colorTitle">Stage 1</p>
+          </div>
+          <button class="mini" id="backFromColor">Back</button>
+        </div>
+
+        <div class="gameWrap">
+          <div class="hud">
+            <div class="chip"><small>Goal</small> Color the picture</div>
+            <div class="chip"><small>Stage</small> <span id="colorStage">1</span></div>
+          </div>
+
+          <div class="canvasCard">
+            <!-- OPTIONAL: put a faint line-art guide here per stage -->
+            <img class="guide" id="colorGuide" alt="" />
+            <canvas id="colorCanvas"></canvas>
+          </div>
+
+          <div class="palette" id="palette"></div>
+
+          <div class="btnRow">
+            <button class="btn" id="colorClear">Clear</button>
+            <button class="btn primary" id="colorDone">Done ✅</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TRACE -->
+      <div class="screen" id="trace">
+        <div class="head">
+          <div>
+            <h2>✍️ Trace</h2>
+            <p id="traceTitle">Stage 1</p>
+          </div>
+          <button class="mini" id="backFromTrace">Back</button>
+        </div>
+
+        <div class="gameWrap">
+          <div class="hud">
+            <div class="chip"><small>Goal</small> Trace the lines</div>
+            <div class="chip"><small>Stage</small> <span id="traceStage">1</span></div>
+          </div>
+
+          <div class="canvasCard">
+            <img class="guide" id="traceGuide" alt="" />
+            <canvas id="traceCanvas"></canvas>
+          </div>
+
+          <div class="btnRow">
+            <button class="btn" id="traceClear">Clear</button>
+            <button class="btn primary" id="traceDone">Done ✅</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Modal: Results / HowTo / Parent Gate -->
+  <!-- Modal -->
   <div class="modalBackdrop" id="modalBackdrop" aria-hidden="true">
     <div class="modal" role="dialog" aria-modal="true">
       <div class="modalHead">
-        <h3 id="modalTitle">Title</h3>
+        <h3 id="modalTitle">Nice!</h3>
       </div>
       <div class="modalBody" id="modalBody"></div>
       <div class="modalActions" id="modalActions"></div>
     </div>
   </div>
 
+  <div id="toast"></div>
+
   <script>
-    /*****************************************************************
-     * Learn How to Draw Hub — iOS-friendly Gamified App Index.html
-     * - Mobile-first UI
-     * - Draw Sprint (trace) + Color Match (paint)
-     * - Local leaderboard + XP/coins
-     * - Kid-safe mode + parent gate
+    /****************************************************************
+     * SUPER SIMPLE KID UI:
+     * - Only TWO modes: Color + Trace
+     * - Progressively more complex via "stages"
+     * - Each "Done" unlocks next stage
+     * - Uses your sky-blue theme
      *
-     * ASSETS (place these in your webDir, e.g. www/assets/...)
-     * - Draw Sprint guide PNGs (transparent background recommended)
-     *   Example: assets/draw/star_guide.png
-     * - Color Challenge line art and target images:
-     *   assets/color/rainbow_line.png
-     *   assets/color/rainbow_target.png
-     *****************************************************************/
+     * OPTIONAL STAGE IMAGES (recommended):
+     * Put these files in your webDir:
+     *   assets/color/1.png, 2.png, 3.png ...
+     *   assets/trace/1.png, 2.png, 3.png ...
+     * These should be simple line art (transparent background).
+     ****************************************************************/
 
     const $ = (s) => document.querySelector(s);
-    const $$ = (s) => Array.from(document.querySelectorAll(s));
 
-    // ---------- Simple Storage ----------
     const Store = {
-      get(key, fallback){
-        try { return JSON.parse(localStorage.getItem(key)) ?? fallback; }
-        catch { return fallback; }
-      },
-      set(key, value){
-        localStorage.setItem(key, JSON.stringify(value));
-      }
+      get(k, f){ try{ return JSON.parse(localStorage.getItem(k)) ?? f; } catch{ return f; } },
+      set(k, v){ localStorage.setItem(k, JSON.stringify(v)); }
     };
 
-    // ---------- Game State ----------
-    const state = {
-      profile: Store.get("lhtd_profile", { name: "Artist", kidsMode: true }),
-      wallet: Store.get("lhtd_wallet", { xp: 0, coins: 0, streak: 0, lastPlay: null }),
-      scores: Store.get("lhtd_scores", []), // {name, mode, score, accuracy, timeSec, at}
-      parentUnlocked: false
-    };
+    const state = Store.get("lhtd_kids_simple", {
+      colorStage: 1,
+      traceStage: 1
+    });
 
-    // ---------- UI Elements ----------
+    const MAX_STAGE = 12; // you can raise this later
+
+    // Screens
     const screens = {
-      home: $("#screen-home"),
-      draw: $("#screen-draw"),
-      color: $("#screen-color"),
-      leaderboard: $("#screen-leaderboard"),
-      profile: $("#screen-profile"),
+      home: $("#home"),
+      color: $("#color"),
+      trace: $("#trace")
     };
 
-    function setStatsUI(){
-      $("#xpTxt").textContent = `XP ${state.wallet.xp}`;
-      $("#coinTxt").textContent = `Coins ${state.wallet.coins}`;
-      $("#homeGreeting").textContent = `Hi, ${state.profile.name}! 🎨`;
-      $("#nameInput").value = state.profile.name || "Artist";
-
-      $("#kidsModeBtn").textContent = state.profile.kidsMode ? "ON" : "OFF";
-      $("#adsStatus").textContent = state.profile.kidsMode
-        ? "Hidden (Kids Mode)"
-        : (state.parentUnlocked ? "Allowed (Parent Unlocked)" : "Locked (Use Parent Gate)");
-    }
-
-    function go(screenKey){
+    function go(key){
       Object.values(screens).forEach(el => el.classList.remove("active"));
-      screens[screenKey].classList.add("active");
-      $$(".tab").forEach(t => t.classList.toggle("active", t.dataset.go === screenKey));
-      // update subtitle
-      const sub = {
-        home: "Play • Draw • Color • Score",
-        draw: "Trace fast • Stay on the guide",
-        color: "Pick colors • Match the target",
-        leaderboard: "Your best scores",
-        profile: "Nickname • Kid Safe Mode",
-      }[screenKey] || "Play";
-      $("#subtitle").textContent = sub;
+      screens[key].classList.add("active");
 
-      // ensure canvases size correctly after navigation
-      if(screenKey === "draw") resizeCanvas(draw);
-      if(screenKey === "color") resizeCanvas(color);
-      if(screenKey === "leaderboard") renderLeaderboard();
+      if(key === "color") resizeCanvas(colorPainter);
+      if(key === "trace") resizeCanvas(tracePainter);
     }
 
-    // Tabs
-    $$(".tab").forEach(btn => btn.addEventListener("click", () => go(btn.dataset.go)));
-
-    // Buttons: Home
-    $("#goDrawBtn").addEventListener("click", () => { loadDrawChallenge("star"); go("draw"); });
-    $("#goColorBtn").addEventListener("click", () => { loadColorChallenge("rainbow"); go("color"); });
-
-    $("#dailyGoBtn").addEventListener("click", () => {
-      // Daily rotates later; for now route to draw
-      loadDrawChallenge("star");
-      go("draw");
-    });
-
-    $("#openProfileBtn").addEventListener("click", () => go("profile"));
-    $("#profileExitBtn").addEventListener("click", () => go("home"));
-
-    // How to play modal
-    $("#howToBtn").addEventListener("click", () => {
-      showModal("How to Play 🎮", `
-        <div style="font-weight:900; color:#0f172a; line-height:1.35">
-          <div style="margin-bottom:10px">✅ <b>Draw Sprint</b>: Trace the picture. Finish before time runs out.</div>
-          <div style="margin-bottom:10px">✅ <b>Color Match</b>: Color it to match the target image. Accuracy + speed = score.</div>
-          <div style="margin-bottom:10px">🏆 Scores save locally. State/Global leaderboards can be added with a backend.</div>
-          <div style="margin-bottom:10px">🧒 Kids Mode keeps it kid-safe. Parent Gate unlocks settings.</div>
-        </div>
-      `, [
-        { label: "Got it!", type: "primary", onClick: hideModal }
-      ]);
-    });
-
-    // ---------- Modal ----------
-    function showModal(title, html, actions){
-      $("#modalTitle").textContent = title;
-      $("#modalBody").innerHTML = html;
-
-      const actionsEl = $("#modalActions");
-      actionsEl.innerHTML = "";
-      actions.forEach(a => {
-        const b = document.createElement("button");
-        b.className = "btn " + (a.type === "primary" ? "primary" : a.type === "amber" ? "amber" : "");
-        b.textContent = a.label;
-        b.addEventListener("click", a.onClick);
-        actionsEl.appendChild(b);
-      });
-
-      $("#modalBackdrop").classList.add("show");
-      $("#modalBackdrop").setAttribute("aria-hidden", "false");
+    // Simple level is just total stages cleared (rough)
+    function calcLevel(){
+      const cleared = (state.colorStage - 1) + (state.traceStage - 1);
+      return 1 + Math.floor(cleared / 2);
     }
 
-    function hideModal(){
-      $("#modalBackdrop").classList.remove("show");
-      $("#modalBackdrop").setAttribute("aria-hidden", "true");
+    function updateUI(){
+      $("#lvl").textContent = calcLevel();
+
+      $("#colorStageBadge").textContent = state.colorStage;
+      $("#traceStageBadge").textContent = state.traceStage;
+
+      $("#progressText").textContent = `Color Stage ${state.colorStage} • Trace Stage ${state.traceStage}`;
+
+      $("#colorStage").textContent = state.colorStage;
+      $("#traceStage").textContent = state.traceStage;
+
+      $("#colorTitle").textContent = `Stage ${state.colorStage}`;
+      $("#traceTitle").textContent = `Stage ${state.traceStage}`;
+
+      // Load optional guide images (line art) for each stage
+      $("#colorGuide").src = `assets/color/${state.colorStage}.png`;
+      $("#traceGuide").src = `assets/trace/${state.traceStage}.png`;
     }
 
-    $("#modalBackdrop").addEventListener("click", (e) => {
-      if(e.target === $("#modalBackdrop")) hideModal();
-    });
-
-    // ---------- Parent Gate (Hold) ----------
-    let holdTimer = null;
-    $("#parentGateBtn").addEventListener("touchstart", startHold, {passive:true});
-    $("#parentGateBtn").addEventListener("mousedown", startHold);
-
-    $("#parentGateBtn").addEventListener("touchend", cancelHold, {passive:true});
-    $("#parentGateBtn").addEventListener("mouseup", cancelHold);
-    $("#parentGateBtn").addEventListener("mouseleave", cancelHold);
-
-    function startHold(){
-      cancelHold();
-      const btn = $("#parentGateBtn");
-      btn.textContent = "Holding...";
-      holdTimer = setTimeout(() => {
-        btn.textContent = "Parent Gate (Hold)";
-        openParentGateQuiz();
-      }, 1200);
-    }
-    function cancelHold(){
-      if(holdTimer) clearTimeout(holdTimer);
-      holdTimer = null;
-      $("#parentGateBtn").textContent = "Parent Gate (Hold)";
+    function save(){
+      Store.set("lhtd_kids_simple", state);
     }
 
-    function openParentGateQuiz(){
-      // simple math gate
-      const a = 3 + Math.floor(Math.random()*6);
-      const b = 4 + Math.floor(Math.random()*6);
-      const answer = a + b;
-
-      showModal("Parent Gate 🔒", `
-        <div style="font-weight:900; color:#0f172a; line-height:1.35">
-          <div style="margin-bottom:10px">Adults only. Solve:</div>
-          <div style="font-size:22px; margin-bottom:10px">${a} + ${b} = ?</div>
-          <input id="pgInput" class="field" inputmode="numeric" placeholder="Enter answer" />
-          <div style="margin-top:10px; color:#64748b; font-size:12px; font-weight:800">
-            This unlocks settings + ads controls.
-          </div>
-        </div>
-      `, [
-        { label: "Cancel", type: "", onClick: () => { state.parentUnlocked = false; setStatsUI(); hideModal(); } },
-        { label: "Unlock", type: "primary", onClick: () => {
-            const v = parseInt($("#pgInput").value || "0", 10);
-            if(v === answer){
-              state.parentUnlocked = true;
-              setStatsUI();
-              hideModal();
-              showToast("Unlocked ✅");
-            }else{
-              showToast("Try again");
-            }
-          }
-        }
-      ]);
-
-      setTimeout(() => $("#pgInput")?.focus(), 150);
-    }
-
-    // Kids mode toggle (requires parent unlock to turn OFF)
-    $("#kidsModeBtn").addEventListener("click", () => {
-      if(state.profile.kidsMode){
-        if(!state.parentUnlocked){
-          showToast("Use Parent Gate first 🔒");
-          return;
-        }
-        state.profile.kidsMode = false;
-      }else{
-        state.profile.kidsMode = true;
-      }
-      persistProfile();
-      setStatsUI();
-    });
-
-    function persistProfile(){
-      Store.set("lhtd_profile", state.profile);
-    }
-    function persistWallet(){
-      Store.set("lhtd_wallet", state.wallet);
-    }
-    function persistScores(){
-      Store.set("lhtd_scores", state.scores);
-    }
-
-    // Profile save
-    $("#saveProfileBtn").addEventListener("click", () => {
-      const name = ($("#nameInput").value || "").trim().slice(0, 18);
-      state.profile.name = name || "Artist";
-      persistProfile();
-      setStatsUI();
-      showToast("Saved ✅");
-    });
-
-    // Reset progress (requires parent gate)
-    $("#resetBtn").addEventListener("click", () => {
-      if(!state.parentUnlocked){
-        showToast("Use Parent Gate first 🔒");
-        return;
-      }
-      showModal("Reset Progress?", `
-        <div style="font-weight:900; line-height:1.35; color:#0f172a">
-          This clears local scores, XP, and coins on this device.
-        </div>
-      `, [
-        { label: "Cancel", type: "", onClick: hideModal },
-        { label: "Reset", type: "amber", onClick: () => {
-            state.wallet = { xp: 0, coins: 0, streak: 0, lastPlay: null };
-            state.scores = [];
-            persistWallet();
-            persistScores();
-            setStatsUI();
-            hideModal();
-            renderLeaderboard();
-            showToast("Reset ✅");
-          }
-        }
-      ]);
-    });
-
-    // ---------- Toast ----------
+    // Toast
     let toastTimer = null;
-    function showToast(msg){
-      let t = document.getElementById("toast");
-      if(!t){
-        t = document.createElement("div");
-        t.id = "toast";
-        t.style.position = "fixed";
-        t.style.left = "12px";
-        t.style.right = "12px";
-        t.style.bottom = "calc(86px + env(safe-area-inset-bottom))";
-        t.style.padding = "12px 14px";
-        t.style.borderRadius = "18px";
-        t.style.background = "rgba(15,23,42,.92)";
-        t.style.color = "white";
-        t.style.fontWeight = "1000";
-        t.style.fontSize = "13px";
-        t.style.boxShadow = "0 14px 40px rgba(0,0,0,.25)";
-        t.style.zIndex = "9999";
-        t.style.textAlign = "center";
-        t.style.transform = "translateY(12px)";
-        t.style.opacity = "0";
-        t.style.transition = "all .18s ease";
-        document.body.appendChild(t);
-      }
+    function toast(msg){
+      const t = $("#toast");
       t.textContent = msg;
       clearTimeout(toastTimer);
       requestAnimationFrame(() => {
@@ -1129,143 +620,45 @@
       });
       toastTimer = setTimeout(() => {
         t.style.opacity = "0";
-        t.style.transform = "translateY(10px)";
-      }, 1200);
+        t.style.transform = "translateY(12px)";
+      }, 1100);
     }
 
-    // ---------- Leaderboard (Local) ----------
-    function renderLeaderboard(){
-      const list = $("#lbList");
-      const rows = [...state.scores]
-        .sort((a,b) => b.score - a.score)
-        .slice(0, 10);
-
-      if(rows.length === 0){
-        list.innerHTML = `<div class="hint">No scores yet. Play Draw Sprint or Color Match!</div>`;
-        return;
-      }
-
-      list.innerHTML = rows.map((r, i) => `
-        <div class="lbRow">
-          <div style="display:flex; align-items:center; gap:10px;">
-            <div class="rank">${i+1}</div>
-            <div>
-              <div class="name">${escapeHtml(r.name)} <span style="color:#64748b; font-weight:900; font-size:12px;">• ${r.mode}</span></div>
-              <div style="color:#64748b; font-weight:900; font-size:12px;">
-                Accuracy ${Math.round(r.accuracy)}% • ${Math.round(r.timeSec)}s
-              </div>
-            </div>
-          </div>
-          <div class="score">${Math.round(r.score)}</div>
-        </div>
-      `).join("");
+    // Modal
+    function showModal(title, body, actions){
+      $("#modalTitle").textContent = title;
+      $("#modalBody").innerHTML = body;
+      const a = $("#modalActions");
+      a.innerHTML = "";
+      actions.forEach(x => {
+        const b = document.createElement("button");
+        b.className = "btn " + (x.primary ? "primary" : "");
+        b.textContent = x.label;
+        b.addEventListener("click", x.onClick);
+        a.appendChild(b);
+      });
+      $("#modalBackdrop").classList.add("show");
+      $("#modalBackdrop").setAttribute("aria-hidden","false");
     }
-    $("#lbRefreshBtn").addEventListener("click", renderLeaderboard);
-
-    function escapeHtml(s){
-      return (s||"").replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+    function hideModal(){
+      $("#modalBackdrop").classList.remove("show");
+      $("#modalBackdrop").setAttribute("aria-hidden","true");
     }
-
-    // ---------- Challenges (simple placeholders) ----------
-    const challenges = {
-      draw: {
-        star: {
-          name: "Star",
-          seconds: 45,
-          guide: "assets/draw/star_guide.png"
-        },
-        // add more: cat, rocket, etc.
-      },
-      color: {
-        rainbow: {
-          name: "Rainbow",
-          seconds: 60,
-          line: "assets/color/rainbow_line.png",
-          target: "assets/color/rainbow_target.png"
-        }
-      }
-    };
-
-    // ---------- Canvas Helpers ----------
-    function getCanvasRect(canvas){
-      const r = canvas.getBoundingClientRect();
-      return { x: r.left, y: r.top, w: r.width, h: r.height };
-    }
-
-    function resizeCanvas(ctxObj){
-      const { canvas } = ctxObj;
-      const rect = canvas.getBoundingClientRect();
-      const dpr = Math.max(1, Math.min(3, window.devicePixelRatio || 1));
-      const w = Math.floor(rect.width * dpr);
-      const h = Math.floor(rect.height * dpr);
-      if(canvas.width !== w || canvas.height !== h){
-        // keep snapshot history coherent
-        const old = document.createElement("canvas");
-        old.width = canvas.width; old.height = canvas.height;
-        old.getContext("2d").drawImage(canvas, 0, 0);
-
-        canvas.width = w;
-        canvas.height = h;
-
-        const g = canvas.getContext("2d");
-        g.setTransform(dpr, 0, 0, dpr, 0, 0);
-        g.lineCap = "round";
-        g.lineJoin = "round";
-        g.imageSmoothingEnabled = true;
-
-        // restore old content scaled (best effort)
-        if(old.width && old.height){
-          g.save();
-          g.setTransform(1,0,0,1,0,0);
-          g.drawImage(old, 0, 0, old.width, old.height, 0, 0, canvas.width, canvas.height);
-          g.restore();
-        }
-      }
-    }
-
-    window.addEventListener("resize", () => {
-      resizeCanvas(draw);
-      resizeCanvas(color);
+    $("#modalBackdrop").addEventListener("click", (e) => {
+      if(e.target === $("#modalBackdrop")) hideModal();
     });
 
-    // ---------- Drawing Engine ----------
+    // ---------- Painter ----------
     function makePainter(canvasId){
       const canvas = document.getElementById(canvasId);
       const ctx = canvas.getContext("2d");
-      const history = [];
       let painting = false;
       let last = null;
 
       const painter = {
-        canvas,
-        ctx,
-        brush: 10,
-        color: "#0f172a",
-        eraser: false,
-        history,
-
-        snapshot(){
-          // store as image data url (fast enough for small history)
-          try{
-            history.push(canvas.toDataURL("image/png"));
-            if(history.length > 20) history.shift();
-          }catch(e){}
-        },
-
-        undo(){
-          if(history.length === 0) return;
-          const src = history.pop();
-          const img = new Image();
-          img.onload = () => {
-            ctx.save();
-            ctx.setTransform(1,0,0,1,0,0);
-            ctx.clearRect(0,0,canvas.width, canvas.height);
-            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-            ctx.restore();
-          };
-          img.src = src;
-        },
-
+        canvas, ctx,
+        color: "#0ea5e9",
+        brush: 18,
         clear(){
           ctx.save();
           ctx.setTransform(1,0,0,1,0,0);
@@ -1274,49 +667,43 @@
         }
       };
 
-      function pointerPos(e){
-        const rect = canvas.getBoundingClientRect();
-        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-        return { x: clientX - rect.left, y: clientY - rect.top };
+      function pos(e){
+        const r = canvas.getBoundingClientRect();
+        const cx = e.touches ? e.touches[0].clientX : e.clientX;
+        const cy = e.touches ? e.touches[0].clientY : e.clientY;
+        return { x: cx - r.left, y: cy - r.top };
       }
 
       function start(e){
         e.preventDefault();
         painting = true;
-        painter.snapshot();
-        last = pointerPos(e);
+        last = pos(e);
       }
 
       function move(e){
         if(!painting) return;
         e.preventDefault();
-        const p = pointerPos(e);
-        const g = ctx;
+        const p = pos(e);
 
-        g.save();
-        g.globalCompositeOperation = painter.eraser ? "destination-out" : "source-over";
-        g.strokeStyle = painter.color;
-        g.lineWidth = painter.brush;
-        g.beginPath();
-        g.moveTo(last.x, last.y);
-        g.lineTo(p.x, p.y);
-        g.stroke();
-        g.restore();
+        ctx.save();
+        ctx.strokeStyle = painter.color;
+        ctx.lineWidth = painter.brush;
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+        ctx.beginPath();
+        ctx.moveTo(last.x, last.y);
+        ctx.lineTo(p.x, p.y);
+        ctx.stroke();
+        ctx.restore();
 
         last = p;
       }
 
-      function end(){
-        painting = false;
-        last = null;
-      }
+      function end(){ painting = false; last = null; }
 
-      // iOS: use touch events + pointer events fallback
       canvas.addEventListener("touchstart", start, {passive:false});
       canvas.addEventListener("touchmove", move, {passive:false});
       canvas.addEventListener("touchend", end, {passive:true});
-
       canvas.addEventListener("mousedown", start);
       window.addEventListener("mousemove", move);
       window.addEventListener("mouseup", end);
@@ -1324,398 +711,132 @@
       return painter;
     }
 
-    const draw = makePainter("drawCanvas");
-    const color = makePainter("colorCanvas");
-
-    // Palettes
-    function buildDrawPalette(){
-      const el = $("#drawPalette");
-      el.innerHTML = "";
-      const colors = ["#0f172a", "#0ea5e9"]; // ink + blue accent
-      colors.forEach((c, i) => {
-        const s = document.createElement("button");
-        s.className = "swatch" + (i === 0 ? " active" : "");
-        s.style.background = c;
-        s.addEventListener("click", () => {
-          $$("#drawPalette .swatch").forEach(x => x.classList.remove("active"));
-          s.classList.add("active");
-          draw.eraser = false;
-          draw.color = c;
-        });
-        el.appendChild(s);
-      });
-
-      const er = document.createElement("button");
-      er.className = "swatch";
-      er.style.background = "linear-gradient(180deg, #fff, #e2e8f0)";
-      er.title = "Eraser";
-      er.addEventListener("click", () => {
-        $$("#drawPalette .swatch").forEach(x => x.classList.remove("active"));
-        er.classList.add("active");
-        draw.eraser = true;
-      });
-      el.appendChild(er);
+    function resizeCanvas(painter){
+      const c = painter.canvas;
+      const rect = c.getBoundingClientRect();
+      const dpr = Math.max(1, Math.min(3, window.devicePixelRatio || 1));
+      const w = Math.floor(rect.width * dpr);
+      const h = Math.floor(rect.height * dpr);
+      if(c.width !== w || c.height !== h){
+        c.width = w; c.height = h;
+        const g = c.getContext("2d");
+        g.setTransform(dpr,0,0,dpr,0,0);
+      }
     }
 
-    function buildColorPalette(){
-      const el = $("#colorPalette");
-      el.innerHTML = "";
-      const colors = [
-        "#0f172a", "#ffffff", "#ef4444", "#f59e0b", "#fbbf24",
-        "#22c55e", "#0ea5e9", "#2563eb", "#a855f7", "#ec4899"
-      ];
-
-      colors.forEach((c, i) => {
-        const s = document.createElement("button");
-        s.className = "swatch" + (i === 6 ? " active" : "");
-        s.style.background = c === "#ffffff" ? "linear-gradient(180deg,#fff,#e2e8f0)" : c;
-        s.addEventListener("click", () => {
-          $$("#colorPalette .swatch").forEach(x => x.classList.remove("active"));
-          s.classList.add("active");
-          color.eraser = false;
-          color.color = c;
-        });
-        el.appendChild(s);
-      });
-
-      const er = document.createElement("button");
-      er.className = "swatch";
-      er.style.background = "repeating-linear-gradient(45deg, #fff 0 6px, #e2e8f0 6px 12px)";
-      er.title = "Eraser";
-      er.addEventListener("click", () => {
-        $$("#colorPalette .swatch").forEach(x => x.classList.remove("active"));
-        er.classList.add("active");
-        color.eraser = true;
-      });
-      el.appendChild(er);
-    }
-
-    buildDrawPalette();
-    buildColorPalette();
-
-    // Brush sliders
-    $("#drawBrush").addEventListener("input", (e) => {
-      draw.brush = parseInt(e.target.value, 10);
-      $("#drawBrushVal").textContent = draw.brush;
-    });
-    $("#colorBrush").addEventListener("input", (e) => {
-      color.brush = parseInt(e.target.value, 10);
-      $("#colorBrushVal").textContent = color.brush;
+    window.addEventListener("resize", () => {
+      resizeCanvas(colorPainter);
+      resizeCanvas(tracePainter);
     });
 
-    // Buttons: Draw
-    $("#drawExitBtn").addEventListener("click", () => go("home"));
-    $("#drawUndoBtn").addEventListener("click", () => draw.undo());
-    $("#drawClearBtn").addEventListener("click", () => draw.clear());
-    $("#drawFinishBtn").addEventListener("click", () => finishRound("draw"));
+    const colorPainter = makePainter("colorCanvas");
+    const tracePainter = makePainter("traceCanvas");
 
-    // Buttons: Color
-    $("#colorExitBtn").addEventListener("click", () => go("home"));
-    $("#colorUndoBtn").addEventListener("click", () => color.undo());
-    $("#colorClearBtn").addEventListener("click", () => color.clear());
-    $("#colorFinishBtn").addEventListener("click", () => finishRound("color"));
+    // ---------- Color palette (kid simple) ----------
+    const paletteColors = [
+      "#0ea5e9", "#38bdf8", "#2563eb", "#22c55e", "#f59e0b", "#ef4444", "#a855f7", "#0f172a"
+    ];
 
-    // ---------- Timers ----------
-    let drawTimerId = null;
-    let colorTimerId = null;
+    function buildPalette(){
+      const el = $("#palette");
+      el.innerHTML = "";
+      paletteColors.forEach((c, i) => {
+        const b = document.createElement("button");
+        b.className = "swatch" + (i === 0 ? " active" : "");
+        b.style.background = c;
+        b.addEventListener("click", () => {
+          Array.from(el.querySelectorAll(".swatch")).forEach(x => x.classList.remove("active"));
+          b.classList.add("active");
+          colorPainter.color = c;
+        });
+        el.appendChild(b);
+      });
+    }
+    buildPalette();
 
-    $("#drawStartBtn").addEventListener("click", () => startTimer("draw"));
-    $("#colorStartBtn").addEventListener("click", () => startTimer("color"));
+    // Trace always uses the same blue ink (simple)
+    tracePainter.color = "#0ea5e9";
+    tracePainter.brush = 14;
 
-    function startTimer(mode){
-      if(mode === "draw"){
-        if(drawTimerId) return;
-        draw.remaining = draw.challenge.seconds;
-        updateTimerUI("draw");
-        drawTimerId = setInterval(() => tick("draw"), 1000);
-        showToast("Go! ✍️");
+    // ---------- Navigation ----------
+    $("#goColor").addEventListener("click", () => { colorPainter.clear(); go("color"); toast("Color time! 🖍️"); });
+    $("#goTrace").addEventListener("click", () => { tracePainter.clear(); go("trace"); toast("Trace time! ✍️"); });
+
+    $("#backFromColor").addEventListener("click", () => go("home"));
+    $("#backFromTrace").addEventListener("click", () => go("home"));
+
+    // ---------- Clear ----------
+    $("#colorClear").addEventListener("click", () => colorPainter.clear());
+    $("#traceClear").addEventListener("click", () => tracePainter.clear());
+
+    // ---------- Done = unlock next stage ----------
+    function unlock(mode){
+      if(mode === "color"){
+        if(state.colorStage < MAX_STAGE) state.colorStage += 1;
+        save(); updateUI();
       }else{
-        if(colorTimerId) return;
-        color.remaining = color.challenge.seconds;
-        updateTimerUI("color");
-        colorTimerId = setInterval(() => tick("color"), 1000);
-        showToast("Go! 🖍️");
+        if(state.traceStage < MAX_STAGE) state.traceStage += 1;
+        save(); updateUI();
       }
     }
 
-    function stopTimer(mode){
-      if(mode === "draw" && drawTimerId){ clearInterval(drawTimerId); drawTimerId = null; }
-      if(mode === "color" && colorTimerId){ clearInterval(colorTimerId); colorTimerId = null; }
-    }
-
-    function tick(mode){
-      const obj = mode === "draw" ? draw : color;
-      obj.remaining = Math.max(0, (obj.remaining ?? 0) - 1);
-      updateTimerUI(mode);
-      if(obj.remaining <= 0){
-        stopTimer(mode);
-        showToast("Time!");
-        finishRound(mode);
-      }
-    }
-
-    function updateTimerUI(mode){
-      const obj = mode === "draw" ? draw : color;
-      const t = Math.max(0, obj.remaining ?? obj.challenge.seconds);
-      const mm = String(Math.floor(t/60)).padStart(2,"0");
-      const ss = String(t%60).padStart(2,"0");
-      if(mode === "draw") $("#drawTimer").textContent = `${mm}:${ss}`;
-      if(mode === "color") $("#colorTimer").textContent = `${mm}:${ss}`;
-    }
-
-    // ---------- Load Challenges ----------
-    function loadDrawChallenge(key){
-      const ch = challenges.draw[key];
-      draw.challenge = ch;
-      $("#drawChallengeName").textContent = ch.name;
-      $("#drawGuideImg").src = ch.guide;
-      draw.clear();
-      stopTimer("draw");
-      draw.remaining = ch.seconds;
-      updateTimerUI("draw");
-      setTimeout(() => resizeCanvas(draw), 50);
-    }
-
-    function loadColorChallenge(key){
-      const ch = challenges.color[key];
-      color.challenge = ch;
-      $("#colorChallengeName").textContent = ch.name;
-      $("#colorLineImg").src = ch.line;
-      $("#colorTargetImg").src = ch.target;
-      color.clear();
-      stopTimer("color");
-      color.remaining = ch.seconds;
-      updateTimerUI("color");
-      setTimeout(() => resizeCanvas(color), 50);
-    }
-
-    // ---------- Scoring ----------
-    function finishRound(mode){
-      const obj = mode === "draw" ? draw : color;
-      const elapsed = (obj.challenge.seconds - (obj.remaining ?? obj.challenge.seconds));
-
-      stopTimer(mode);
-
-      // Accuracy:
-      // - Draw: percent of canvas that has ink (simple proxy) + time bonus
-      // - Color: compare to target image if it loads; otherwise ink proxy
-      if(mode === "draw"){
-        const accuracy = estimateInkCoverage(draw.canvas);
-        const score = computeScore(accuracy, elapsed, obj.challenge.seconds, mode);
-        awardAndSave(mode, accuracy, elapsed, score);
-        showResults(mode, accuracy, elapsed, score);
-      }else{
-        compareToTargetIfReady()
-          .then((accuracy) => {
-            const score = computeScore(accuracy, elapsed, obj.challenge.seconds, mode);
-            awardAndSave(mode, accuracy, elapsed, score);
-            showResults(mode, accuracy, elapsed, score);
-          })
-          .catch(() => {
-            const accuracy = estimateInkCoverage(color.canvas);
-            const score = computeScore(accuracy, elapsed, obj.challenge.seconds, mode);
-            awardAndSave(mode, accuracy, elapsed, score);
-            showResults(mode, accuracy, elapsed, score);
-          });
-      }
-    }
-
-    function computeScore(accuracyPct, elapsedSec, totalSec, mode){
-      const acc = clamp(accuracyPct, 0, 100);
-      const speed = clamp(1 - (elapsedSec / Math.max(1, totalSec)), 0, 1);
-      const speedBonus = mode === "draw" ? 40 : 30;
-      const base = acc * 10;
-      return Math.round(base + speed * speedBonus * 10);
-    }
-
-    function awardAndSave(mode, accuracy, elapsed, score){
-      // XP and coins for kids: big satisfying numbers, simple rules
-      const xp = Math.round(10 + score / 40);
-      const coins = Math.round(5 + score / 80);
-
-      state.wallet.xp += xp;
-      state.wallet.coins += coins;
-
-      // Streak logic: 1 play per day increments streak
-      const today = new Date().toISOString().slice(0,10);
-      if(state.wallet.lastPlay !== today){
-        // if played yesterday -> streak++, else reset to 1
-        const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0,10);
-        state.wallet.streak = (state.wallet.lastPlay === yesterday) ? (state.wallet.streak + 1) : 1;
-        state.wallet.lastPlay = today;
-      }
-
-      const entry = {
-        name: state.profile.name || "Artist",
-        mode: mode === "draw" ? "Draw Sprint" : "Color Match",
-        score,
-        accuracy,
-        timeSec: elapsed,
-        at: Date.now()
-      };
-      state.scores.push(entry);
-
-      persistWallet();
-      persistScores();
-      setStatsUI();
-    }
-
-    function showResults(mode, accuracy, elapsed, score){
-      const xp = Math.round(10 + score / 40);
-      const coins = Math.round(5 + score / 80);
-
-      showModal("Results ⭐", `
-        <div style="display:flex; flex-direction:column; gap:10px;">
-          <div style="padding:12px; border-radius:18px; border:1px solid rgba(14,165,233,.18); background: rgba(14,165,233,.08);">
-            <div style="font-weight:1000; font-size:14px;">${mode === "draw" ? "Draw Sprint" : "Color Match"}</div>
-            <div style="margin-top:6px; color:#64748b; font-weight:900; font-size:12px;">
-              Accuracy <b style="color:#075985;">${Math.round(accuracy)}%</b> • Time <b style="color:#075985;">${Math.round(elapsed)}s</b>
-            </div>
-          </div>
-
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-            <div style="padding:12px; border-radius:18px; border:1px solid rgba(2,6,23,.08); background:#fff;">
-              <div style="color:#64748b; font-weight:900; font-size:12px;">Score</div>
-              <div style="font-weight:1000; font-size:24px; color:#075985;">${score}</div>
-            </div>
-            <div style="padding:12px; border-radius:18px; border:1px solid rgba(2,6,23,.08); background:#fff;">
-              <div style="color:#64748b; font-weight:900; font-size:12px;">Rewards</div>
-              <div style="font-weight:1000; font-size:14px; color:#0f172a;">+${xp} XP • +${coins} Coins</div>
-              <div style="margin-top:6px; color:#64748b; font-weight:900; font-size:12px;">Streak: ${state.wallet.streak} 🔥</div>
-            </div>
-          </div>
-        </div>
+    $("#colorDone").addEventListener("click", () => {
+      showModal("Nice coloring! ⭐", `
+        You finished <b>Color Stage ${state.colorStage}</b>.<br/>
+        Ready for the next picture?
       `, [
-        { label: "Play Again", type: "primary", onClick: () => {
+        { label: "Next", primary: true, onClick: () => {
             hideModal();
-            if(mode === "draw"){ loadDrawChallenge("star"); }
-            else{ loadColorChallenge("rainbow"); }
+            unlock("color");
+            colorPainter.clear();
+            toast("Unlocked! 🔓");
           }
         },
-        { label: "Scores", type: "", onClick: () => { hideModal(); go("leaderboard"); } }
+        { label: "Home", primary: false, onClick: () => { hideModal(); go("home"); } }
       ]);
-    }
+    });
 
-    // Quick ink coverage proxy (0..100)
-    function estimateInkCoverage(canvas){
-      const ctx = canvas.getContext("2d");
-      // sample down to speed
-      const w = canvas.width, h = canvas.height;
-      if(!w || !h) return 0;
-      const step = Math.max(3, Math.floor(Math.min(w,h) / 140)); // ~ small sample grid
-      let total = 0, ink = 0;
+    $("#traceDone").addEventListener("click", () => {
+      showModal("Great tracing! ⭐", `
+        You finished <b>Trace Stage ${state.traceStage}</b>.<br/>
+        Want a harder one?
+      `, [
+        { label: "Next", primary: true, onClick: () => {
+            hideModal();
+            unlock("trace");
+            tracePainter.clear();
+            toast("Unlocked! 🔓");
+          }
+        },
+        { label: "Home", primary: false, onClick: () => { hideModal(); go("home"); } }
+      ]);
+    });
 
-      const img = ctx.getImageData(0,0,w,h).data;
-      for(let y=0; y<h; y+=step){
-        for(let x=0; x<w; x+=step){
-          const i = (y*w + x) * 4;
-          const a = img[i+3];
-          total++;
-          if(a > 10) ink++;
-        }
-      }
-      // normalize: avoid giving 100% just for scribbles
-      const pct = (ink / Math.max(1,total)) * 100;
-      return clamp(pct * 1.4, 0, 100); // slightly more generous for kids
-    }
-
-    // Compare color canvas to target image (best-effort)
-    function compareToTargetIfReady(){
-      return new Promise((resolve, reject) => {
-        const targetImg = $("#colorTargetImg");
-        if(!targetImg || !targetImg.src) return reject();
-
-        // Make sure it loaded
-        if(!targetImg.complete || targetImg.naturalWidth === 0) return reject();
-
-        // Draw target into offscreen matching canvas size (contain)
-        const userC = color.canvas;
-        const W = userC.width, H = userC.height;
-        if(!W || !H) return reject();
-
-        const off = document.createElement("canvas");
-        off.width = W; off.height = H;
-        const g = off.getContext("2d");
-
-        // contain draw
-        const iw = targetImg.naturalWidth, ih = targetImg.naturalHeight;
-        const scale = Math.min(W/iw, H/ih);
-        const dw = iw*scale, dh = ih*scale;
-        const dx = (W - dw)/2, dy = (H - dh)/2;
-
-        g.clearRect(0,0,W,H);
-        g.drawImage(targetImg, dx, dy, dw, dh);
-
-        const user = color.ctx.getImageData(0,0,W,H).data;
-        const tgt = g.getImageData(0,0,W,H).data;
-
-        // sample for speed
-        const step = Math.max(4, Math.floor(Math.min(W,H) / 160));
-        let total = 0;
-        let good = 0;
-
-        for(let y=0; y<H; y+=step){
-          for(let x=0; x<W; x+=step){
-            const i = (y*W + x)*4;
-
-            // ignore fully transparent target pixels
-            const ta = tgt[i+3];
-            if(ta < 10) continue;
-
-            const ur = user[i], ug = user[i+1], ub = user[i+2], ua = user[i+3];
-            const tr = tgt[i], tg = tgt[i+1], tb = tgt[i+2];
-
-            // If user left it blank, count as miss (kids-friendly: small penalty)
-            if(ua < 10){
-              total++;
-              continue;
-            }
-
-            const dr = ur - tr, dg = ug - tg, db = ub - tb;
-            const dist = Math.sqrt(dr*dr + dg*dg + db*db);
-
-            total++;
-            // tolerance: larger tolerance makes it easier for kids
-            if(dist <= 70) good++;
+    // ---------- Reset ----------
+    $("#resetBtn").addEventListener("click", () => {
+      showModal("Reset Progress?", `
+        This sets both games back to <b>Stage 1</b>.
+      `, [
+        { label: "Cancel", primary: false, onClick: hideModal },
+        { label: "Reset", primary: true, onClick: () => {
+            state.colorStage = 1;
+            state.traceStage = 1;
+            save();
+            updateUI();
+            hideModal();
+            toast("Reset ✅");
           }
         }
+      ]);
+    });
 
-        if(total <= 0) return reject();
-        const pct = (good/total)*100;
-        // a little generous for kids
-        resolve(clamp(pct * 1.08, 0, 100));
-      });
-    }
-
-    function clamp(n, a, b){ return Math.max(a, Math.min(b, n)); }
-
-    // ---------- Navigation Buttons ----------
-    $("#drawExitBtn").addEventListener("click", () => { stopTimer("draw"); go("home"); });
-    $("#colorExitBtn").addEventListener("click", () => { stopTimer("color"); go("home"); });
-
-    // ---------- First Load ----------
-    function init(){
-      setStatsUI();
-
-      // Set daily challenge text (later you can rotate based on date)
-      $("#dailyTitle").textContent = "Daily Challenge";
-      $("#dailySub").textContent = "Trace the “Star” in 45 seconds ⭐";
-
-      // Load default challenges
-      loadDrawChallenge("star");
-      loadColorChallenge("rainbow");
-
-      // Ensure canvases are sized after first paint
-      setTimeout(() => {
-        resizeCanvas(draw);
-        resizeCanvas(color);
-      }, 80);
-
-      // Default route
-      go("home");
-    }
-
-    init();
+    // ---------- Init ----------
+    updateUI();
+    setTimeout(() => {
+      resizeCanvas(colorPainter);
+      resizeCanvas(tracePainter);
+    }, 60);
   </script>
 </body>
 </html>
+
